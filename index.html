@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Weaver Management</title>
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --panel: rgba(255,255,255,0.05);
+      --panel-2: rgba(255,255,255,0.04);
+      --line: rgba(255,255,255,0.10);
+      --text: #eef2f7;
+      --muted: #aab4c2;
+      --accent: #bed1ff;
+      --accent-bg: rgba(124, 158, 255, 0.14);
+      --shadow: 0 20px 45px rgba(0,0,0,0.26);
+      --radius: 22px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background: radial-gradient(circle at top, rgba(120,150,255,0.16), transparent 28%), linear-gradient(180deg, #0a0d12, #11161d);
+      min-height: 100vh;
+    }
+    .wrap {
+      width: min(1080px, calc(100vw - 24px));
+      margin: 0 auto;
+      padding: 18px 0 56px;
+    }
+    .hero {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 22px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+    }
+    .eyebrow {
+      margin: 0 0 8px;
+      color: var(--accent);
+      font-size: 12px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(28px, 5vw, 48px);
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+    .meta {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .cards {
+      display: grid;
+      gap: 14px;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+    }
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+    .card-top h2 {
+      margin: 0;
+      font-size: clamp(20px, 3vw, 28px);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+    .updated-at {
+      margin: 10px 0 12px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .updates-window {
+      max-height: 180px;
+      overflow: auto;
+      background: var(--panel-2);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 12px;
+    }
+    .update-line {
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      line-height: 1.55;
+      font-size: 14px;
+    }
+    .update-line:last-child { border-bottom: 0; }
+    .summary-button, .modal-close {
+      appearance: none;
+      border: 1px solid rgba(190,209,255,0.20);
+      background: var(--accent-bg);
+      color: var(--accent);
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .modal[hidden] { display: none; }
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      background: rgba(6,8,12,0.72);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+    }
+    .modal-panel {
+      width: min(760px, 100%);
+      max-height: 80vh;
+      overflow: auto;
+      background: #11161d;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      padding: 20px;
+    }
+    .modal-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .modal-top h2 {
+      margin: 0 0 6px;
+      font-size: clamp(22px, 4vw, 32px);
+    }
+    .modal-top p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .modal-body {
+      white-space: pre-wrap;
+      line-height: 1.7;
+      font-size: 15px;
+      color: var(--text);
+      background: var(--panel-2);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 16px;
+    }
+    @media (max-width: 680px) {
+      .wrap { width: min(100vw - 18px, 1080px); }
+      .hero, .card { padding: 16px; }
+      .card-top {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .summary-button { width: 100%; }
+      .updates-window { max-height: 220px; }
+    }
+  </style>
+<script src="auth.js"></script></head>
+<body>
+  <main class="wrap">
+    <header class="hero">
+      <p class="eyebrow">Weaver Management</p>
+      <h1>Estado das frentes da Weaver</h1>
+      <div class="meta">
+        Este painel é atualizado sempre que surgem novos movimentos nos projetos da Weaver: a atualização entra no arquivo do projeto, o card sobe no painel e o histórico rolável reflete a mudança mais recente. O botão <strong>Resumo geral</strong> abre uma leitura curta, pensada para dar contexto rápido sem obrigar você a entrar no detalhe completo do arquivo.<br>
+        Gerado em: 2026-05-04T21:48:15.498Z
+      </div>
+    </header>
+
+    <section class="cards">
+      
+  <article class="card">
+    <div class="card-top">
+      <h2>Angola — Feasibility Studies</h2>
+      <button class="summary-button" type="button" data-summary-title="Angola — Feasibility Studies" data-summary-updated="2026-05-04" data-summary-text="Angola — Feasibility Studies está com status ativo. Objetivo: Mapear, acompanhar e posicionar a Weaver para feasibility studies atuais e próximos em Angola, com foco em WBG e procurement do país. Contexto: A Weaver já fez o trabalho inicial para o WBG e o governo de Angola nesta frente. Próximo passo: Revisitar portal de procurement de Angola quando sair da manutenção. Aguardando: Mais contexto do Aureo e do Bernardo sobre estratégia de entrada. Risco ou bloqueio: Portal de procurement de Angola estava em manutenção na última checagem.">Resumo geral</button>
+    </div>
+    <p class="updated-at">Última atualização: 2026-05-04</p>
+    <div class="updates-window">
+      <div class="update-line">2026-05-04 — Caio seguiu acompanhando Banco Mundial e procurement de país, incluindo Angola.</div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="card-top">
+      <h2>Austral Continental</h2>
+      <button class="summary-button" type="button" data-summary-title="Austral Continental" data-summary-updated="2026-05-04" data-summary-text="Austral Continental está com status em qualificação. Objetivo: Entender o encaixe real da frente Austral Continental e transformar o primeiro contato em leitura prática de oportunidade. Contexto: Houve primeira reunião. Próximo passo: Consolidar o contexto da conversa. Aguardando: Pessoa: contraparte / follow-up da frente. Risco ou bloqueio: ainda há pouco contexto consolidado.">Resumo geral</button>
+    </div>
+    <p class="updated-at">Última atualização: 2026-05-04</p>
+    <div class="updates-window">
+      <div class="update-line">2026-05-04 — Primeira reunião realizada e troca inicial por email registrada.</div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="card-top">
+      <h2>BID</h2>
+      <button class="summary-button" type="button" data-summary-title="BID" data-summary-updated="2026-05-04" data-summary-text="BID está com status provavelmente submetido. Objetivo: Confirmar submissão do BID, acompanhar retorno e não perder o timing do próximo movimento. Contexto: A leitura atual é que o BID provavelmente já foi submetido. Próximo passo: Confirmar submissão do BID. Aguardando: Pessoa: Reinoldo. Risco ou bloqueio: risco de ficar em limbo sem confirmação formal.">Resumo geral</button>
+    </div>
+    <p class="updated-at">Última atualização: 2026-05-04</p>
+    <div class="updates-window">
+      <div class="update-line">2026-05-04 — BID provavelmente submetido; aguardando resposta do Reinoldo.</div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="card-top">
+      <h2>Casa Brasil</h2>
+      <button class="summary-button" type="button" data-summary-title="Casa Brasil" data-summary-updated="2026-05-04" data-summary-text="Casa Brasil está com status frente ativa. Objetivo: Avançar a presença e o posicionamento da Casa Brasil com atualização do site e definição da próxima aparição/fala. Contexto: A frente avançou na atualização do site. Próximo passo: Finalizar atualização do site. Aguardando: Pessoa: time / alinhamento interno. Risco ou bloqueio: risco de avanço difuso sem próximo marco definido.">Resumo geral</button>
+    </div>
+    <p class="updated-at">Última atualização: 2026-05-04</p>
+    <div class="updates-window">
+      <div class="update-line">2026-05-04 — Atualização do site avançou e o planejamento da próxima aparição andou.</div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="card-top">
+      <h2>Casa Brasil Board Lusófono</h2>
+      <button class="summary-button" type="button" data-summary-title="Casa Brasil Board Lusófono" data-summary-updated="2026-05-04" data-summary-text="Casa Brasil Board Lusófono está com status andando bem. Objetivo: Consolidar a composição do board lusófono da Casa Brasil e acompanhar a entrada dos demais nomes. Contexto: A composição atual inclui Aureo, Marcos Vaena e um contato da Guiné-Bissau. Próximo passo: Acompanhar a composição do board. Aguardando: Pessoa: contato da Guiné-Bissau. Risco ou bloqueio: dependência de terceiros para fechar a composição.">Resumo geral</button>
+    </div>
+    <p class="updated-at">Última atualização: 2026-05-04</p>
+    <div class="updates-window">
+      <div class="update-line">2026-05-04 — Board mantido como frente ativa, com composição parcial já visível.</div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="card-top">
+      <h2>DRC</h2>
+      <button class="summary-button" type="button" data-summary-title="DRC" data-summary-updated="2026-05-04" data-summary-text="DRC está com status ativo. Objetivo: Manter a frente DRC visível, qualificada e pronta para ganhar definição operacional quando houver mais contexto. Contexto: Frente ativa da Weaver. Próximo passo: Consolidar mais contexto da frente. Aguardando: Pessoa: Aureo / Bernardo. Risco ou bloqueio: pouca definição operacional no momento.">Resumo geral</button>
+    </div>
+    <p class="updated-at">Última atualização: 2026-05-04</p>
+    <div class="updates-window">
+      <div class="update-line">2026-05-04 — Frente mantida como ativa para não sair dos resumos e do radar.</div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="card-top">
+      <h2>EBRD Iraq</h2>
+      <button class="summary-button" type="button" data-summary-title="EBRD Iraq" data-summary-updated="2026-05-04" data-summary-text="EBRD Iraq está com status nova frente registrada. Objetivo: Entender se a frente EBRD Iraq tem fit real para a Weaver e se vale avançar com leitura mais estruturada. Contexto: Modelo envolve cost-sharing advisory para SMEs no Iraque com subsídio parcial do EBRD. Próximo passo: Levantar mais informações sobre a frente. Aguardando: Pessoa: contraparte / Omar. Risco ou bloqueio: ainda há pouca informação para qualificar a oportunidade.">Resumo geral</button>
+    </div>
+    <p class="updated-at">Última atualização: 2026-05-04</p>
+    <div class="updates-window">
+      <div class="update-line">2026-05-04 — Frente mantida como oportunidade nova ainda em avaliação.</div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="card-top">
+      <h2>Emerging Markets Platform</h2>
+      <button class="summary-button" type="button" data-summary-title="Emerging Markets Platform" data-summary-updated="2026-05-04" data-summary-text="Emerging Markets Platform está com status frente ativa em definição. Objetivo: Estruturar a plataforma própria da Weaver para emerging markets no site, com clareza de tese, formato e próximos passos. Contexto: A direção atual é construir a plataforma da própria Weaver. Próximo passo: Realizar a conversa com a empresa do setor. Aguardando: Pessoa: reunião externa / Bernardo. Risco ou bloqueio: risco de a frente ficar conceitual demais.">Resumo geral</button>
+    </div>
+    <p class="updated-at">Última atualização: 2026-05-04</p>
+    <div class="updates-window">
+      <div class="update-line">2026-05-04 — Tese da plataforma própria avançou e reunião com empresa do setor foi colocada como próximo passo.</div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="card-top">
+      <h2>Granter.ai</h2>
+      <button class="summary-button" type="button" data-summary-title="Granter.ai" data-summary-updated="2026-05-04" data-summary-text="Granter.ai apareceu como nova frente a partir de contato via LinkedIn e terá reunião inicial na quarta, 2026-05-06. Pelo site e pela leitura atual, a empresa atua com IA para grants, com força aparente em grants da União Europeia. Para a Weaver, o possível diferencial na conversa está em combinar isso com dados e oportunidades do World Bank, que já foram mencionados na abordagem inicial. Antes da reunião, faz sentido entender com Bernardo o que ele já conversou sobre o projeto e como posicionou a Weaver. O objetivo é chegar na conversa com tese mais calibrada de fit, parceria potencial e próximo passo concreto.">Resumo geral</button>
+    </div>
+    <p class="updated-at">Última atualização: 2026-05-04</p>
+    <div class="updates-window">
+      <div class="update-line">2026-05-04 — Frente criada a partir de novo contato vindo de LinkedIn.</div><div class="update-line">2026-05-04 — Site revisado para registrar a tese pública da empresa.</div><div class="update-line">2026-05-04 — Encaixe refinado: grants da UE de um lado, dados e oportunidades do World Bank do outro.</div><div class="update-line">2026-05-04 — Conversa prévia com Bernardo definida como passo necessário antes da reunião.</div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="card-top">
+      <h2>Spain NIE</h2>
+      <button class="summary-button" type="button" data-summary-title="Spain NIE" data-summary-updated="2026-05-04" data-summary-text="Spain NIE está com status andando. Objetivo: Concluir a etapa documental para o NIE e manter visível o próximo passo operacional na frente da Espanha. Contexto: A documentação já foi preparada. Próximo passo: Levar a documentação à embaixada/seção consular. Aguardando: Pessoa: Bernardo. Risco ou bloqueio: dependência de execução presencial.">Resumo geral</button>
+    </div>
+    <p class="updated-at">Última atualização: 2026-05-04</p>
+    <div class="updates-window">
+      <div class="update-line">2026-05-04 — Documentação ficou pronta para a ida à embaixada.</div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="card-top">
+      <h2>Sugar Mills</h2>
+      <button class="summary-button" type="button" data-summary-title="Sugar Mills" data-summary-updated="2026-05-04" data-summary-text="Sugar Mills está com status oportunidade em andamento. Objetivo: Consolidar a leitura das 3 oportunidades de usinas e verificar as especificações dos chineses para qualificar a frente. Contexto: Há 3 oportunidades de usinas no radar com Henrique. Próximo passo: Consolidar leitura das 3 usinas. Aguardando: Pessoa: Henrique. Risco ou bloqueio: dependência externa concentrada no Henrique.">Resumo geral</button>
+    </div>
+    <p class="updated-at">Última atualização: 2026-05-04</p>
+    <div class="updates-window">
+      <div class="update-line">2026-05-04 — Frente segue com 3 oportunidades e aguardando do Henrique as especificações dos chineses.</div>
+    </div>
+  </article>
+    </section>
+  </main>
+
+  <div class="modal" id="summaryModal" hidden>
+    <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="summaryTitle">
+      <div class="modal-top">
+        <div>
+          <h2 id="summaryTitle">Resumo do projeto</h2>
+          <p id="summaryMeta"></p>
+        </div>
+        <button class="modal-close" type="button" id="closeSummary">Fechar</button>
+      </div>
+      <div class="modal-body" id="summaryBody"></div>
+    </div>
+  </div>
+
+  <script>
+    const modal = document.getElementById('summaryModal');
+    const summaryTitle = document.getElementById('summaryTitle');
+    const summaryMeta = document.getElementById('summaryMeta');
+    const summaryBody = document.getElementById('summaryBody');
+    const closeSummary = document.getElementById('closeSummary');
+
+    function openSummary(button) {
+      summaryTitle.textContent = button.dataset.summaryTitle || 'Resumo do projeto';
+      summaryMeta.textContent = button.dataset.summaryUpdated ? 'Última atualização: ' + button.dataset.summaryUpdated : '';
+      summaryBody.textContent = button.dataset.summaryText || 'Sem resumo disponível.';
+      modal.hidden = false;
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      modal.hidden = true;
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('.summary-button').forEach((button) => {
+      button.addEventListener('click', () => openSummary(button));
+    });
+
+    closeSummary.addEventListener('click', closeModal);
+    modal.addEventListener('click', (event) => {
+      if (event.target === modal) closeModal();
+    });
+    window.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !modal.hidden) closeModal();
+    });
+  </script>
+</body>
+</html>
