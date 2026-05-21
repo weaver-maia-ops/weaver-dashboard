@@ -1,432 +1,409 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Weaver Management</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weaver Dashboard</title>
   <style>
     :root {
-      --bg: #0b0f14;
-      --panel: rgba(255,255,255,0.05);
-      --panel-2: rgba(255,255,255,0.04);
-      --line: rgba(255,255,255,0.10);
-      --text: #eef2f7;
-      --muted: #aab4c2;
-      --accent: #bed1ff;
-      --accent-bg: rgba(124, 158, 255, 0.14);
-      --shadow: 0 20px 45px rgba(0,0,0,0.26);
-      --radius: 22px;
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --border: #334155;
+      --tag-bg: #1e3a5f;
     }
-    * { box-sizing: border-box; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      margin: 0;
-      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
       color: var(--text);
-      background: radial-gradient(circle at top, rgba(120,150,255,0.16), transparent 28%), linear-gradient(180deg, #0a0d12, #11161d);
-      min-height: 100vh;
+      font-family: system-ui, -apple-system, sans-serif;
+      line-height: 1.5;
     }
-    .wrap {
-      width: min(1080px, calc(100vw - 24px));
-      margin: 0 auto;
-      padding: 18px 0 56px;
+    header {
+      background: #0b1120;
+      border-bottom: 1px solid var(--border);
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
-    .hero {
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 28px;
-      padding: 22px;
-      margin-bottom: 16px;
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(16px);
-    }
-    .eyebrow {
-      margin: 0 0 8px;
-      color: var(--accent);
-      font-size: 12px;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-    }
-    h1 {
-      margin: 0;
-      font-size: clamp(28px, 5vw, 48px);
-      letter-spacing: -0.03em;
-      line-height: 1;
-    }
-    .meta {
-      margin-top: 12px;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.6;
-    }
+    header h1 { font-size: 1.5rem; color: var(--accent); }
+    header .updated { color: var(--muted); font-size: 0.85rem; }
     .cards {
       display: grid;
-      gap: 14px;
+      grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+      gap: 1rem;
+      padding: 1.5rem 2rem;
     }
     .card {
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 18px;
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(16px);
-    }
-    .card-top {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem;
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
+      flex-direction: column;
     }
-    .card-top h2 {
-      margin: 0;
-      font-size: clamp(20px, 3vw, 28px);
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-    }
-    .leadership {
-      margin: 8px 0 0;
-      color: var(--accent);
-      font-size: 13px;
-      font-weight: 500;
-      letter-spacing: 0.02em;
-    }
-    .updated-at {
-      margin: 10px 0 12px;
-      color: var(--muted);
-      font-size: 13px;
-    }
+    .card-top { display: flex; justify-content: space-between; align-items: flex-start; }
+    .card h2 { font-size: 1.1rem; color: var(--accent); margin-bottom: 0.25rem; }
+    .leadership { color: var(--muted); font-size: 0.8rem; margin-bottom: 0.5rem; }
+    .updated-at { color: var(--muted); font-size: 0.75rem; margin-bottom: 0.75rem; }
     .updates-window {
+      background: #0f172a;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.75rem;
+      font-size: 0.82rem;
       max-height: 180px;
-      overflow: auto;
-      background: var(--panel-2);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 16px;
-      padding: 12px;
+      overflow-y: auto;
+      flex: 1;
     }
     .update-line {
-      padding: 10px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.07);
-      line-height: 1.55;
-      font-size: 14px;
+      padding: 0.3rem 0;
+      border-bottom: 1px solid #1e293b;
     }
-    .update-line:last-child { border-bottom: 0; }
-    .summary-button, .modal-close {
-      appearance: none;
-      border: 1px solid rgba(190,209,255,0.20);
-      background: var(--accent-bg);
+    .update-line:last-child { border-bottom: none; }
+    .summary-button {
+      background: var(--tag-bg);
       color: var(--accent);
-      border-radius: 999px;
-      padding: 10px 14px;
-      font-size: 13px;
-      font-weight: 600;
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      padding: 0.25rem 0.6rem;
+      font-size: 0.7rem;
       cursor: pointer;
+      white-space: nowrap;
     }
-    .modal[hidden] { display: none; }
+    .summary-button:hover { background: #2563eb; color: #fff; }
     .modal {
-      position: fixed;
-      inset: 0;
-      z-index: 50;
-      background: rgba(6,8,12,0.72);
-      backdrop-filter: blur(10px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 18px;
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.7);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 100;
     }
     .modal-panel {
-      width: min(760px, 100%);
-      max-height: 80vh;
-      overflow: auto;
-      background: #11161d;
-      border: 1px solid var(--line);
-      border-radius: 24px;
-      box-shadow: var(--shadow);
-      padding: 20px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      max-width: 640px; width: 90%;
     }
-    .modal-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 12px;
-      margin-bottom: 14px;
+    .modal-panel h2 { color: var(--accent); margin-bottom: 0.5rem; }
+    .modal-panel .meta { color: var(--muted); font-size: 0.8rem; margin-bottom: 1rem; }
+    .modal-panel .summary-text { line-height: 1.6; margin-bottom: 1.5rem; }
+    .modal-panel button {
+      background: var(--accent); color: #0f172a;
+      border: none; border-radius: 6px; padding: 0.5rem 1.25rem;
+      cursor: pointer; font-weight: 600;
     }
-    .modal-top h2 {
-      margin: 0 0 6px;
-      font-size: clamp(22px, 4vw, 32px);
+    [hidden] { display: none !important; }
+    .password-overlay {
+      position: fixed; inset: 0;
+      background: var(--bg);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 200;
     }
-    .modal-top p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 13px;
+    .password-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
     }
-    .modal-body {
-      white-space: pre-wrap;
-      line-height: 1.7;
-      font-size: 15px;
-      color: var(--text);
-      background: var(--panel-2);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 16px;
-      padding: 16px;
+    .password-box input {
+      background: #0f172a; color: var(--text);
+      border: 1px solid var(--border); border-radius: 6px;
+      padding: 0.5rem; margin: 0.5rem 0; width: 100%;
     }
-    @media (max-width: 680px) {
-      .wrap { width: min(100vw - 18px, 1080px); }
-      .hero, .card { padding: 16px; }
-      .card-top {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .summary-button { width: 100%; }
-      .updates-window { max-height: 220px; }
+    .password-box button {
+      background: var(--accent); color: #0f172a;
+      border: none; border-radius: 6px; padding: 0.5rem 1.25rem;
+      cursor: pointer; font-weight: 600; margin-top: 0.5rem;
     }
+    .error { color: #f87171; font-size: 0.8rem; margin-top: 0.25rem; }
   </style>
-<script src="auth.js"></script></head>
+</head>
 <body>
-  <main class="wrap">
-    <header class="hero">
-      <p class="eyebrow">Weaver Management</p>
-      <h1>Estado das frentes da Weaver</h1>
-      <div class="meta">
-        Este painel é atualizado sempre que surgem novos movimentos nos projetos da Weaver: a atualização entra no arquivo do projeto, o card sobe no painel e o histórico rolável reflete a mudança mais recente. O botão <strong>Resumo geral</strong> abre uma leitura curta, pensada para dar contexto rápido sem obrigar você a entrar no detalhe completo do arquivo.<br>
-        Última atualização: 19 de maio de 2026, 4:30 PM EST
-      </div>
-    </header>
-
-    <section class="cards">
-<article class="card">
-    <div class="card-top">
-      <h2>EBRD Iraq</h2>
-      <button class="summary-button" type="button" data-summary-title="EBRD Iraq" data-summary-updated="2026-05-19" data-summary-text="Weaver registra-se como International Advisor no site da EBRD (deals >US$5M). Formulários enviados por email; discussão sobre registro no Banco Central do Iraque e possibilidade de oferecer orientação/treinamento aos tomadores de empréstimo (ex.: estruturação como dividendos). Omar propõe introdução por email ao contato local da EBRD.">Resumo geral</button>
-    </div>
-    <p class="leadership">Liderança: Caio</p>
-    <p class="updated-at">Última atualização: 19 de maio de 2026, 4:30 PM EST</p>
-    <div class="updates-window">
-      <div class="update-line">2026-05-19 — Registrar Weaver como International Advisor no site da EBRD (deals >US$5M). Formulários enviados por email.</div>
-      <div class="update-line">2026-05-19 — Discussão sobre registro no Banco Central do Iraque e oferecer orientação/treinamento aos tomadores (ex.: pagamentos estruturados como dividendos ao invés de juros).</div>
-      <div class="update-line">2026-05-19 — Omar concorda em fazer introdução por email ao contato local da EBRD para agendar chamada.</div>
-      <div class="update-line">2026-05-14 — Call marcada com Omar do Iraq. Omar consegue arrumar oportunidades boas no Iraque. É um banco onde a Weaver já aplicou projeto de Gaza sem sucesso; o banco tem dinheiro da comunidade Europeia para projetos. Pendente identificar qual banco.</div>
-      <div class="update-line">2026-05-04 — Frente mantida como oportunidade nova ainda em avaliação.</div>
-    </div>
-  </article>
-<article class="card">
-    <div class="card-top">
-      <h2>Austral Continental</h2>
-      <button class="summary-button" type="button" data-summary-title="Austral Continental" data-summary-updated="2026-05-15" data-summary-text="NDA enviado ao Drew; deals anonimizados dos Fundos Regionais também enviados. Aguardando retorno do Drew.">Resumo geral</button>
-    </div>
-    <p class="leadership">Liderança: Aureo</p>
-    <p class="updated-at">Última atualização: 15 de maio de 2026, 4:34 PM EST</p>
-    <div class="updates-window">
-      <div class="update-line">2026-05-15 — NDA enviado para Drew. Deals anonimizados dos Fundos Regionais também enviados. Aguardando retorno.</div>
-      <div class="update-line">2026-05-07 — Aureo prepara lista de pipeline das empresas nas superintendências com potencial de equity, vai anonimizá-las. Nicola prepara pitch da usina da Weaver no Amapá. Estratégia definida: investidor do Drew entra com equity, Weaver com dívida.</div>
-      <div class="update-line">2026-05-06 — Drew detalhou a tese da Austral Continental. Demanda ativa de family offices, RIAs, HNW e alocadores institucionais com tickets de USM a USM+. Setores: logística, agricultura, mineração, energia renovável. Complementaridade clara com a Weaver: pipeline dos fundos de desenvolvimento (FNO, FNE, FCO, FDA, FDNE, FDCO) e bancos multilaterais de um lado, canal institucional americano do outro. Três ações: (1) exemplo anonimizado de projeto FNO/FNE com necessidade de equity/mezzanine; (2) NDA para projeto eólico no Amapá (~USM, potencial primeiro deal); (3) call de 30 min com Bernardo em até 2 semanas.</div>
-      <div class="update-line">2026-05-04 — Primeira reunião realizada e troca inicial por email registrada.</div>
-    </div>
-  </article>
-<article class="card">
-    <div class="card-top">
-      <h2>Board Lusófono</h2>
-      <button class="summary-button" type="button" data-summary-title="Board Lusófono" data-summary-updated="2026-05-15" data-summary-text="Board Lusófono avançando. Voigt ligou: data 22/05 mantida, repórter do Globo convidado, programa da reunião chega na segunda (19/05). Composição confirmada: Aureo, Marcos Vaena e contato da Guiné-Bissau. Reunião 22/05 às 10am EST.">Resumo geral</button>
-    </div>
-    <p class="leadership">Liderança: Aureo</p>
-    <p class="updated-at">Última atualização: 15 de maio de 2026, 1:35 PM EST</p>
-    <div class="updates-window">
-      <div class="update-line">2026-05-15 — Voigt ligou para Aureo. Quer manter a data da reunião (22/05). Chamou repórter do Globo. Vai mandar programa na segunda-feira.</div>
-      <div class="update-line">2026-05-14 — Vaena confirmou presença junto com pessoa da Guiné-Bissau. Voigt chamou outras pessoas. Vaena pediu programa da reunião.
-      </div>
-      <div class="update-line">2026-05-11 — Reunião do Board Lusófono marcada para 22/05, 10am EST.</div>
-      <div class="update-line">2026-05-15 — NDA enviado para Drew. Deals anonimizados dos Fundos Regionais também enviados. Aguardando retorno.</div>
-      <div class="update-line">2026-05-07 — Willian pediu link para reunião ao Aureo, que respondeu perguntando data, hora e email dos participantes.</div>
-    </div>
-  </article>
-<article class="card">
-    <div class="card-top">
-      <h2>DRC — Shomberwa Solar IPP</h2>
-      <button class="summary-button" type="button" data-summary-title="DRC — Shomberwa Solar IPP" data-summary-updated="2026-05-15" data-summary-text="Shomberwa Solar IPP: usina solar híbrida de 23.5 MWp + BESS 195.6 MWh em Kambove, Haut-Katanga, DRC. Estrutura BOOT com PPA de 15 anos, offtaker CMT SAS (fundição de cobre e cobalto). Weaver mandatada como assessora financeira para fundraising. Remuneração: success fee 7.7% (50/50 cash/equity) + retainer USD 77K. IFC voltou a mostrar interesse no projeto. China sendo trabalhada como fonte de financiamento/investidores.">Resumo geral</button>
-    </div>
-    <p class="leadership">Liderança: Bernardo</p>
-    <p class="updated-at">Última atualização: 15 de maio de 2026, 11:08 AM EST</p>
-    <div class="updates-window">
-      <div class="update-line">2026-05-15 — Aureo informou a David que a IFC voltou a mostrar interesse. Equipe segue tentando a China como fonte de financiamento e investidores.</div>
-      <div class="update-line">2026-05-08 — Tanzânia LNG separada em card próprio após reunião com David Kiai. Card DRC agora focado exclusivamente no Shomberwa Solar IPP.</div>
-      <div class="update-line">2026-05-06 — David teve reunião com Tanzanian Petroleum Authority sobre possível PPP em LNG. Bernardo ficou de falar com parceiros.</div>
-    </div>
-  </article>
-<article class="card">
-    <div class="card-top">
-      <h2>Miscelânea</h2>
-      <button class="summary-button" type="button" data-summary-title="Miscelânea" data-summary-updated="2026-05-15" data-summary-text="Miscelânea captura itens operacionais do dia a dia que não justificam projeto próprio. Aureo enviou pitch deck da Weaver para Maristela, da UNDP, que sugeriu incluir Bernardo no rol de especialistas da instituição. Criado grupo Invest SC após contato do Bernardo no evento do BID em Santa Catarina. Weaver Room publicada. Podcast: João produziu e publicou vídeo de entrevista do Bernardo no LinkedIn.">Resumo geral</button>
-    </div>
-    <p class="leadership">Liderança: Sem liderança</p>
-    <p class="updated-at">Última atualização: 15 de maio de 2026, 3:58 PM EST</p>
-    <div class="updates-window">
-      <div class="update-line">2026-05-15 — Aureo enviou pitch deck da Weaver para Maristela, da UNDP, que sugeriu incluir Bernardo no rol de especialistas da instituição. Criado grupo Invest SC após contato do Bernardo no evento do BID em Santa Catarina.</div>
-      <div class="update-line">2026-05-08 — Primeira versão da página Weaver Room publicada. João produziu e publicou no LinkedIn o vídeo da entrevista do Bernardo em podcast universitário.</div>
-      <div class="update-line">2026-05-06 — Dispensados sobrinho do Ciccio e social media entrevistados. Filha do Todd vai estagiar sem custo no verão americano.</div>
-    </div>
-  </article>
-<article class="card">
-    <div class="card-top">
-      <h2>N5Deal</h2>
-      <button class="summary-button" type="button" data-summary-title="N5Deal" data-summary-updated="2026-05-15" data-summary-text="Intermediação de deals Weaver com compradores institucionais. Egor aceitou 25% da comissão para apresentar o Buyer. Palheiro está preparando pitch detalhado de um dos negócios (ainda anonimizado), que será enviado em breve. Nicola fazendo pitch do terceiro teaser.">Resumo geral</button>
-    </div>
-    <p class="leadership">Liderança: Bernardo</p>
-    <p class="updated-at">Última atualização: 15 de maio de 2026, 11:08 AM EST</p>
-    <div class="updates-window">
-      <div class="update-line">2026-05-15 — Palheiro está preparando pitch detalhado de um dos negócios (anonimizado). Vai enviar em breve. Quer apresentar só este por enquanto.</div>
-      <div class="update-line">2026-05-08 — Nicola fazendo pitch do terceiro teaser. Segundo teaser de Massena/Palheiro recebido, será enviado para Egor → Buyer.</div>
-      <div class="update-line">2026-05-15 — NDA enviado para Drew. Deals anonimizados dos Fundos Regionais também enviados. Aguardando retorno.</div>
-      <div class="update-line">2026-05-07 — Aureo fez modelo de mandato (enviado ao Palheiro). Egor aceitou 25% da comissão. Aureo pediu pitch do terceiro deal ao Massena.</div>
-    </div>
-  </article>
-<article class="card">
-    <div class="card-top">
-      <h2>Tanzânia LNG</h2>
-      <button class="summary-button" type="button" data-summary-title="Tanzânia LNG" data-summary-updated="2026-05-15" data-summary-text="Oportunidade de exploração de LNG na Tanzânia via TPC/TPDC. Contato via David Kiai (consultor, Nairobi), com acesso a Lead Finance Manager e Lead Project Manager da TPC. Qatar declarou force majeure em LNG com a Europa — janela favorável. Carta de assessoria já enviada ao David para revisão. Aguardando retorno. Próximo passo: NDA + reunião online → estudos de viabilidade.">Resumo geral</button>
-    </div>
-    <p class="leadership">Liderança: Aureo</p>
-    <p class="updated-at">Última atualização: 15 de maio de 2026, 2:04 PM EST</p>
-    <div class="updates-window">
-      <div class="update-line">2026-05-15 — Aureo enviou a carta de assessoria para o David revisar. Aguardando retorno.</div>
-      <div class="update-line">2026-05-08 — Reunião Aureo + David Kiai. David apresentou a TPC/TPDC, o contexto da oportunidade LNG e os contatos que possui dentro da TPC. Condições para avançar: NDA → reunião online → estudos de viabilidade → reunião presencial na Tanzânia. Bernardo não participou.</div>
-    </div>
-  </article>
-<article class="card">
-    <div class="card-top">
-      <h2>Weaver Spain</h2>
-      <button class="summary-button" type="button" data-summary-title="Weaver Spain" data-summary-updated="2026-05-15" data-summary-text="Certificación negativa solicitada (C-5447994, 22,54 EUR). SLU: WEAVER ADVISORY DE ESPAÑA, S.L.U., CNAE 7022, capital 3.000 EUR. NIE protocolado (~2 semanas). Garcia (Egor) respondeu com honorários de €5.000 para constituição. Reunião com Regus Madrid marcada para segunda 10h BRT. Susana também na agenda de segunda 11h BRT. Nicola falando com coworks. Notaría Online como alternativa turn-key (~480 EUR). Cronograma: 6-7 semanas.">Resumo geral</button>
-    </div>
-    <p class="leadership">Liderança: Nicola</p>
-    <p class="updated-at">Última atualização: 15 de maio de 2026, 11:08 AM EST</p>
-    <div class="updates-window">
-      <div class="update-line">2026-05-15 — Aureo marcou reunião com Regus Madrid (segunda 10h BRT) e Susana (segunda 11h BRT). Garcia (Egor) respondeu com honorários de €5.000 para constituição da empresa.</div>
-      <div class="update-line">2026-05-14 — Certificación negativa solicitada (C-5447994, 22,54 EUR). SLU definida com CNAE 7022, capital 3.000 EUR. Nome liberado. Conta bancária dispensada para constituição.</div>
-      <div class="update-line">2026-05-08 — Nicola definido como dono do processo. Orientações detalhadas compiladas (SL, custos, NIE, procuração, gargalos).</div>
-      <div class="update-line">2026-05-01 — Bernardo foi à embaixada e protocolou o NIE. Advogado espanhol se dispôs a ajudar.</div>
-    </div>
-  </article>
-<article class="card">
-    <div class="card-top">
-      <h2>Angola — Feasibility Studies</h2>
-      <button class="summary-button" type="button" data-summary-title="Angola — Feasibility Studies" data-summary-updated="2026-05-14" data-summary-text="Angola — Feasibility Studies ativo. Caio contactou Wenilton do Ministério das Finanças, que respondeu perguntando mais informações do projeto. Caio vai ver isso com Bernardo. Weaver já fez trabalho inicial para WBG e governo de Angola. Sinais concretos no WBG: Caculo Cabaça Transmission, Cunene Transmission, PPP Transaction Advisory, Huila-Cunene Interconnection.">Resumo geral</button>
-    </div>
-    <p class="leadership">Liderança: Caio</p>
-    <p class="updated-at">Última atualização: 14 de maio de 2026, 3:11 PM EST</p>
-    <div class="updates-window">
-      <div class="update-line">2026-05-14 — Caio contactou Wenilton do Ministério das Finanças de Angola. Wenilton respondeu perguntando mais informações do projeto. Caio vai ver isso com Bernardo.</div>
-      <div class="update-line">2026-05-04 — Caio seguiu acompanhando Banco Mundial e procurement de país, incluindo Angola.</div>
-    </div>
-  </article>
-<article class="card">
-    <div class="card-top">
-      <h2>BID</h2>
-      <button class="summary-button" type="button" data-summary-title="BID" data-summary-updated="2026-05-07" data-summary-text="Projeto principal em fase de não objeção no BID. Quando essa etapa avançar, abre-se janela de 2 dias para seguir. Nova frente: Reinaldo sugeriu fundo no BID com Grant para Green Bonds na América Central. Nicola preparou carta para o embaixador de Honduras para ativar o ministério e verificar interesse. Weaver se oferece para avançar com o governo.">Resumo geral</button>
-    </div>
-    <p class="leadership">Liderança: Aureo</p>
-    <p class="updated-at">Última atualização: 15 de maio de 2026, 4:34 PM EST</p>
-    <div class="updates-window">
-      <div class="update-line">2026-05-15 — NDA enviado para Drew. Deals anonimizados dos Fundos Regionais também enviados. Aguardando retorno.</div>
-      <div class="update-line">2026-05-07 — Reinaldo sugeriu fundo no BID com Grant para Green Bonds na América Central. Nicola preparou carta e está mandando para embaixador de Honduras para ativar o ministério e verificar interesse. Weaver se oferece para avançar com o governo.</div>
-      <div class="update-line">2026-05-05 — Reinaldo reportou que o projeto entrou em fase de não objeção. Janela de 2 dias para seguir quando essa etapa avançar. Avaliação do grupo de qualidade chegará nesse intervalo.</div>
-      <div class="update-line">2026-05-04 — BID provavelmente submetido; aguardando resposta do Reinaldo.</div>
-    </div>
-  </article>
-<article class="card">
-    <div class="card-top">
-      <h2>Emerging Markets Platform</h2>
-      <button class="summary-button" type="button" data-summary-title="Emerging Markets Platform" data-summary-updated="2026-05-07" data-summary-text="Plataforma própria da Weaver para emerging markets em definição. Com orientações mais claras, Aureo avança na criação da tabela de deals no site da Weaver.">Resumo geral</button>
-    </div>
-    <p class="leadership">Liderança: Aureo</p>
-    <p class="updated-at">Última atualização: 15 de maio de 2026, 4:34 PM EST</p>
-    <div class="updates-window">
-      <div class="update-line">2026-05-15 — NDA enviado para Drew. Deals anonimizados dos Fundos Regionais também enviados. Aguardando retorno.</div>
-      <div class="update-line">2026-05-07 — Com orientações mais claras, Aureo avança na criação da tabela de deals no site da Weaver.</div>
-      <div class="update-line">2026-05-04 — Tese da plataforma própria avançou e reunião com empresa do setor foi colocada como próximo passo.</div>
-    </div>
-  </article>
-<article class="card">
-    <div class="card-top">
-      <h2>Granter.ai</h2>
-      <button class="summary-button" type="button" data-summary-title="Granter.ai" data-summary-updated="2026-05-07" data-summary-text="Granter.ai é startup portuguesa (Lisboa, vencedora Web Summit 2025 e Techstars Torino). Agente de IA para grants com €21,3M em candidaturas e 3000+ clientes, foco atual na Europa. Oportunidades levantadas: (1) rodada de investimento — Weaver pode trazer investidores; (2) parceria para IA de scraping de RFP; (3) contatos em departamentos federais americanos. Aureo sugeriu reunião na semana que vem com Bernardo Weaver para destravar a frente de governo americano.">Resumo geral</button>
-    </div>
-    <p class="leadership">Liderança: Aureo</p>
-    <p class="updated-at">Última atualização: 15 de maio de 2026, 4:34 PM EST</p>
-    <div class="updates-window">
-      <div class="update-line">2026-05-15 — NDA enviado para Drew. Deals anonimizados dos Fundos Regionais também enviados. Aguardando retorno.</div>
-      <div class="update-line">2026-05-07 — Aureo mandou mensagem para Bernardo Seixas sugerindo reunião na semana que vem com Bernardo Weaver para destravar a frente de governo americano.</div>
-      <div class="update-line">2026-05-06 — Reunião inicial com Bernardo Seixas. Granter.ai é startup portuguesa, agente de IA para grants com €21,3M em candidaturas e 3000+ clientes, mas foco restrito à Europa. Oportunidades: (1) rodada de investimento — Weaver pode trazer investidores; (2) parceria para IA de scraping de RFP; (3) contatos em departamentos federais americanos. Bernardo Seixas estará no Rio para o Web Summit.</div>
-      <div class="update-line">2026-05-04 — Frente criada a partir de novo contato vindo de LinkedIn.</div>
-    </div>
-  </article>
-<article class="card">
-    <div class="card-top">
-      <h2>Sugar Mills</h2>
-      <button class="summary-button" type="button" data-summary-title="Sugar Mills" data-summary-updated="2026-05-07" data-summary-text="Sugar Mills: 4 usinas no radar com Henrique. Nova usina de etanol e açúcar não encaixa no perfil chinês. Aureo visita parceiro dos chineses na terça-feira. Nova fazenda de Henrique terá pitch anonimizado da Weaver e será apresentada também ao Drew (Austral Continental).">Resumo geral</button>
-    </div>
-    <p class="leadership">Liderança: Aureo</p>
-    <p class="updated-at">Última atualização: 07 de maio de 2026, 5:35 PM EST</p>
-    <div class="updates-window">
-      <div class="update-line">2026-05-15 — NDA enviado para Drew. Deals anonimizados dos Fundos Regionais também enviados. Aguardando retorno.</div>
-      <div class="update-line">2026-05-07 — Henrique mandou mais uma usina (etanol e açúcar), mas não é o perfil desejado pelos chineses. Aureo vai visitar parceiro dos chineses na próxima terça. A nova fazenda de Henrique vai ter pitch anonimizado da Weaver e será apresentada também ao Drew.</div>
-      <div class="update-line">2026-05-04 — Frente seguia com 3 oportunidades e aguardando do Henrique as especificações dos chineses.</div>
-    </div>
-  </article>
-<article class="card">
-    <div class="card-top">
-      <h2>Casa Brasil</h2>
-      <button class="summary-button" type="button" data-summary-title="Casa Brasil" data-summary-updated="2026-05-05" data-summary-text="Casa Brasil ativa. Atualização do site e planejamento da próxima aparição em andamento. Possível participação do David da Vantiq. Board lusófono tratado em card próprio.">Resumo geral</button>
-    </div>
-    <p class="leadership">Liderança: Aureo</p>
-    <p class="updated-at">Última atualização: 05 de maio de 2026, 6:00 PM EST</p>
-    <div class="updates-window">
-      <div class="update-line">2026-05-04 — Atualização do site avançou e o planejamento da próxima aparição andou.</div>
-    </div>
-  </article>
-    </section>
-  </main>
-
-  <div class="modal" id="summaryModal" hidden>
-    <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="summaryTitle">
-      <div class="modal-top">
-        <div>
-          <h2 id="summaryTitle">Resumo do projeto</h2>
-          <p id="summaryMeta"></p>
-        </div>
-        <button class="modal-close" type="button" id="closeSummary">Fechar</button>
-      </div>
-      <div class="modal-body" id="summaryBody"></div>
-    </div>
+<div class="password-overlay" id="passwordOverlay">
+  <div class="password-box">
+    <h2>Acesso Restrito</h2>
+    <p style="color:var(--muted);font-size:0.85rem;">Digite a senha para acessar o dashboard</p>
+    <input type="password" id="passwordInput" placeholder="Senha">
+    <p class="error" id="passwordError" hidden>Senha incorreta</p>
+    <button id="passwordSubmit">Entrar</button>
   </div>
+</div>
 
-  <script>
-    const modal = document.getElementById('summaryModal');
-    const summaryTitle = document.getElementById('summaryTitle');
-    const summaryMeta = document.getElementById('summaryMeta');
-    const summaryBody = document.getElementById('summaryBody');
-    const closeSummary = document.getElementById('closeSummary');
+<main id="mainContent" hidden>
+  <header>
+    <h1>Weaver Dashboard</h1>
+    <div class="updated">Gerado em 21 de maio de 2026, 12:58 PM EST</div>
+  </header>
 
-    function openSummary(button) {
-      summaryTitle.textContent = button.dataset.summaryTitle || 'Resumo do projeto';
-      summaryMeta.textContent = button.dataset.summaryUpdated ? 'Última atualização: ' + button.dataset.summaryUpdated : '';
-      summaryBody.textContent = button.dataset.summaryText || 'Sem resumo disponível.';
-      modal.hidden = false;
-      document.body.style.overflow = 'hidden';
+  <section class="cards">
+
+<article class="card">
+  <div class="card-top">
+    <h2>Austral Continental</h2>
+    <button class="summary-button" type="button" data-summary-title="Austral Continental" data-summary-updated="2026-05-21" data-summary-text="Drew demonstrou interesse na usina do Henrique e pediu mais informações. NDA enviado anteriormente — Aureo aguarda confirmação de assinatura. Deals anonimizados dos Fundos Regionais também enviados. Estratégia: investidor do Drew entra com equity, Weaver com dívida no projeto do Amapá.">Resumo geral</button>
+  </div>
+  <p class="leadership">Liderança: Aureo</p>
+  <p class="updated-at">Última atualização: 21 de maio de 2026, 12:58 PM EST</p>
+  <div class="updates-window">
+    <div class="update-line">2026-05-21 — Drew se mostrou interessado na usina do Henrique e pediu mais informações. NDA enviado anteriormente — Aureo aguarda confirmação de assinatura.</div>
+    <div class="update-line">2026-05-15 — NDA enviado para Drew. Deals anonimizados dos Fundos Regionais também enviados. Aguardando retorno.</div>
+    <div class="update-line">2026-05-07 — Aureo prepara lista de pipeline das empresas nas superintendências com potencial de equity, vai anonimizá-las. Nicola prepara pitch da usina da Weaver no Amapá. Estratégia definida: investidor do Drew entra com equity, Weaver com dívida.</div>
+    <div class="update-line">2026-05-06 — Drew detalhou a tese da Austral Continental. Demanda ativa de family offices, RIAs, HNW e alocadores institucionais (US$ 20M a US$ 100M+). Setores: logística, agricultura, mineração, energia renovável. Complementaridade clara.</div>
+    <div class="update-line">2026-05-04 — Primeira reunião realizada e troca inicial por email registrada.</div>
+  </div>
+</article>
+
+<article class="card">
+  <div class="card-top">
+    <h2>Sugar Mills</h2>
+    <button class="summary-button" type="button" data-summary-title="Sugar Mills" data-summary-updated="2026-05-21" data-summary-text="4 usinas no radar com Henrique. Drew (Austral Continental) demonstrou interesse em uma delas e pediu mais informações. Aureo enviou NDA e aguarda confirmação. Nova usina de etanol e açúcar não encaixa no perfil chinês.">Resumo geral</button>
+  </div>
+  <p class="leadership">Liderança: Aureo</p>
+  <p class="updated-at">Última atualização: 21 de maio de 2026, 12:58 PM EST</p>
+  <div class="updates-window">
+    <div class="update-line">2026-05-21 — Drew (Austral Continental) demonstrou interesse em uma das usinas do Henrique e pediu mais informações. Aureo enviou NDA e aguarda confirmação de assinatura.</div>
+    <div class="update-line">2026-05-07 — Henrique mandou mais uma usina (etanol e açúcar), mas não é o perfil desejado pelos chineses. Aureo vai visitar parceiro dos chineses na próxima terça. A nova fazenda de Henrique vai ter pitch anonimizado da Weaver e será apresentada também ao Drew.</div>
+    <div class="update-line">2026-05-04 — Frente seguia com 3 oportunidades e aguardando do Henrique as especificações dos chineses.</div>
+  </div>
+</article>
+
+<article class="card">
+  <div class="card-top">
+    <h2>Tanzânia LNG</h2>
+    <button class="summary-button" type="button" data-summary-title="Tanzânia LNG" data-summary-updated="2026-05-21" data-summary-text="Carta de expressão de interesse enviada ao governo da Tanzânia. Aguardando resposta ou confirmação de recebimento. Follow up em breve. Oportunidade de exploração de LNG via TPC/TPDC — contato via David Kiai (Nairobi). Qatar declarou force majeure em LNG com a Europa, janela favorável.">Resumo geral</button>
+  </div>
+  <p class="leadership">Liderança: Aureo</p>
+  <p class="updated-at">Última atualização: 21 de maio de 2026, 12:58 PM EST</p>
+  <div class="updates-window">
+    <div class="update-line">2026-05-21 — Carta de expressão de interesse enviada ao governo da Tanzânia. Aguardando resposta ou confirmação de recebimento. Follow up em breve.</div>
+    <div class="update-line">2026-05-15 — Aureo enviou a carta de assessoria para o David revisar. Aguardando retorno.</div>
+    <div class="update-line">2026-05-08 — Reunião Aureo + David Kiai. David apresentou a TPC/TPDC, o contexto da oportunidade LNG e os contatos que possui dentro da TPC. Condições para avançar: NDA + reunião online → estudos de viabilidade → reunião presencial → acesso a investidores. Bernardo não participou.</div>
+  </div>
+</article>
+
+<article class="card">
+  <div class="card-top">
+    <h2>EBRD Iraq</h2>
+    <button class="summary-button" type="button" data-summary-title="EBRD Iraq" data-summary-updated="2026-05-19" data-summary-text="Weaver registra-se como International Advisor no site da EBRD (deals >US$5M). Formulários enviados por email. Omar propõe introdução ao contato local da EBRD para agendar chamada. Discussão sobre registro no Banco Central do Iraque e orientação/treinamento a tomadores de empréstimo.">Resumo geral</button>
+  </div>
+  <p class="leadership">Liderança: Caio</p>
+  <p class="updated-at">Última atualização: 19 de maio de 2026, 4:30 PM EST</p>
+  <div class="updates-window">
+    <div class="update-line">2026-05-19 — Registrar Weaver como International Advisor no site da EBRD (deals >US$5M). Formulários enviados por email. Discussão sobre registro no Banco Central do Iraque e possibilidade de oferecer orientação/treinamento a tomadores de empréstimo (ex.: pagamentos estruturados como dividendos ao invés de juros). Omar concorda em fazer introdução ao contato local da EBRD para agendar chamada.</div>
+    <div class="update-line">2026-05-14 — Call marcada com Omar do Iraq. Omar consegue arrumar oportunidades boas no Iraque. É um banco onde a Weaver já aplicou projeto de Gaza sem sucesso; o banco tem dinheiro da comunidade Europeia para projetos. Pendente identificar qual banco.</div>
+    <div class="update-line">2026-05-04 — Frente mantida como oportunidade nova ainda em avaliação.</div>
+  </div>
+</article>
+
+<article class="card">
+  <div class="card-top">
+    <h2>Board Lusófono</h2>
+    <button class="summary-button" type="button" data-summary-title="Board Lusófono" data-summary-updated="2026-05-15" data-summary-text="Board Lusófono avançando. Voigt ligou: data 22/05 mantida, repórter do Globo convidado, programa da reunião chega na segunda (19/05). Composição confirmada: Aureo, Marcos Vaena e contato da Guiné-Bissau. Reunião 22/05 às 10am EST.">Resumo geral</button>
+  </div>
+  <p class="leadership">Liderança: Aureo</p>
+  <p class="updated-at">Última atualização: 15 de maio de 2026, 1:35 PM EST</p>
+  <div class="updates-window">
+    <div class="update-line">2026-05-15 — Voigt ligou para Aureo. Quer manter a data da reunião (22/05). Chamou repórter do Globo. Vai mandar programa na segunda-feira.</div>
+    <div class="update-line">2026-05-14 — Vaena confirmou presença junto com pessoa da Guiné-Bissau. Voigt chamou outras pessoas. Vaena pediu programa da reunião.</div>
+    <div class="update-line">2026-05-11 — Reunião do Board Lusófono marcada para 22/05, 10am EST.</div>
+    <div class="update-line">2026-05-07 — Willian pediu link para reunião ao Aureo, que respondeu perguntando data, hora e email dos participantes.</div>
+  </div>
+</article>
+
+<article class="card">
+  <div class="card-top">
+    <h2>DRC — Shomberwa Solar IPP</h2>
+    <button class="summary-button" type="button" data-summary-title="DRC — Shomberwa Solar IPP" data-summary-updated="2026-05-15" data-summary-text="Shomberwa Solar IPP: usina solar híbrida de 23.5 MWp + BESS 195.6 MWh em Kambove, Haut-Katanga, DRC. Estrutura BOOT com PPA de 15 anos, offtaker CMT SAS (fundição de cobre e cobalto). Weaver mandatada como assessora financeira para fundraising. Remuneração: success fee 7.7% (50/50 cash/equity) + retainer USD 77K. IFC voltou a mostrar interesse. China sendo trabalhada como fonte de financiamento/investidores.">Resumo geral</button>
+  </div>
+  <p class="leadership">Liderança: Bernardo</p>
+  <p class="updated-at">Última atualização: 15 de maio de 2026, 11:08 AM EST</p>
+  <div class="updates-window">
+    <div class="update-line">2026-05-15 — Aureo informou a David que a IFC voltou a mostrar interesse. Equipe segue tentando a China como fonte de financiamento e investidores.</div>
+    <div class="update-line">2026-05-08 — Tanzânia LNG separada em card próprio após reunião com David Kiai. Card DRC agora focado exclusivamente no Shomberwa Solar IPP.</div>
+    <div class="update-line">2026-05-06 — David teve reunião com Tanzanian Petroleum Authority sobre possível PPP em LNG. Bernardo ficou de falar com parceiros.</div>
+  </div>
+</article>
+
+<article class="card">
+  <div class="card-top">
+    <h2>Miscelânea</h2>
+    <button class="summary-button" type="button" data-summary-title="Miscelânea" data-summary-updated="2026-05-15" data-summary-text="Miscelânea captura itens operacionais do dia a dia que não justificam projeto próprio. Aureo enviou pitch deck da Weaver para Maristela, da UNDP, que sugeriu incluir Bernardo no rol de especialistas da instituição. Criado grupo Invest SC após contato do Bernardo no evento do BID em Santa Catarina. Weaver Room publicada. Podcast: João produziu e publicou vídeo de entrevista do Bernardo no LinkedIn.">Resumo geral</button>
+  </div>
+  <p class="leadership">Liderança: Sem liderança</p>
+  <p class="updated-at">Última atualização: 15 de maio de 2026, 3:58 PM EST</p>
+  <div class="updates-window">
+    <div class="update-line">2026-05-15 — Aureo enviou pitch deck da Weaver para Maristela, da UNDP, que sugeriu incluir Bernardo no rol de especialistas da instituição. Criado grupo Invest SC após contato do Bernardo no evento do BID em Santa Catarina.</div>
+    <div class="update-line">2026-05-08 — Primeira versão da página Weaver Room publicada. João produziu e publicou no LinkedIn o vídeo da entrevista do Bernardo em podcast universitário.</div>
+    <div class="update-line">2026-05-06 — Dispensados sobrinho do Ciccio e social media entrevistados. Filha do Todd vai estagiar sem custo no verão americano.</div>
+  </div>
+</article>
+
+<article class="card">
+  <div class="card-top">
+    <h2>N5Deal</h2>
+    <button class="summary-button" type="button" data-summary-title="N5Deal" data-summary-updated="2026-05-15" data-summary-text="Intermediação de deals Weaver com compradores institucionais. Egor aceitou 25% da comissão para apresentar o Buyer. Palheiro está preparando pitch detalhado de um dos negócios (ainda anonimizado), que será enviado em breve. Nicola fazendo pitch do terceiro teaser.">Resumo geral</button>
+  </div>
+  <p class="leadership">Liderança: Bernardo</p>
+  <p class="updated-at">Última atualização: 15 de maio de 2026, 11:08 AM EST</p>
+  <div class="updates-window">
+    <div class="update-line">2026-05-15 — Palheiro está preparando pitch detalhado de um dos negócios (anonimizado). Vai enviar em breve. Quer apresentar só este por enquanto.</div>
+    <div class="update-line">2026-05-08 — Nicola fazendo pitch do terceiro teaser. Segundo teaser de Massena/Palheiro recebido, será enviado para Egor → Buyer.</div>
+    <div class="update-line">2026-05-07 — Aureo fez modelo de mandato (enviado ao Palheiro). Egor aceitou 25% da comissão. Aureo pediu pitch do terceiro deal ao Massena.</div>
+  </div>
+</article>
+
+<article class="card">
+  <div class="card-top">
+    <h2>Weaver Spain</h2>
+    <button class="summary-button" type="button" data-summary-title="Weaver Spain" data-summary-updated="2026-05-15" data-summary-text="Certificación negativa solicitada (C-5447994, 22,54 EUR). SLU: WEAVER ADVISORY DE ESPAÑA, S.L.U., CNAE 7022, capital 3.000 EUR. NIE protocolado (~2 semanas). Garcia (Egor) respondeu com honorários de €5.000 para constituição. Reunião com Regus Madrid marcada para segunda 10h BRT. Susana também na agenda de segunda 11h BRT. Notaría Online como alternativa turn-key (~480 EUR). Cronograma: 6-7 semanas.">Resumo geral</button>
+  </div>
+  <p class="leadership">Liderança: Nicola</p>
+  <p class="updated-at">Última atualização: 15 de maio de 2026, 11:08 AM EST</p>
+  <div class="updates-window">
+    <div class="update-line">2026-05-15 — Aureo marcou reunião com Regus Madrid (segunda 10h BRT) e Susana (segunda 11h BRT). Garcia (Egor) respondeu com honorários de €5.000 para constituição da empresa.</div>
+    <div class="update-line">2026-05-14 — Certificación negativa solicitada (C-5447994, 22,54 EUR). SLU definida com CNAE 7022, capital 3.000 EUR. Nome liberado. Conta bancária dispensada para constituição.</div>
+    <div class="update-line">2026-05-08 — Nicola definido como dono do processo. Orientações detalhadas compiladas (SL, custos, NIE, procuração, gargalos).</div>
+    <div class="update-line">2026-05-01 — Bernardo foi à embaixada e protocolou o NIE. Advogado espanhol se dispôs a ajudar.</div>
+  </div>
+</article>
+
+<article class="card">
+  <div class="card-top">
+    <h2>Angola — Feasibility Studies</h2>
+    <button class="summary-button" type="button" data-summary-title="Angola — Feasibility Studies" data-summary-updated="2026-05-14" data-summary-text="Angola — Feasibility Studies ativo. Caio contactou Wenilton do Ministério das Finanças, que respondeu perguntando mais informações do projeto. Caio vai ver isso com Bernardo. Weaver já fez trabalho inicial para WBG e governo de Angola.">Resumo geral</button>
+  </div>
+  <p class="leadership">Liderança: Caio</p>
+  <p class="updated-at">Última atualização: 14 de maio de 2026, 3:11 PM EST</p>
+  <div class="updates-window">
+    <div class="update-line">2026-05-14 — Caio contactou Wenilton do Ministério das Finanças de Angola. Wenilton respondeu perguntando mais informações do projeto. Caio vai ver isso com Bernardo.</div>
+    <div class="update-line">2026-05-04 — Caio seguiu acompanhando Banco Mundial e procurement de país, incluindo Angola.</div>
+  </div>
+</article>
+
+<article class="card">
+  <div class="card-top">
+    <h2>BID</h2>
+    <button class="summary-button" type="button" data-summary-title="BID" data-summary-updated="2026-05-07" data-summary-text="Projeto principal em fase de não objeção no BID. Quando essa etapa avançar, abre-se janela de 2 dias para seguir. Nova frente: Reinaldo sugeriu fundo no BID com Grant para Green Bonds na América Central. Nicola preparou carta para o embaixador de Honduras para ativar o ministério e verificar interesse.">Resumo geral</button>
+  </div>
+  <p class="leadership">Liderança: Aureo</p>
+  <p class="updated-at">Última atualização: 07 de maio de 2026, 5:35 PM EST</p>
+  <div class="updates-window">
+    <div class="update-line">2026-05-07 — Reinaldo sugeriu fundo no BID com Grant para Green Bonds na América Central. Nicola preparou carta e está mandando para embaixador de Honduras para ativar o ministério e verificar interesse. Weaver se oferece para avançar com o governo.</div>
+    <div class="update-line">2026-05-05 — Reinaldo reportou que o projeto entrou em fase de não objeção. Janela de 2 dias para seguir quando essa etapa avançar. Avaliação do grupo de qualidade chegará nesse intervalo.</div>
+    <div class="update-line">2026-05-04 — BID provavelmente submetido; aguardando resposta do Reinaldo.</div>
+  </div>
+</article>
+
+<article class="card">
+  <div class="card-top">
+    <h2>Emerging Markets Platform</h2>
+    <button class="summary-button" type="button" data-summary-title="Emerging Markets Platform" data-summary-updated="2026-05-07" data-summary-text="Plataforma própria da Weaver para emerging markets em definição. Com orientações mais claras, Aureo avança na criação da tabela de deals no site da Weaver.">Resumo geral</button>
+  </div>
+  <p class="leadership">Liderança: Aureo</p>
+  <p class="updated-at">Última atualização: 07 de maio de 2026, 5:35 PM EST</p>
+  <div class="updates-window">
+    <div class="update-line">2026-05-07 — Com orientações mais claras, Aureo avança na criação da tabela de deals no site da Weaver.</div>
+    <div class="update-line">2026-05-04 — Tese da plataforma própria avançou e reunião com empresa do setor foi colocada como próximo passo.</div>
+  </div>
+</article>
+
+<article class="card">
+  <div class="card-top">
+    <h2>Granter.ai</h2>
+    <button class="summary-button" type="button" data-summary-title="Granter.ai" data-summary-updated="2026-05-07" data-summary-text="Granter.ai é startup portuguesa (Lisboa, vencedora Web Summit 2025 e Techstars Torino). Agente de IA para grants com €21,3M em candidaturas e 3000+ clientes, foco atual na Europa. Oportunidades: (1) rodada de investimento — Weaver pode trazer investidores; (2) parceria para IA de scraping de RFP; (3) contatos em departamentos federais americanos.">Resumo geral</button>
+  </div>
+  <p class="leadership">Liderança: Aureo</p>
+  <p class="updated-at">Última atualização: 07 de maio de 2026, 5:35 PM EST</p>
+  <div class="updates-window">
+    <div class="update-line">2026-05-07 — Aureo mandou mensagem para Bernardo Seixas sugerindo reunião na semana que vem com Bernardo Weaver para destravar a frente de governo americano.</div>
+    <div class="update-line">2026-05-06 — Reunião inicial com Bernardo Seixas. Granter.ai é startup portuguesa, agente de IA para grants com €21,3M em candidaturas e 3000+ clientes, mas foco restrito à Europa. Oportunidades: (1) rodada de investimento — Weaver pode trazer investidores; (2) parceria para IA de scraping de RFP; (3) contatos em departamentos federais americanos. Bernardo Seixas estará no Rio para o Web Summit.</div>
+    <div class="update-line">2026-05-04 — Frente criada a partir de novo contato vindo de LinkedIn.</div>
+  </div>
+</article>
+
+<article class="card">
+  <div class="card-top">
+    <h2>Casa Brasil</h2>
+    <button class="summary-button" type="button" data-summary-title="Casa Brasil" data-summary-updated="2026-05-05" data-summary-text="Casa Brasil ativa. Atualização do site e planejamento da próxima aparição em andamento. Possível participação do David da Vantiq. Board lusófono tratado em card próprio.">Resumo geral</button>
+  </div>
+  <p class="leadership">Liderança: Aureo</p>
+  <p class="updated-at">Última atualização: 05 de maio de 2026, 6:00 PM EST</p>
+  <div class="updates-window">
+    <div class="update-line">2026-05-04 — Atualização do site avançou e o planejamento da próxima aparição andou.</div>
+  </div>
+</article>
+
+  </section>
+</main>
+
+<div class="modal" id="summaryModal" hidden>
+  <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="summaryTitle">
+    <div class="modal-top">
+      <div>
+        <h2 id="summaryTitle"></h2>
+        <p class="meta" id="summaryMeta"></p>
+      </div>
+    </div>
+    <p class="summary-text" id="summaryText"></p>
+    <button id="summaryClose">Fechar</button>
+  </div>
+</div>
+
+<script>
+(function() {
+  var PASSWORD = 'SenhaFacil2!';
+  var overlay = document.getElementById('passwordOverlay');
+  var input = document.getElementById('passwordInput');
+  var submit = document.getElementById('passwordSubmit');
+  var error = document.getElementById('passwordError');
+  var main = document.getElementById('mainContent');
+
+  if (sessionStorage.getItem('weaver_dash_auth') === '1') {
+    overlay.hidden = true;
+    main.hidden = false;
+    initModals();
+  }
+
+  function tryAuth() {
+    if (input.value === PASSWORD) {
+      sessionStorage.setItem('weaver_dash_auth', '1');
+      overlay.hidden = true;
+      main.hidden = false;
+      initModals();
+    } else {
+      error.hidden = false;
+      input.value = '';
     }
+  }
+  submit.addEventListener('click', tryAuth);
+  input.addEventListener('keydown', function(e) { if (e.key === 'Enter') tryAuth(); });
 
-    function closeModal() {
-      modal.hidden = true;
-      document.body.style.overflow = '';
-    }
+  function initModals() {
+    var modal = document.getElementById('summaryModal');
+    var titleEl = document.getElementById('summaryTitle');
+    var metaEl = document.getElementById('summaryMeta');
+    var textEl = document.getElementById('summaryText');
+    var closeBtn = document.getElementById('summaryClose');
 
-    document.querySelectorAll('.summary-button').forEach((button) => {
-      button.addEventListener('click', () => openSummary(button));
+    document.querySelectorAll('.summary-button').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        titleEl.textContent = btn.dataset.summaryTitle || '';
+        metaEl.textContent = btn.dataset.summaryUpdated ? 'Última atualização: ' + btn.dataset.summaryUpdated : '';
+        textEl.textContent = btn.dataset.summaryText || '';
+        modal.hidden = false;
+      });
     });
 
-    closeSummary.addEventListener('click', closeModal);
-    modal.addEventListener('click', (event) => {
-      if (event.target === modal) closeModal();
-    });
-    window.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape' && !modal.hidden) closeModal();
-    });
-  </script>
+    closeBtn.addEventListener('click', function() { modal.hidden = true; });
+    modal.addEventListener('click', function(e) { if (e.target === modal) modal.hidden = true; });
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') modal.hidden = true; });
+  }
+})();
+</script>
 </body>
 </html>
