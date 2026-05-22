@@ -55,7 +55,7 @@
       border-radius: 6px;
       padding: 0.75rem;
       font-size: 0.82rem;
-      max-height: 180px;
+      max-height: 220px;
       overflow-y: auto;
       flex: 1;
     }
@@ -86,11 +86,12 @@
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: 2rem;
-      max-width: 640px; width: 90%;
+      max-width: 680px; width: 90%;
+      max-height: 80vh; overflow-y: auto;
     }
     .modal-panel h2 { color: var(--accent); margin-bottom: 0.5rem; }
     .modal-panel .meta { color: var(--muted); font-size: 0.8rem; margin-bottom: 1rem; }
-    .modal-panel .summary-text { line-height: 1.6; margin-bottom: 1.5rem; }
+    .modal-panel .summary-text { line-height: 1.65; margin-bottom: 1.5rem; white-space: pre-wrap; }
     .modal-panel button {
       background: var(--accent); color: #0f172a;
       border: none; border-radius: 6px; padding: 0.5rem 1.25rem;
@@ -137,15 +138,31 @@
 <main id="mainContent" hidden>
   <header>
     <h1>Weaver Dashboard</h1>
-    <div class="updated">Gerado em 21 de maio de 2026, 12:58 PM EST</div>
+    <div class="updated">Gerado em 22 de maio de 2026, 1:55 PM EST</div>
   </header>
 
   <section class="cards">
 
 <article class="card">
   <div class="card-top">
+    <h2>Board Lusófono</h2>
+    <button class="summary-button" type="button" data-summary-title="Board Lusófono" data-summary-updated="2026-05-22" data-summary-text="Primeira reunião do Board Lusófono realizada em 22/05. Formato virtual (~1h, inglês), com participantes de múltiplas jurisdições. Liderada por Will Vogt, a iniciativa visa aumentar a visibilidade estratégica, econômica e geopolítica dos países e comunidades lusófonas em Washington, Nova York e nos ecossistemas de investimento internacionais. O consenso da reunião foi que a iniciativa é promissora, mas precisa refinar proposta de valor — qual problema resolve, para quem e com quais produtos. Direção: evitar dispersão temática e começar por frentes concretas (eventos, briefings, produção analítica, construção de rede). Encaminhamentos: Will circulará resumo, recolherá bios/fotos de colaboradores, estudará estrutura jurídica (501(c)(3) provável) e preparará nova reunião sobre governança e primeiros produtos públicos. Composição: Aureo, Marcos Vaena, contato da Guiné-Bissau, mais participantes a registrar.">Resumo geral</button>
+  </div>
+  <p class="leadership">Liderança: Aureo</p>
+  <p class="updated-at">Última atualização: 22 de maio de 2026, 1:55 PM EST</p>
+  <div class="updates-window">
+    <div class="update-line">2026-05-22 — Primeira reunião do Board Lusófono realizada. Formato virtual (~1h, inglês), participantes de múltiplas jurisdições. Consenso: iniciativa promissora, precisa refinar proposta de valor. Encaminhamentos: Will circula resumo, recolhe bios, estuda estrutura jurídica (501(c)(3) provável), prepara nova reunião sobre governança e primeiros produtos públicos.</div>
+    <div class="update-line">2026-05-15 — Voigt ligou para Aureo. Quer manter a data da reunião (22/05). Chamou repórter do Globo. Vai mandar programa na segunda-feira.</div>
+    <div class="update-line">2026-05-14 — Vaena confirmou presença junto com pessoa da Guiné-Bissau. Voigt chamou outras pessoas. Vaena pediu programa da reunião.</div>
+    <div class="update-line">2026-05-11 — Reunião do Board Lusófono marcada para 22/05, 10am EST.</div>
+    <div class="update-line">2026-05-07 — Willian pediu link para reunião ao Aureo, que respondeu perguntando data, hora e email dos participantes.</div>
+  </div>
+</article>
+
+<article class="card">
+  <div class="card-top">
     <h2>Austral Continental</h2>
-    <button class="summary-button" type="button" data-summary-title="Austral Continental" data-summary-updated="2026-05-21" data-summary-text="Drew demonstrou interesse na usina do Henrique e pediu mais informações. NDA enviado anteriormente — Aureo aguarda confirmação de assinatura. Deals anonimizados dos Fundos Regionais também enviados. Estratégia: investidor do Drew entra com equity, Weaver com dívida no projeto do Amapá.">Resumo geral</button>
+    <button class="summary-button" type="button" data-summary-title="Austral Continental" data-summary-updated="2026-05-21" data-summary-text="Parceria em qualificação avançada entre Weaver Advisory (pipeline brasileiro de project finance — fundos de desenvolvimento e multilaterais) e Austral Continental (canal institucional americano — family offices, RIAs, HNW, tickets US$ 20M a US$ 100M+). Drew (Austral, baseado em Florianópolis) demonstrou interesse na usina do Henrique e pediu mais informações. NDA enviado anteriormente — Aureo aguarda confirmação de assinatura. Deals anonimizados dos Fundos Regionais também foram enviados. Nicola prepara pitch da usina eólica da Weaver no Amapá (~US$ 100M). Estratégia: investidor do Drew entra com equity, Weaver com dívida. Pendente: call Bernardo-Drew para alinhamento estratégico da parceria.">Resumo geral</button>
   </div>
   <p class="leadership">Liderança: Aureo</p>
   <p class="updated-at">Última atualização: 21 de maio de 2026, 12:58 PM EST</p>
@@ -160,22 +177,8 @@
 
 <article class="card">
   <div class="card-top">
-    <h2>Sugar Mills</h2>
-    <button class="summary-button" type="button" data-summary-title="Sugar Mills" data-summary-updated="2026-05-21" data-summary-text="4 usinas no radar com Henrique. Drew (Austral Continental) demonstrou interesse em uma delas e pediu mais informações. Aureo enviou NDA e aguarda confirmação. Nova usina de etanol e açúcar não encaixa no perfil chinês.">Resumo geral</button>
-  </div>
-  <p class="leadership">Liderança: Aureo</p>
-  <p class="updated-at">Última atualização: 21 de maio de 2026, 12:58 PM EST</p>
-  <div class="updates-window">
-    <div class="update-line">2026-05-21 — Drew (Austral Continental) demonstrou interesse em uma das usinas do Henrique e pediu mais informações. Aureo enviou NDA e aguarda confirmação de assinatura.</div>
-    <div class="update-line">2026-05-07 — Henrique mandou mais uma usina (etanol e açúcar), mas não é o perfil desejado pelos chineses. Aureo vai visitar parceiro dos chineses na próxima terça. A nova fazenda de Henrique vai ter pitch anonimizado da Weaver e será apresentada também ao Drew.</div>
-    <div class="update-line">2026-05-04 — Frente seguia com 3 oportunidades e aguardando do Henrique as especificações dos chineses.</div>
-  </div>
-</article>
-
-<article class="card">
-  <div class="card-top">
     <h2>Tanzânia LNG</h2>
-    <button class="summary-button" type="button" data-summary-title="Tanzânia LNG" data-summary-updated="2026-05-21" data-summary-text="Carta de expressão de interesse enviada ao governo da Tanzânia. Aguardando resposta ou confirmação de recebimento. Follow up em breve. Oportunidade de exploração de LNG via TPC/TPDC — contato via David Kiai (Nairobi). Qatar declarou force majeure em LNG com a Europa, janela favorável.">Resumo geral</button>
+    <button class="summary-button" type="button" data-summary-title="Tanzânia LNG" data-summary-updated="2026-05-21" data-summary-text="Oportunidade de exploração de LNG na Tanzânia via TPC/TPDC (regulador estatal de petróleo e gás), intermediada por David Kiai (Nairobi) — com acesso direto ao Lead Finance Manager e Lead Project Manager da TPC. Carta de expressão de interesse enviada ao governo da Tanzânia. Aguardando resposta ou confirmação de recebimento. Modelos possíveis: PPP, fully private ou joint ventures. Janela de mercado favorável: Qatar declarou force majeure em LNG com a Europa, abrindo espaço para novos fornecedores. TPC disposta a compartilhar estudos de viabilidade sob NDA, com expectativa de reunião presencial na Tanzânia. Possível sinergia com empresa brasileira de petróleo.">Resumo geral</button>
   </div>
   <p class="leadership">Liderança: Aureo</p>
   <p class="updated-at">Última atualização: 21 de maio de 2026, 12:58 PM EST</p>
@@ -188,8 +191,22 @@
 
 <article class="card">
   <div class="card-top">
+    <h2>Sugar Mills</h2>
+    <button class="summary-button" type="button" data-summary-title="Sugar Mills" data-summary-updated="2026-05-21" data-summary-text="4 usinas no radar com Henrique. Drew (Austral Continental) demonstrou interesse em uma delas e pediu mais informações — NDA enviado, aguarda confirmação. A usina mais recente (etanol e açúcar) não encaixa no perfil chinês, mas pode ir para o Drew como alternativa. Aureo tem visita agendada ao parceiro dos chineses. Weaver prepara pitch anonimizado das usinas para apresentar aos dois canais (chineses e Austral Continental). Frente conectada diretamente ao pipeline da Austral Continental.">Resumo geral</button>
+  </div>
+  <p class="leadership">Liderança: Aureo</p>
+  <p class="updated-at">Última atualização: 21 de maio de 2026, 12:58 PM EST</p>
+  <div class="updates-window">
+    <div class="update-line">2026-05-21 — Drew (Austral Continental) demonstrou interesse em uma das usinas do Henrique e pediu mais informações. Aureo enviou NDA e aguarda confirmação de assinatura.</div>
+    <div class="update-line">2026-05-07 — Henrique mandou mais uma usina (etanol e açúcar), mas não é o perfil desejado pelos chineses. Aureo vai visitar parceiro dos chineses na próxima terça. A nova fazenda de Henrique vai ter pitch anonimizado da Weaver e será apresentada também ao Drew.</div>
+    <div class="update-line">2026-05-04 — Frente seguia com 3 oportunidades e aguardando do Henrique as especificações dos chineses.</div>
+  </div>
+</article>
+
+<article class="card">
+  <div class="card-top">
     <h2>EBRD Iraq</h2>
-    <button class="summary-button" type="button" data-summary-title="EBRD Iraq" data-summary-updated="2026-05-19" data-summary-text="Weaver registra-se como International Advisor no site da EBRD (deals >US$5M). Formulários enviados por email. Omar propõe introdução ao contato local da EBRD para agendar chamada. Discussão sobre registro no Banco Central do Iraque e orientação/treinamento a tomadores de empréstimo.">Resumo geral</button>
+    <button class="summary-button" type="button" data-summary-title="EBRD Iraq" data-summary-updated="2026-05-19" data-summary-text="Weaver se registra como International Advisor no site da EBRD (deals >US$5M). Formulários enviados por email. Omar propõe introdução ao contato local da EBRD para agendar chamada. Modelo envolve cost-sharing advisory para SMEs no Iraque com subsídio parcial do EBRD. Em discussão: registro no Banco Central do Iraque e possibilidade de oferecer orientação a tomadores de empréstimo (ex.: estruturação de pagamentos como dividendos ao invés de juros). É um banco onde a Weaver já aplicou projeto de Gaza (sem sucesso). Call com Omar pendente para qualificar o pipeline.">Resumo geral</button>
   </div>
   <p class="leadership">Liderança: Caio</p>
   <p class="updated-at">Última atualização: 19 de maio de 2026, 4:30 PM EST</p>
@@ -202,83 +219,40 @@
 
 <article class="card">
   <div class="card-top">
-    <h2>Board Lusófono</h2>
-    <button class="summary-button" type="button" data-summary-title="Board Lusófono" data-summary-updated="2026-05-15" data-summary-text="Board Lusófono avançando. Voigt ligou: data 22/05 mantida, repórter do Globo convidado, programa da reunião chega na segunda (19/05). Composição confirmada: Aureo, Marcos Vaena e contato da Guiné-Bissau. Reunião 22/05 às 10am EST.">Resumo geral</button>
-  </div>
-  <p class="leadership">Liderança: Aureo</p>
-  <p class="updated-at">Última atualização: 15 de maio de 2026, 1:35 PM EST</p>
-  <div class="updates-window">
-    <div class="update-line">2026-05-15 — Voigt ligou para Aureo. Quer manter a data da reunião (22/05). Chamou repórter do Globo. Vai mandar programa na segunda-feira.</div>
-    <div class="update-line">2026-05-14 — Vaena confirmou presença junto com pessoa da Guiné-Bissau. Voigt chamou outras pessoas. Vaena pediu programa da reunião.</div>
-    <div class="update-line">2026-05-11 — Reunião do Board Lusófono marcada para 22/05, 10am EST.</div>
-    <div class="update-line">2026-05-07 — Willian pediu link para reunião ao Aureo, que respondeu perguntando data, hora e email dos participantes.</div>
-  </div>
-</article>
-
-<article class="card">
-  <div class="card-top">
     <h2>DRC — Shomberwa Solar IPP</h2>
-    <button class="summary-button" type="button" data-summary-title="DRC — Shomberwa Solar IPP" data-summary-updated="2026-05-15" data-summary-text="Shomberwa Solar IPP: usina solar híbrida de 23.5 MWp + BESS 195.6 MWh em Kambove, Haut-Katanga, DRC. Estrutura BOOT com PPA de 15 anos, offtaker CMT SAS (fundição de cobre e cobalto). Weaver mandatada como assessora financeira para fundraising. Remuneração: success fee 7.7% (50/50 cash/equity) + retainer USD 77K. IFC voltou a mostrar interesse. China sendo trabalhada como fonte de financiamento/investidores.">Resumo geral</button>
+    <button class="summary-button" type="button" data-summary-title="DRC — Shomberwa Solar IPP" data-summary-updated="2026-05-15" data-summary-text="Mandato ativo de fundraising. Weaver assessora o Shomberwa Solar IPP (23.5 MWp + BESS 195.6 MWh, Kambove, Haut-Katanga, DRC). Estrutura BOOT com PPA de 15 anos, offtaker CMT SAS (fundição de cobre e cobalto). Remuneração Weaver: success fee de 7.7% (50/50 cash/equity) + retainer USD 77K no primeiro closing. IFC voltou a mostrar interesse. China segue em prospecção como fonte de financiamento/investidores.">Resumo geral</button>
   </div>
   <p class="leadership">Liderança: Bernardo</p>
-  <p class="updated-at">Última atualização: 15 de maio de 2026, 11:08 AM EST</p>
+  <p class="updated-at">Última atualização: 15 de maio de 2026, 2:10 PM EST</p>
   <div class="updates-window">
-    <div class="update-line">2026-05-15 — Aureo informou a David que a IFC voltou a mostrar interesse. Equipe segue tentando a China como fonte de financiamento e investidores.</div>
-    <div class="update-line">2026-05-08 — Tanzânia LNG separada em card próprio após reunião com David Kiai. Card DRC agora focado exclusivamente no Shomberwa Solar IPP.</div>
+    <div class="update-line">2026-05-15 — Aureo informou a David que a IFC voltou a mostrar interesse. Equipe segue tentando a China (financiamento/investidores).</div>
+    <div class="update-line">2026-05-08 — Card de Tanzânia LNG separado em projeto próprio após reunião com David Kiai. ZepRe (Kenya) não foi abordado — follow-up pendente.</div>
     <div class="update-line">2026-05-06 — David teve reunião com Tanzanian Petroleum Authority sobre possível PPP em LNG. Bernardo ficou de falar com parceiros.</div>
+    <div class="update-line">2026-05-04 — Frente mantida como ativa para não sair dos resumos e do radar.</div>
   </div>
 </article>
 
 <article class="card">
   <div class="card-top">
-    <h2>Miscelânea</h2>
-    <button class="summary-button" type="button" data-summary-title="Miscelânea" data-summary-updated="2026-05-15" data-summary-text="Miscelânea captura itens operacionais do dia a dia que não justificam projeto próprio. Aureo enviou pitch deck da Weaver para Maristela, da UNDP, que sugeriu incluir Bernardo no rol de especialistas da instituição. Criado grupo Invest SC após contato do Bernardo no evento do BID em Santa Catarina. Weaver Room publicada. Podcast: João produziu e publicou vídeo de entrevista do Bernardo no LinkedIn.">Resumo geral</button>
-  </div>
-  <p class="leadership">Liderança: Sem liderança</p>
-  <p class="updated-at">Última atualização: 15 de maio de 2026, 3:58 PM EST</p>
-  <div class="updates-window">
-    <div class="update-line">2026-05-15 — Aureo enviou pitch deck da Weaver para Maristela, da UNDP, que sugeriu incluir Bernardo no rol de especialistas da instituição. Criado grupo Invest SC após contato do Bernardo no evento do BID em Santa Catarina.</div>
-    <div class="update-line">2026-05-08 — Primeira versão da página Weaver Room publicada. João produziu e publicou no LinkedIn o vídeo da entrevista do Bernardo em podcast universitário.</div>
-    <div class="update-line">2026-05-06 — Dispensados sobrinho do Ciccio e social media entrevistados. Filha do Todd vai estagiar sem custo no verão americano.</div>
-  </div>
-</article>
-
-<article class="card">
-  <div class="card-top">
-    <h2>N5Deal</h2>
-    <button class="summary-button" type="button" data-summary-title="N5Deal" data-summary-updated="2026-05-15" data-summary-text="Intermediação de deals Weaver com compradores institucionais. Egor aceitou 25% da comissão para apresentar o Buyer. Palheiro está preparando pitch detalhado de um dos negócios (ainda anonimizado), que será enviado em breve. Nicola fazendo pitch do terceiro teaser.">Resumo geral</button>
-  </div>
-  <p class="leadership">Liderança: Bernardo</p>
-  <p class="updated-at">Última atualização: 15 de maio de 2026, 11:08 AM EST</p>
-  <div class="updates-window">
-    <div class="update-line">2026-05-15 — Palheiro está preparando pitch detalhado de um dos negócios (anonimizado). Vai enviar em breve. Quer apresentar só este por enquanto.</div>
-    <div class="update-line">2026-05-08 — Nicola fazendo pitch do terceiro teaser. Segundo teaser de Massena/Palheiro recebido, será enviado para Egor → Buyer.</div>
-    <div class="update-line">2026-05-07 — Aureo fez modelo de mandato (enviado ao Palheiro). Egor aceitou 25% da comissão. Aureo pediu pitch do terceiro deal ao Massena.</div>
-  </div>
-</article>
-
-<article class="card">
-  <div class="card-top">
-    <h2>Weaver Spain</h2>
-    <button class="summary-button" type="button" data-summary-title="Weaver Spain" data-summary-updated="2026-05-15" data-summary-text="Certificación negativa solicitada (C-5447994, 22,54 EUR). SLU: WEAVER ADVISORY DE ESPAÑA, S.L.U., CNAE 7022, capital 3.000 EUR. NIE protocolado (~2 semanas). Garcia (Egor) respondeu com honorários de €5.000 para constituição. Reunião com Regus Madrid marcada para segunda 10h BRT. Susana também na agenda de segunda 11h BRT. Notaría Online como alternativa turn-key (~480 EUR). Cronograma: 6-7 semanas.">Resumo geral</button>
+    <h2>Espanha — Abertura Weaver</h2>
+    <button class="summary-button" type="button" data-summary-title="Espanha — Abertura Weaver" data-summary-updated="2026-05-15" data-summary-text="Processo liderado por Nicola. NIE do Bernardo protocolado no consulado espanhol em DC (previsão ~2 semanas). Certificación negativa de denominación solicitada (C-5447994, 22,54 EUR). SLU confirmada: WEAVER ADVISORY DE ESPAÑA, S.L.U., CNAE 7022, capital 3.000 EUR. Nicola deve contratar virtual office em Madri (Regus, Lexington, First Workplaces) e contatar Notaría Online (~480 EUR turn-key). Conta bancária dispensada para constituição (Lei Crea y Crece). Cronograma realista: 6-7 semanas do NIE até empresa operacional.">Resumo geral</button>
   </div>
   <p class="leadership">Liderança: Nicola</p>
-  <p class="updated-at">Última atualização: 15 de maio de 2026, 11:08 AM EST</p>
+  <p class="updated-at">Última atualização: 15 de maio de 2026, 1:50 PM EST</p>
   <div class="updates-window">
-    <div class="update-line">2026-05-15 — Aureo marcou reunião com Regus Madrid (segunda 10h BRT) e Susana (segunda 11h BRT). Garcia (Egor) respondeu com honorários de €5.000 para constituição da empresa.</div>
-    <div class="update-line">2026-05-14 — Certificación negativa solicitada (C-5447994, 22,54 EUR). SLU definida com CNAE 7022, capital 3.000 EUR. Nome liberado. Conta bancária dispensada para constituição.</div>
-    <div class="update-line">2026-05-08 — Nicola definido como dono do processo. Orientações detalhadas compiladas (SL, custos, NIE, procuração, gargalos).</div>
-    <div class="update-line">2026-05-01 — Bernardo foi à embaixada e protocolou o NIE. Advogado espanhol se dispôs a ajudar.</div>
+    <div class="update-line">2026-05-15 — Aureo marcou reuniões: Regus Madrid (segunda 10h BRT) e Susana (segunda 11h BRT). Garcia (contato do Egor) respondeu com honorários de €5.000 para ajudar na constituição.</div>
+    <div class="update-line">2026-05-14 — Aureo mandou email para Garcia. Nicola falando com coworks para domicílio. Nome liberado. Certificación negativa solicitada (C-5447994). SLU definida. Nicola deve contratar virtual office e contatar Notaría Online.</div>
+    <div class="update-line">2026-05-08 — Nicola definido como dono do processo. Aureo preparou orientações detalhadas. NIE do Bernardo protocolado desde 01/05.</div>
   </div>
 </article>
 
 <article class="card">
   <div class="card-top">
     <h2>Angola — Feasibility Studies</h2>
-    <button class="summary-button" type="button" data-summary-title="Angola — Feasibility Studies" data-summary-updated="2026-05-14" data-summary-text="Angola — Feasibility Studies ativo. Caio contactou Wenilton do Ministério das Finanças, que respondeu perguntando mais informações do projeto. Caio vai ver isso com Bernardo. Weaver já fez trabalho inicial para WBG e governo de Angola.">Resumo geral</button>
+    <button class="summary-button" type="button" data-summary-title="Angola — Feasibility Studies" data-summary-updated="2026-05-14" data-summary-text="Weaver já fez trabalho inicial para WBG e governo de Angola nesta frente (deck enviado jun/2025 com forte aderência em open access, concessões de transmissão, PPP, atração de capital privado). Caio contactou Wenilton (Ministério das Finanças), que respondeu pedindo mais informações — Caio vai alinhar com Bernardo. Sinais concretos de pipeline no WBG: feasibility study de transmissão (Caculo Cabaça), contract award (Cunene), PPP transaction advisory, Huila-Cunene Interconnection em general procurement notice.">Resumo geral</button>
   </div>
   <p class="leadership">Liderança: Caio</p>
-  <p class="updated-at">Última atualização: 14 de maio de 2026, 3:11 PM EST</p>
+  <p class="updated-at">Última atualização: 14 de maio de 2026, 2:40 PM EST</p>
   <div class="updates-window">
     <div class="update-line">2026-05-14 — Caio contactou Wenilton do Ministério das Finanças de Angola. Wenilton respondeu perguntando mais informações do projeto. Caio vai ver isso com Bernardo.</div>
     <div class="update-line">2026-05-04 — Caio seguiu acompanhando Banco Mundial e procurement de país, incluindo Angola.</div>
@@ -287,38 +261,11 @@
 
 <article class="card">
   <div class="card-top">
-    <h2>BID</h2>
-    <button class="summary-button" type="button" data-summary-title="BID" data-summary-updated="2026-05-07" data-summary-text="Projeto principal em fase de não objeção no BID. Quando essa etapa avançar, abre-se janela de 2 dias para seguir. Nova frente: Reinaldo sugeriu fundo no BID com Grant para Green Bonds na América Central. Nicola preparou carta para o embaixador de Honduras para ativar o ministério e verificar interesse.">Resumo geral</button>
-  </div>
-  <p class="leadership">Liderança: Aureo</p>
-  <p class="updated-at">Última atualização: 07 de maio de 2026, 5:35 PM EST</p>
-  <div class="updates-window">
-    <div class="update-line">2026-05-07 — Reinaldo sugeriu fundo no BID com Grant para Green Bonds na América Central. Nicola preparou carta e está mandando para embaixador de Honduras para ativar o ministério e verificar interesse. Weaver se oferece para avançar com o governo.</div>
-    <div class="update-line">2026-05-05 — Reinaldo reportou que o projeto entrou em fase de não objeção. Janela de 2 dias para seguir quando essa etapa avançar. Avaliação do grupo de qualidade chegará nesse intervalo.</div>
-    <div class="update-line">2026-05-04 — BID provavelmente submetido; aguardando resposta do Reinaldo.</div>
-  </div>
-</article>
-
-<article class="card">
-  <div class="card-top">
-    <h2>Emerging Markets Platform</h2>
-    <button class="summary-button" type="button" data-summary-title="Emerging Markets Platform" data-summary-updated="2026-05-07" data-summary-text="Plataforma própria da Weaver para emerging markets em definição. Com orientações mais claras, Aureo avança na criação da tabela de deals no site da Weaver.">Resumo geral</button>
-  </div>
-  <p class="leadership">Liderança: Aureo</p>
-  <p class="updated-at">Última atualização: 07 de maio de 2026, 5:35 PM EST</p>
-  <div class="updates-window">
-    <div class="update-line">2026-05-07 — Com orientações mais claras, Aureo avança na criação da tabela de deals no site da Weaver.</div>
-    <div class="update-line">2026-05-04 — Tese da plataforma própria avançou e reunião com empresa do setor foi colocada como próximo passo.</div>
-  </div>
-</article>
-
-<article class="card">
-  <div class="card-top">
     <h2>Granter.ai</h2>
-    <button class="summary-button" type="button" data-summary-title="Granter.ai" data-summary-updated="2026-05-07" data-summary-text="Granter.ai é startup portuguesa (Lisboa, vencedora Web Summit 2025 e Techstars Torino). Agente de IA para grants com €21,3M em candidaturas e 3000+ clientes, foco atual na Europa. Oportunidades: (1) rodada de investimento — Weaver pode trazer investidores; (2) parceria para IA de scraping de RFP; (3) contatos em departamentos federais americanos.">Resumo geral</button>
+    <button class="summary-button" type="button" data-summary-title="Granter.ai" data-summary-updated="2026-05-07" data-summary-text="Reunião inicial com Bernardo Seixas (português, San Francisco). Granter.ai é startup de IA para grants (€21,3M em candidaturas, 3000+ clientes, Web Summit 2025, Techstars Torino), mas foco restrito à Europa — sem MDB/RFPs. Três frentes abertas: (1) Weaver pode trazer investidores para rodada, (2) parceria para desenvolver IA de scraping de RFP, (3) Bernardo Seixas precisa de contatos em departamentos federais americanos. Aureo sugeriu reunião com Bernardo Weaver para destravar a frente de governo americano.">Resumo geral</button>
   </div>
   <p class="leadership">Liderança: Aureo</p>
-  <p class="updated-at">Última atualização: 07 de maio de 2026, 5:35 PM EST</p>
+  <p class="updated-at">Última atualização: 7 de maio de 2026, 5:35 PM EST</p>
   <div class="updates-window">
     <div class="update-line">2026-05-07 — Aureo mandou mensagem para Bernardo Seixas sugerindo reunião na semana que vem com Bernardo Weaver para destravar a frente de governo americano.</div>
     <div class="update-line">2026-05-06 — Reunião inicial com Bernardo Seixas. Granter.ai é startup portuguesa, agente de IA para grants com €21,3M em candidaturas e 3000+ clientes, mas foco restrito à Europa. Oportunidades: (1) rodada de investimento — Weaver pode trazer investidores; (2) parceria para IA de scraping de RFP; (3) contatos em departamentos federais americanos. Bernardo Seixas estará no Rio para o Web Summit.</div>
@@ -328,12 +275,68 @@
 
 <article class="card">
   <div class="card-top">
-    <h2>Casa Brasil</h2>
-    <button class="summary-button" type="button" data-summary-title="Casa Brasil" data-summary-updated="2026-05-05" data-summary-text="Casa Brasil ativa. Atualização do site e planejamento da próxima aparição em andamento. Possível participação do David da Vantiq. Board lusófono tratado em card próprio.">Resumo geral</button>
+    <h2>BID</h2>
+    <button class="summary-button" type="button" data-summary-title="BID" data-summary-updated="2026-05-07" data-summary-text="Projeto principal em fase de não objeção no BID (Reinaldo reportou). Quando avançar, janela de 2 dias para agir. Avaliação do grupo de qualidade chegará nesse intervalo. Oportunidade paralela: Reinaldo sugeriu fundo no BID para Green Bonds na América Central. Nicola preparou carta e está enviando para o embaixador de Honduras — objetivo é ativar o ministério e verificar interesse do governo. Weaver se oferece para avançar com o governo neste email.">Resumo geral</button>
   </div>
   <p class="leadership">Liderança: Aureo</p>
-  <p class="updated-at">Última atualização: 05 de maio de 2026, 6:00 PM EST</p>
+  <p class="updated-at">Última atualização: 7 de maio de 2026, 5:35 PM EST</p>
   <div class="updates-window">
+    <div class="update-line">2026-05-07 — Reinaldo sugeriu fundo no BID com Grant para Green Bonds na América Central. Nicola preparou carta e está mandando para embaixador de Honduras para ativar o ministério e verificar interesse. Weaver se oferece para avançar com o governo.</div>
+    <div class="update-line">2026-05-05 — Reinaldo reportou que o projeto entrou em fase de não objeção. Janela de 2 dias para seguir quando essa etapa avançar. Avaliação do grupo de qualidade chegará nesse intervalo.</div>
+    <div class="update-line">2026-05-04 — BID provavelmente submetido; aguardando resposta do Reinaldo.</div>
+  </div>
+</article>
+
+<article class="card">
+  <div class="card-top">
+    <h2>N5Deal</h2>
+    <button class="summary-button" type="button" data-summary-title="N5Deal" data-summary-updated="2026-05-15" data-summary-text="Intermediação de deals entre Weaver e compradores institucionais. Egor aceitou 25% da comissão para apresentar o Buyer. Aureo estruturou modelo de mandato e enviou para Palheiro. Palheiro preparando pitch detalhado de um negócio (anonimizado) — enviará em breve. Segundo teaser de Massena/Palheiro recebido, rota: Egor → Buyer. Nicola preparando pitch do terceiro deal.">Resumo geral</button>
+  </div>
+  <p class="leadership">Liderança: Bernardo</p>
+  <p class="updated-at">Última atualização: 15 de maio de 2026, 1:50 PM EST</p>
+  <div class="updates-window">
+    <div class="update-line">2026-05-15 — Palheiro está preparando pitch mais detalhado de um dos negócios (anonimizado). Vai enviar em breve. Quer apresentar só este por enquanto.</div>
+    <div class="update-line">2026-05-08 — Nicola fazendo pitch do terceiro teaser. Segundo teaser de Massena e Palheiro recebido, será enviado para Egor mandar ao Buyer.</div>
+    <div class="update-line">2026-05-07 — Aureo fez modelo de mandato e mandou para Palheiro. Bernardo fez reunião com Egor, que aceitou 25% da comissão para apresentar o Buyer. Aureo mandou mensagem para Massena pedindo o pitch do terceiro deal.</div>
+  </div>
+</article>
+
+<article class="card">
+  <div class="card-top">
+    <h2>Emerging Markets Platform</h2>
+    <button class="summary-button" type="button" data-summary-title="Emerging Markets Platform" data-summary-updated="2026-05-07" data-summary-text="Estruturação da plataforma própria da Weaver para emerging markets. Tese avançou para plataforma própria no site. Aureo avança na criação da tabela de deals. Reunião com empresa do setor externa para levantar referências e estrutura está prevista como próximo passo.">Resumo geral</button>
+  </div>
+  <p class="leadership">Liderança: Aureo</p>
+  <p class="updated-at">Última atualização: 7 de maio de 2026, 5:35 PM EST</p>
+  <div class="updates-window">
+    <div class="update-line">2026-05-07 — Com orientações mais claras, Aureo avança na criação da tabela de deals no site da Weaver.</div>
+    <div class="update-line">2026-05-04 — Tese da plataforma própria avançou e reunião com empresa do setor foi colocada como próximo passo.</div>
+  </div>
+</article>
+
+<article class="card">
+  <div class="card-top">
+    <h2>Miscelânea</h2>
+    <button class="summary-button" type="button" data-summary-title="Miscelânea" data-summary-updated="2026-05-15" data-summary-text="Itens operacionais diversos: Aureo enviou pitch deck da Weaver para Maristela (UNDP), que sugeriu incluir Bernardo no rol de especialistas. Criado grupo Invest SC após contato de Bernardo no evento do BID em SC. Primeira versão da página Weaver Room publicada. João produziu e publicou vídeo da entrevista de Bernardo em podcast universitário. Sobrinho do Ciccio e candidato a social media foram dispensados (fechar projetos antes de novas contratações). Filha do Todd vai estagiar sem custo no verão americano.">Resumo geral</button>
+  </div>
+  <p class="leadership">Liderança: (sem liderança definida)</p>
+  <p class="updated-at">Última atualização: 15 de maio de 2026, 1:50 PM EST</p>
+  <div class="updates-window">
+    <div class="update-line">2026-05-15 — Aureo enviou pitch deck da Weaver para Maristela, da UNDP, que sugeriu incluir Bernardo no rol de especialistas da instituição. Criado grupo Invest SC após contato do Bernardo no evento do BID em Santa Catarina.</div>
+    <div class="update-line">2026-05-08 — Primeira versão da página Weaver Room publicada. João produziu e publicou no LinkedIn o vídeo da entrevista do Bernardo em podcast universitário.</div>
+    <div class="update-line">2026-05-06 — Dispensados sobrinho do Ciccio e social media. Filha do Todd vai estagiar no verão americano sem custo.</div>
+  </div>
+</article>
+
+<article class="card">
+  <div class="card-top">
+    <h2>Casa Brasil</h2>
+    <button class="summary-button" type="button" data-summary-title="Casa Brasil" data-summary-updated="2026-05-05" data-summary-text="Casa Brasil ativa. Atualização do site avançou e planejamento da próxima aparição andou. Possível participação do David da Vantiq. Board lusófono foi separado em card próprio. Pendente: confirmar status final do site e definir próximo evento/aparição concreto.">Resumo geral</button>
+  </div>
+  <p class="leadership">Liderança: Aureo</p>
+  <p class="updated-at">Última atualização: 5 de maio de 2026, 6:00 PM EST</p>
+  <div class="updates-window">
+    <div class="update-line">2026-05-05 — Board lusófono extraído para arquivo próprio.</div>
     <div class="update-line">2026-05-04 — Atualização do site avançou e o planejamento da próxima aparição andou.</div>
   </div>
 </article>
@@ -356,7 +359,7 @@
 
 <script>
 (function() {
-  var PASSWORD = 'SenhaFacil2!';
+  var PASSWORD = '2265';
   var overlay = document.getElementById('passwordOverlay');
   var input = document.getElementById('passwordInput');
   var submit = document.getElementById('passwordSubmit');
