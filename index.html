@@ -13,6 +13,7 @@
       --accent: #38bdf8;
       --border: #334155;
       --tag-bg: #1e3a5f;
+      --archived-bg: #1a1f2e;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -28,6 +29,8 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
     }
     header h1 { font-size: 1.5rem; color: var(--accent); }
     header .updated { color: var(--muted); font-size: 0.85rem; }
@@ -171,6 +174,59 @@
       cursor: pointer; font-weight: 600; margin-top: 0.5rem;
     }
     .error { color: #f87171; font-size: 0.8rem; margin-top: 0.25rem; }
+
+    /* ---- Archive section ---- */
+    .section-divider {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.5rem 0;
+      margin-top: 0.5rem;
+    }
+    .section-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, var(--border), transparent);
+    }
+    .section-label {
+      color: #64748b;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .card.archived {
+      background: var(--archived-bg);
+      border-color: #1e293b;
+      padding: 0.85rem 1.1rem;
+    }
+    .card.archived h2 {
+      font-size: 0.95rem;
+      color: #94a3b8;
+    }
+    .closed-badge {
+      background: #1e293b;
+      color: #94a3b8;
+      border: 1px solid #334155;
+      border-radius: 4px;
+      padding: 0.15rem 0.5rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .closed-reason {
+      color: #64748b;
+      font-size: 0.78rem;
+      margin-bottom: 0.4rem;
+      font-style: italic;
+    }
+    .archive-summary {
+      color: #94a3b8;
+      font-size: 0.8rem;
+      line-height: 1.5;
+    }
   </style>
 </head>
 <body>
@@ -186,17 +242,42 @@
 
 <main id="mainContent" hidden>
   <header>
-    <h1>Weaver Dashboard</h1>
-    <div class="lang-switch" id="langSwitch" aria-label="Language selector">
-      <button class="lang-option active" data-lang="pt" aria-pressed="true">PT</button>
-      <button class="lang-option" data-lang="en" aria-pressed="false">EN</button>
+    <div style="display:flex;align-items:center;gap:1rem;">
+      <h1>Weaver Dashboard</h1>
+      <div class="lang-switch" id="langSwitch" aria-label="Language selector">
+        <button class="lang-option active" data-lang="pt" aria-pressed="true">PT</button>
+        <button class="lang-option" data-lang="en" aria-pressed="false">EN</button>
+      </div>
     </div>
-    <div class="updated" data-pt="Gerado em 16 de junho de 2026, 11:05 AM EST" data-en="Generated on June 16, 2026, 11:05 AM EST">Gerado em 16 de junho de 2026, 11:05 AM EST</div>
+    <div class="updated" data-pt="Gerado em 18 de junho de 2026, 2:43 PM EST" data-en="Generated on June 18, 2026, 2:43 PM EST">Gerado em 18 de junho de 2026, 2:43 PM EST</div>
   </header>
 
   <section class="cards">
 
-<!-- ===== June 16, 2026 (alphabetical) ===== -->
+<!-- ===== June 18, 2026 ===== -->
+
+<article class="card">
+  <div class="card-top">
+    <h2 data-pt="Minas — Andorra Part." data-en="Mines — Andorra Part.">Minas — Andorra Part.</h2>
+    <button class="summary-button" type="button" data-pt="Resumo geral" data-en="Overview"
+      data-summary-title="Minas — Andorra Part."
+      data-summary-title-en="Mines — Andorra Part."
+      data-summary-updated="2026-06-18"
+      data-summary-text="Reunião realizada com Avelino Fernandez (Andorra Participações) em 17/jun. Cinco projetos de mineração recebidos. Andorra opera na Serra dos Carajás (Pará) com depósitos de cobre, níquel, cobalto, grafita, manganês, bauxita, lítio, terras raras, ouro, ferro e coltán. Avelino é seller de múltiplos projetos. Foi convidado para Casa Brasil no FMI (25/jun). Próximo passo: Aureo revisar, anonimizar e enviar os projetos ao Drew (Austral Continental)."
+      data-summary-text-en="Meeting held with Avelino Fernandez (Andorra Participações) on Jun 17. Five mining projects received. Andorra operates in Serra dos Carajás (Pará) with deposits of copper, nickel, cobalt, graphite, manganese, bauxite, lithium, rare earths, gold, iron, and coltan. Avelino is a seller of multiple projects. Invited to Casa Brasil at the IMF (Jun 25). Next step: Aureo to review, anonymize, and send projects to Drew (Austral Continental)."
+    >Resumo geral</button>
+  </div>
+  <p class="leadership" data-pt="Liderança: Aureo" data-en="Leadership: Aureo">Liderança: Aureo</p>
+  <p class="updated-at" data-pt="Última atualização: 18 de junho de 2026, 12:50 PM EST" data-en="Last updated: June 18, 2026, 12:50 PM EST">Última atualização: 18 de junho de 2026, 12:50 PM EST</p>
+  <p class="next-steps">
+    <strong data-pt="Próximos passos:" data-en="Next steps:">Próximos passos:</strong>
+    <span data-pt="Revisar 5 projetos recebidos; Anonimizar; Enviar ao Drew (Austral Continental); Acompanhar Casa Brasil (25/jun)" data-en="Review 5 projects; Anonymize; Send to Drew (Austral Continental); Follow up Casa Brasil (Jun 25)">Revisar 5 projetos recebidos; Anonimizar; Enviar ao Drew (Austral Continental); Acompanhar Casa Brasil (25/jun)</span>
+  </p>
+  <div class="updates-window">
+    <div class="update-line" data-pt="2026-06-17 — Reunião com Avelino. Cinco projetos recebidos. Convidado para Casa Brasil (FMI, 25/jun). Aureo fará triagem e envio ao Drew." data-en="2026-06-17 — Meeting with Avelino. Five projects received. Invited to Casa Brasil (IMF, Jun 25). Aureo to screen and send to Drew.">2026-06-17 — Reunião com Avelino. Cinco projetos recebidos. Convidado para Casa Brasil (FMI, 25/jun). Aureo fará triagem e envio ao Drew.</div>
+    <div class="update-line" data-pt="2026-06-15 — Bernardo fez contato com Avelino. Aureo entrou em contato para agendar call." data-en="2026-06-15 — Bernardo contacted Avelino. Aureo followed up to schedule a call.">2026-06-15 — Bernardo fez contato com Avelino. Aureo entrou em contato para agendar call.</div>
+  </div>
+</article>
 
 <article class="card">
   <div class="card-top">
@@ -239,9 +320,9 @@
     <span data-pt="Avançar contrato para viabilizar fundos no Equador (prioridade); Finalizar apresentação para o Governo do Equador; Acompanhar retorno do embaixador de Honduras (Green Bonds)" data-en="Advance contract to make Ecuador funds viable (priority); Finalize presentation for Ecuador Government; Follow up on Honduras ambassador response (Green Bonds)">Avançar contrato para viabilizar fundos no Equador (prioridade); Finalizar apresentação para o Governo do Equador; Acompanhar retorno do embaixador de Honduras (Green Bonds)</span>
   </p>
   <div class="updates-window">
-    <div class="update-line" data-pt="2026-06-15 — Bernardo e Aureo revisaram apresentação do Reinaldo. Weaver na elaboração do plano para o governo. Foco: contrato Fundo Equador." data-en="2026-06-15 — Bernardo and Aureo reviewed Reinaldo's presentation. Weaver co-creating government plan. Focus: Ecuador Fund contract.">2026-06-15 — Bernardo e Aureo revisaram apresentação do Reinaldo. Weaver na elaboração do plano para o governo. Foco: contrato Fundo Equador.</div>
-    <div class="update-line" data-pt="2026-06 (data a confirmar) — Projeto principal passou da fase de não objeção." data-en="2026-06 (date TBD) — Main project passed no-objection phase.">2026-06 (data a confirmar) — Projeto principal passou da fase de não objeção.</div>
-    <div class="update-line" data-pt="2026-06-10 — Nicola ajustando slides para apresentação ao Governo do Equador." data-en="2026-06-10 — Nicola adjusting slides for Ecuador Government presentation.">2026-06-10 — Nicola ajustando slides para apresentação ao Governo do Equador.</div>
+    <div class="update-line" data-pt="2026-06-16 — Projeto principal passou da não objeção. Foco: contrato Fundo Equador. Apresentação do Reinaldo revisada em 15/jun." data-en="2026-06-16 — Main project passed no-objection. Focus: Ecuador Fund contract. Reinaldo's presentation reviewed on Jun 15.">2026-06-16 — Projeto principal passou da não objeção. Foco: contrato Fundo Equador. Apresentação do Reinaldo revisada em 15/jun.</div>
+    <div class="update-line" data-pt="2026-06-10 — Fundo Equador: Nicola ajustando slides para apresentação ao Governo do Equador." data-en="2026-06-10 — Ecuador Fund: Nicola adjusting slides for Ecuador Government presentation.">2026-06-10 — Fundo Equador: Nicola ajustando slides para apresentação ao Governo do Equador.</div>
+    <div class="update-line" data-pt="2026-05-07 — Green Bonds: carta enviada ao embaixador de Honduras para ativar o ministério." data-en="2026-05-07 — Green Bonds: letter sent to Honduras ambassador to activate the ministry.">2026-05-07 — Green Bonds: carta enviada ao embaixador de Honduras para ativar o ministério.</div>
   </div>
 </article>
 
@@ -252,208 +333,43 @@
       data-summary-title="Doug Projects"
       data-summary-title-en="Doug Projects"
       data-summary-updated="2026-06-16"
-      data-summary-text="Oportunidades de advisory via Doug (Banco Mundial, Moldova/Romênia). Caio aplicou projeto Itália-Moldova em 05/06. Caio e João preparando próxima apresentação com deadline em 24 de junho."
-      data-summary-text-en="Advisory opportunities via Doug (World Bank, Moldova/Romania). Caio applied Italy-Moldova project on Jun 5. Caio and João preparing the next presentation with deadline June 24."
+      data-summary-text="Doug é amigo do Bernardo no Banco Mundial (Moldova/Romênia). Enviou ToRs para análise. Caio aplicou projeto Itália-Moldova (B2B export promotion) em 05/06. Nova TDR Moldova recebida em 10/06. Caio e João preparando próxima apresentação — deadline 24 de junho. Busca de consórcio com empresa na Moldávia em andamento."
+      data-summary-text-en="Doug is Bernardo's friend at the World Bank (Moldova/Romania). ToRs sent for analysis. Caio applied for Italy-Moldova project (B2B export promotion) on Jun 5. New Moldova TDR received Jun 10. Caio and João preparing next presentation — deadline June 24. Searching for Moldova-based consortium partner."
     >Resumo geral</button>
   </div>
   <p class="leadership" data-pt="Liderança: Caio" data-en="Leadership: Caio">Liderança: Caio</p>
-  <p class="updated-at" data-pt="Última atualização: 16 de junho de 2026, 11:05 AM EST" data-en="Last updated: June 16, 2026, 11:05 AM EST">Última atualização: 16 de junho de 2026, 11:05 AM EST</p>
+  <p class="updated-at" data-pt="Última atualização: 16 de junho de 2026, 11:00 AM EST" data-en="Last updated: June 16, 2026, 11:00 AM EST">Última atualização: 16 de junho de 2026, 11:00 AM EST</p>
   <p class="next-steps">
     <strong data-pt="Próximos passos:" data-en="Next steps:">Próximos passos:</strong>
-    <span data-pt="Caio e João: entregar apresentação até 24/jun (prioridade); Bernardo: encontrar empresas com experiência na Moldávia; Preparar technical proposal" data-en="Caio and João: deliver presentation by Jun 24 (priority); Bernardo: find companies with Moldova experience; Prepare technical proposal">Caio e João: entregar apresentação até 24/jun (prioridade); Bernardo: encontrar empresas com experiência na Moldávia; Preparar technical proposal</span>
+    <span data-pt="Caio e João: entregar apresentação até 24/jun (prioridade); Bernardo: encontrar empresas com experiência na Moldávia com SMEs para consórcio" data-en="Caio and João: deliver presentation by Jun 24 (priority); Bernardo: find Moldova-experienced SMEs for consortium">Caio e João: entregar apresentação até 24/jun (prioridade); Bernardo: encontrar empresas com experiência na Moldávia com SMEs para consórcio</span>
   </p>
   <div class="updates-window">
-    <div class="update-line" data-pt="2026-06-16 — Caio preparando próxima apresentação com ajuda do João. Deadline: 24 de junho." data-en="2026-06-16 — Caio preparing next presentation with João's help. Deadline: June 24.">2026-06-16 — Caio preparando próxima apresentação com ajuda do João. Deadline: 24 de junho.</div>
-    <div class="update-line" data-pt="2026-06-10 — Bernardo mandou nova TDR Moldova. Caio tocando. Bernardo procurando empresas de SMEs na Moldávia." data-en="2026-06-10 — Bernardo sent new Moldova TOR. Caio working on it. Bernardo looking for Moldova SME companies.">2026-06-10 — Bernardo mandou nova TDR Moldova. Caio tocando. Bernardo procurando empresas de SMEs na Moldávia.</div>
-  </div>
-</article>
-
-<!-- ===== June 15, 2026 ===== -->
-
-<article class="card">
-  <div class="card-top">
-    <h2 data-pt="Mineração no Pará" data-en="Mining in Pará">Mineração no Pará</h2>
-    <button class="summary-button" type="button" data-pt="Resumo geral" data-en="Overview"
-      data-summary-title="Mineração no Pará"
-      data-summary-title-en="Mining in Pará"
-      data-summary-updated="2026-06-15"
-      data-summary-text="Bernardo fez contato com Avelino Fernandez (Andorra Participações), consultoria de minérios na Serra dos Carajás (Pará). Fundada em 2011, possui depósitos de cobre, níquel, cobalto, grafita, manganês, lítio, terras raras, ouro, ferro e coltán. Aureo entrou em contato para agendar call. Fonte potencial de negócios para Drew e Weaver."
-      data-summary-text-en="Bernardo contacted Avelino Fernandez (Andorra Participações), mining consultancy in Serra dos Carajás (Pará). Founded in 2011, holds deposits of copper, nickel, cobalt, graphite, manganese, lithium, rare earths, gold, iron, and coltan. Aureo reached out to schedule a call. Potential business source for Drew and Weaver."
-    >Resumo geral</button>
-  </div>
-  <p class="leadership" data-pt="Liderança: Aureo" data-en="Leadership: Aureo">Liderança: Aureo</p>
-  <p class="updated-at" data-pt="Última atualização: 15 de junho de 2026, 4:00 PM EST" data-en="Last updated: June 15, 2026, 4:00 PM EST">Última atualização: 15 de junho de 2026, 4:00 PM EST</p>
-  <p class="next-steps">
-    <strong data-pt="Próximos passos:" data-en="Next steps:">Próximos passos:</strong>
-    <span data-pt="Marcar call com Avelino esta semana; Entender escopo e interesse da Andorra; Avaliar potencial para Drew" data-en="Schedule call with Avelino this week; Understand Andorra's scope and interest; Evaluate potential for Drew">Marcar call com Avelino esta semana; Entender escopo e interesse da Andorra; Avaliar potencial para Drew</span>
-  </p>
-  <div class="updates-window">
-    <div class="update-line" data-pt="2026-06-15 — Bernardo fez contato com Avelino Fernandez (Andorra Participações). Aureo entrou em contato para agendar call. Depósitos de cobre, níquel, cobalto, grafita, manganês, lítio, terras raras, ouro, ferro e coltán." data-en="2026-06-15 — Bernardo contacted Avelino Fernandez (Andorra Participações). Aureo reached out to schedule a call. Deposits of copper, nickel, cobalt, graphite, manganese, lithium, rare earths, gold, iron, and coltan.">2026-06-15 — Bernardo fez contato com Avelino Fernandez (Andorra Participações). Aureo entrou em contato para agendar call. Depósitos de cobre, níquel, cobalto, grafita, manganês, lítio, terras raras, ouro, ferro e coltán.</div>
-  </div>
-</article>
-
-<!-- ===== June 9, 2026 (alphabetical) ===== -->
-
-<article class="card">
-  <div class="card-top">
-    <h2 data-pt="DRC — Shomberwa Solar IPP" data-en="DRC — Shomberwa Solar IPP">DRC — Shomberwa Solar IPP</h2>
-    <button class="summary-button" type="button" data-pt="Resumo geral" data-en="Overview"
-      data-summary-title="DRC — Shomberwa Solar IPP"
-      data-summary-title-en="DRC — Shomberwa Solar IPP"
-      data-summary-updated="2026-06-09"
-      data-summary-text="Mandato ativo de fundraising para Shomberwa Solar IPP (23.5 MWp + BESS 195.6 MWh), Kambove, DRC. BOOT com PPA de 15 anos, offtaker CMT SAS (fundição de cobre/cobalto). Remuneração Weaver: 7.7% success fee + USD 77K retainer."
-      data-summary-text-en="Active fundraising mandate for Shomberwa Solar IPP (23.5 MWp + BESS 195.6 MWh), Kambove, DRC. BOOT with 15-year PPA, offtaker CMT SAS (copper/cobalt smelter). Weaver compensation: 7.7% success fee + USD 77K retainer."
-    >Resumo geral</button>
-  </div>
-  <p class="leadership" data-pt="Liderança: Bernardo" data-en="Leadership: Bernardo">Liderança: Bernardo</p>
-  <p class="updated-at" data-pt="Última atualização: 9 de junho de 2026, 4:00 PM EST" data-en="Last updated: June 9, 2026, 4:00 PM EST">Última atualização: 9 de junho de 2026, 4:00 PM EST</p>
-  <p class="next-steps">
-    <strong data-pt="Próximos passos:" data-en="Next steps:">Próximos passos:</strong>
-    <span data-pt="Avançar outreach para DFIs e fundos (China, IFC); Cobrar Bernardo sobre parceiros" data-en="Advance outreach to DFIs and funds (China, IFC); Follow up with Bernardo on partners">Avançar outreach para DFIs e fundos (China, IFC); Cobrar Bernardo sobre parceiros</span>
-  </p>
-  <div class="updates-window">
-    <div class="update-line" data-pt="2026-06-09 — Call com IFC agendada para 10/06. Bernardo chamou o Sam." data-en="2026-06-09 — IFC call scheduled for Jun 10. Bernardo called Sam.">2026-06-09 — Call com IFC agendada para 10/06. Bernardo chamou o Sam.</div>
-    <div class="update-line" data-pt="2026-05-15 — IFC voltou a mostrar interesse. China sendo trabalhada." data-en="2026-05-15 — IFC showed renewed interest. China being worked on.">2026-05-15 — IFC voltou a mostrar interesse. China sendo trabalhada.</div>
+    <div class="update-line" data-pt="2026-06-16 — Caio e João na apresentação. Deadline 24/jun." data-en="2026-06-16 — Caio and João working on presentation. Deadline Jun 24.">2026-06-16 — Caio e João na apresentação. Deadline 24/jun.</div>
+    <div class="update-line" data-pt="2026-06-10 — Nova TDR Moldova recebida. Caio tocando. Empresas com experiência local sendo buscadas." data-en="2026-06-10 — New Moldova TDR received. Caio on it. Local-experienced companies being sought.">2026-06-10 — Nova TDR Moldova recebida. Caio tocando. Empresas com experiência local sendo buscadas.</div>
+    <div class="update-line" data-pt="2026-06-05 — Caio aplicou projeto Itália-Moldova (B2B export promotion)." data-en="2026-06-05 — Caio applied for Italy-Moldova project (B2B export promotion).">2026-06-05 — Caio aplicou projeto Itália-Moldova (B2B export promotion).</div>
   </div>
 </article>
 
 <article class="card">
   <div class="card-top">
-    <h2 data-pt="Spain — Abertura de Empresa" data-en="Spain — Company Incorporation">Spain — Abertura de Empresa</h2>
+    <h2 data-pt="Sugar Mills" data-en="Sugar Mills">Sugar Mills</h2>
     <button class="summary-button" type="button" data-pt="Resumo geral" data-en="Overview"
-      data-summary-title="Spain — Abertura de Empresa"
-      data-summary-title-en="Spain — Company Incorporation"
-      data-summary-updated="2026-06-09"
-      data-summary-text="Abertura da Weaver Advisory de España S.L.U. (CNAE 7022, capital €3.000). Certificación negativa emitida (C-5447994). Processo bloqueado por divergência de sobrenome no NIE de Bernardo. Correção em andamento junto ao Depto. de Visados."
-      data-summary-text-en="Incorporation of Weaver Advisory de España S.L.U. (CNAE 7022, capital €3,000). Certificación negativa issued (C-5447994). Process blocked by surname mismatch in Bernardo's NIE. Correction underway with Visa Department."
-    >Resumo geral</button>
-  </div>
-  <p class="leadership" data-pt="Liderança: Nicola" data-en="Leadership: Nicola">Liderança: Nicola</p>
-  <p class="updated-at" data-pt="Última atualização: 9 de junho de 2026, 4:00 PM EST" data-en="Last updated: June 9, 2026, 4:00 PM EST">Última atualização: 9 de junho de 2026, 4:00 PM EST</p>
-  <p class="next-steps">
-    <strong data-pt="Próximos passos:" data-en="Next steps:">Próximos passos:</strong>
-    <span data-pt="Aguardar correção do NIE (sobrenome divergente); Retomar certificado digital FNMT; Contratar virtual office em Madri" data-en="Await NIE correction (surname mismatch); Resume FNMT digital certificate; Contract Madrid virtual office">Aguardar correção do NIE (sobrenome divergente); Retomar certificado digital FNMT; Contratar virtual office em Madri</span>
-  </p>
-  <div class="updates-window">
-    <div class="update-line" data-pt="2026-06-09 — NIE bloqueado por divergência de sobrenome. Correção em andamento. Emails para urgência e aviso à notária." data-en="2026-06-09 — NIE blocked by surname mismatch. Correction underway. Urgency emails and notary notice.">2026-06-09 — NIE bloqueado por divergência de sobrenome. Correção em andamento. Emails para urgência e aviso à notária.</div>
-    <div class="update-line" data-pt="2026-05-26 — Processo migrado para videoconferência. Notaría Online (~€480) turn-key." data-en="2026-05-26 — Migrated to videoconference. Notaría Online (~€480) turn-key.">2026-05-26 — Processo migrado para videoconferência. Notaría Online (~€480) turn-key.</div>
-  </div>
-</article>
-
-<!-- ===== June 8, 2026 ===== -->
-
-<article class="card">
-  <div class="card-top">
-    <h2 data-pt="Tanzânia LNG" data-en="Tanzania LNG">Tanzânia LNG</h2>
-    <button class="summary-button" type="button" data-pt="Resumo geral" data-en="Overview"
-      data-summary-title="Tanzânia LNG"
-      data-summary-title-en="Tanzania LNG"
-      data-summary-updated="2026-06-08"
-      data-summary-text="Oportunidade LNG via TPC/TPDC. Contato David Kiai (Nairobi). Janela favorável pós force majeure do Qatar. Apresentações em análise no Deal Room. Possível sinergia com empresa brasileira de petróleo."
-      data-summary-text-en="LNG opportunity via TPC/TPDC. Contact David Kiai (Nairobi). Favorable window after Qatar force majeure. Presentations under review in Deal Room. Possible synergy with Brazilian oil company."
-    >Resumo geral</button>
-  </div>
-  <p class="leadership" data-pt="Liderança: Aureo" data-en="Leadership: Aureo">Liderança: Aureo</p>
-  <p class="updated-at" data-pt="Última atualização: 8 de junho de 2026, 4:00 PM EST" data-en="Last updated: June 8, 2026, 4:00 PM EST">Última atualização: 8 de junho de 2026, 4:00 PM EST</p>
-  <p class="next-steps">
-    <strong data-pt="Próximos passos:" data-en="Next steps:">Próximos passos:</strong>
-    <span data-pt="Analisar apresentações no Deal Room; Decidir como seguir; Verificar contato com ZepRe" data-en="Review presentations in Deal Room; Decide how to proceed; Check contact with ZepRe">Analisar apresentações no Deal Room; Decidir como seguir; Verificar contato com ZepRe</span>
-  </p>
-  <div class="updates-window">
-    <div class="update-line" data-pt="2026-06-08 — Apresentações recebidas da Tanzânia. Em análise no Deal Room." data-en="2026-06-08 — Tanzania presentations received. Under review in Deal Room.">2026-06-08 — Apresentações recebidas da Tanzânia. Em análise no Deal Room.</div>
-    <div class="update-line" data-pt="2026-06-02 — Reunião com Godbless (TPC). Pipeline será compartilhado." data-en="2026-06-02 — Meeting with Godbless (TPC). Pipeline to be shared.">2026-06-02 — Reunião com Godbless (TPC). Pipeline será compartilhado.</div>
-  </div>
-</article>
-
-<article class="card">
-  <div class="card-top">
-    <h2 data-pt="Weaver Deal Room" data-en="Weaver Deal Room">Weaver Deal Room</h2>
-    <button class="summary-button" type="button" data-pt="Resumo geral" data-en="Overview"
-      data-summary-title="Weaver Deal Room"
-      data-summary-title-en="Weaver Deal Room"
-      data-summary-updated="2026-06-08"
-      data-summary-text="Vitrine digital com mandatos anonimizados. 12 deals, $200M+ agregado, 9 países, 6 setores. Novos deals: Universal Bank Montenegro (€35M) e AI Agentic Banking ($2M)."
-      data-summary-text-en="Digital showcase with anonymized mandates. 12 deals, $200M+ aggregate, 9 countries, 6 sectors. New deals: Universal Bank Montenegro (€35M) and AI Agentic Banking ($2M)."
-    >Resumo geral</button>
-  </div>
-  <p class="leadership" data-pt="Liderança: Aureo" data-en="Leadership: Aureo">Liderança: Aureo</p>
-  <p class="updated-at" data-pt="Última atualização: 8 de junho de 2026, 4:00 PM EST" data-en="Last updated: June 8, 2026, 4:00 PM EST">Última atualização: 8 de junho de 2026, 4:00 PM EST</p>
-  <p class="next-steps">
-    <strong data-pt="Próximos passos:" data-en="Next steps:">Próximos passos:</strong>
-    <span data-pt="Manter iteração do roster e filtros; Avaliar novos deals" data-en="Maintain roster and filter iteration; Evaluate new deals">Manter iteração do roster e filtros; Avaliar novos deals</span>
-  </p>
-  <div class="updates-window">
-    <div class="update-line" data-pt="2026-06-08 — Ghana ($1.6B) saiu. Entraram: Universal Bank Montenegro (€35M) e AI Agentic Banking ($2M). 12 deals." data-en="2026-06-08 — Ghana ($1.6B) removed. New: Universal Bank Montenegro (€35M) and AI Agentic Banking ($2M). 12 deals.">2026-06-08 — Ghana ($1.6B) saiu. Entraram: Universal Bank Montenegro (€35M) e AI Agentic Banking ($2M). 12 deals.</div>
-  </div>
-</article>
-
-<!-- ===== June 12, 2026 (alphabetical) ===== -->
-
-<article class="card">
-  <div class="card-top">
-    <h2 data-pt="Board Lusófono" data-en="Lusophone Board">Board Lusófono</h2>
-    <button class="summary-button" type="button" data-pt="Resumo geral" data-en="Overview"
-      data-summary-title="Board Lusófono"
-      data-summary-title-en="Lusophone Board"
-      data-summary-updated="2026-06-12"
-      data-summary-text="Iniciativa para visibilidade estratégica dos países lusófonos. Primeira reunião em 22/05, grupo qualificado. Decisão de entrar com mais força: Bernardo presidente, William secretário. Aureo fará identidade visual e site."
-      data-summary-text-en="Initiative for strategic visibility of Portuguese-speaking countries. First meeting May 22, qualified group. Decision to engage more forcefully: Bernardo president, William secretary. Aureo to create visual identity and website."
-    >Resumo geral</button>
-  </div>
-  <p class="leadership" data-pt="Liderança: Aureo" data-en="Leadership: Aureo">Liderança: Aureo</p>
-  <p class="updated-at" data-pt="Última atualização: 12 de junho de 2026, 4:00 PM EST" data-en="Last updated: June 12, 2026, 4:00 PM EST">Última atualização: 12 de junho de 2026, 4:00 PM EST</p>
-  <p class="next-steps">
-    <strong data-pt="Próximos passos:" data-en="Next steps:">Próximos passos:</strong>
-    <span data-pt="Criar logo e site; Conversar com William sobre planos; Formalizar papéis: Bernardo (presidente), William (secretário)" data-en="Create logo and website; Talk with William about plans; Formalize roles: Bernardo (president), William (secretary)">Criar logo e site; Conversar com William sobre planos; Formalizar papéis: Bernardo (presidente), William (secretário)</span>
-  </p>
-  <div class="updates-window">
-    <div class="update-line" data-pt="2026-06-12 — Decisão de entrar com mais força. Bernardo presidente, William secretário. Aureo fará logo e site." data-en="2026-06-12 — Decision to engage more forcefully. Bernardo president, William secretary. Aureo to create logo and website.">2026-06-12 — Decisão de entrar com mais força. Bernardo presidente, William secretário. Aureo fará logo e site.</div>
-    <div class="update-line" data-pt="2026-05-22 — Primeira reunião (~1h, inglês). Grupo diverso. Consenso: iniciativa promissora." data-en="2026-05-22 — First meeting (~1h, English). Diverse group. Consensus: promising initiative.">2026-05-22 — Primeira reunião (~1h, inglês). Grupo diverso. Consenso: iniciativa promissora.</div>
-  </div>
-</article>
-
-<article class="card">
-  <div class="card-top">
-    <h2 data-pt="Miscelânea" data-en="Miscellaneous">Miscelânea</h2>
-    <button class="summary-button" type="button" data-pt="Resumo geral" data-en="Overview"
-      data-summary-title="Miscelânea"
-      data-summary-title-en="Miscellaneous"
-      data-summary-updated="2026-06-12"
-      data-summary-text="Itens operacionais do dia a dia. Fátima Lunsford iniciou como estagiária (americana, português, foco defesa). Bernardo reuniu com Paulo (IFC SP). Erika/UNDP prosseguindo registro PNUD."
-      data-summary-text-en="Day-to-day operational items. Fátima Lunsford started as intern (American, Portuguese, defense focus). Bernardo met Paulo (IFC SP). Erika/UNDP advancing PNUD registration."
-    >Resumo geral</button>
-  </div>
-  <p class="leadership" data-pt="Liderança: (sem liderança definida)" data-en="Leadership: (no defined leadership)">Liderança: (sem liderança definida)</p>
-  <p class="updated-at" data-pt="Última atualização: 12 de junho de 2026, 4:00 PM EST" data-en="Last updated: June 12, 2026, 4:00 PM EST">Última atualização: 12 de junho de 2026, 4:00 PM EST</p>
-  <p class="next-steps">
-    <strong data-pt="Próximos passos:" data-en="Next steps:">Próximos passos:</strong>
-    <span data-pt="Acompanhar registro de Bernardo no PNUD (UNDP); Acompanhar grupo Invest SC; Confirmar estágio filha do Todd" data-en="Follow Bernardo's UNDP roster registration; Follow Invest SC group; Confirm Todd's daughter internship">Acompanhar registro de Bernardo no PNUD (UNDP); Acompanhar grupo Invest SC; Confirmar estágio filha do Todd</span>
-  </p>
-  <div class="updates-window">
-    <div class="update-line" data-pt="2026-06-12 — Fátima Lunsford começou como estagiária (americana, fala português, foco defesa e BD)." data-en="2026-06-12 — Fátima Lunsford started as intern (American, speaks Portuguese, defense and BD focus).">2026-06-12 — Fátima Lunsford começou como estagiária (americana, fala português, foco defesa e BD).</div>
-    <div class="update-line" data-pt="2026-06-05 — Bernardo reuniu com Paulo (IFC SP). João produzindo PPT sobre PPP." data-en="2026-06-05 — Bernardo met Paulo (IFC SP). João producing PPP presentation PPT.">2026-06-05 — Bernardo reuniu com Paulo (IFC SP). João produzindo PPT sobre PPP.</div>
-  </div>
-</article>
-
-<article class="card">
-  <div class="card-top">
-    <h2 data-pt="Sugar Mills / Usinas" data-en="Sugar Mills">Sugar Mills / Usinas</h2>
-    <button class="summary-button" type="button" data-pt="Resumo geral" data-en="Overview"
-      data-summary-title="Sugar Mills / Usinas"
+      data-summary-title="Sugar Mills"
       data-summary-title-en="Sugar Mills"
       data-summary-updated="2026-06-12"
-      data-summary-text="Pipeline de usinas para chineses e Drew. Melhor fazenda saiu. Nova em SP e muitas outras. 4 usinas no radar. Anonimização em curso."
-      data-summary-text-en="Pipeline of mills for Chinese investors and Drew. Best farm dropped out. New one in SP and many others. 4 mills on radar. Anonymization underway."
+      data-summary-text="Pipeline de usinas e fazendas sendo anonimizado para clientes. A melhor fazenda saiu do negócio, mas entrou outra em São Paulo e muitas outras. Agora são 4 usinas no radar com Henrique. Fazendas serão anonimizadas para envio a Drew (Austral Continental) e aos chineses via Bernardo."
+      data-summary-text-en="Pipeline of mills and farms being anonymized for clients. The best farm left the deal, but another entered in São Paulo plus many others. Now 4 mills on radar with Henrique. Farms to be anonymized and sent to Drew (Austral Continental) and Chinese investors via Bernardo."
     >Resumo geral</button>
   </div>
   <p class="leadership" data-pt="Liderança: Aureo" data-en="Leadership: Aureo">Liderança: Aureo</p>
-  <p class="updated-at" data-pt="Última atualização: 12 de junho de 2026, 4:00 PM EST" data-en="Last updated: June 12, 2026, 4:00 PM EST">Última atualização: 12 de junho de 2026, 4:00 PM EST</p>
+  <p class="updated-at" data-pt="Última atualização: 12 de junho de 2026, 3:00 PM EST" data-en="Last updated: June 12, 2026, 3:00 PM EST">Última atualização: 12 de junho de 2026, 3:00 PM EST</p>
   <p class="next-steps">
     <strong data-pt="Próximos passos:" data-en="Next steps:">Próximos passos:</strong>
-    <span data-pt="Anonimizar fazendas e preparar pitch; Enviar para chineses e Drew" data-en="Anonymize farms and prepare pitch; Send to Chinese investors and Drew">Anonimizar fazendas e preparar pitch; Enviar para chineses e Drew</span>
+    <span data-pt="Anonimizar fazendas e preparar pitch; Enviar para Bernardo encaminhar aos chineses; Enviar pitch anonimizado para Drew (Austral Continental)" data-en="Anonymize farms and prepare pitch; Send to Bernardo to forward to Chinese investors; Send anonymized pitch to Drew (Austral Continental)">Anonimizar fazendas e preparar pitch; Enviar para Bernardo encaminhar aos chineses; Enviar pitch anonimizado para Drew (Austral Continental)</span>
   </p>
   <div class="updates-window">
-    <div class="update-line" data-pt="2026-06-12 — Melhor fazenda saiu. Nova fazenda em SP. Anonimização em curso." data-en="2026-06-12 — Best farm dropped out. New farm in SP. Anonymization underway.">2026-06-12 — Melhor fazenda saiu. Nova fazenda em SP. Anonimização em curso.</div>
+    <div class="update-line" data-pt="2026-06-12 — Melhor fazenda saiu. Nova fazenda em SP e muitas outras. Anonimização em curso." data-en="2026-06-12 — Best farm left. New farm in SP and many others. Anonymization underway.">2026-06-12 — Melhor fazenda saiu. Nova fazenda em SP e muitas outras. Anonimização em curso.</div>
+    <div class="update-line" data-pt="2026-05-25 — Henrique enviou mais uma usina e fazendas anonimizadas. Aureo preparará envio para Drew e Bernardo." data-en="2026-05-25 — Henrique sent another mill and anonymized farms. Aureo to prep for Drew and Bernardo.">2026-05-25 — Henrique enviou mais uma usina e fazendas anonimizadas. Aureo preparará envio para Drew e Bernardo.</div>
   </div>
 </article>
 
@@ -464,22 +380,159 @@
       data-summary-title="Weaver Tech"
       data-summary-title-en="Weaver Tech"
       data-summary-updated="2026-06-12"
-      data-summary-text="Braço de tecnologia (IA em tempo real com Vantiq). Reativado. Fátima liderando. Oportunidade: treinamento em sistemas robóticos/autônomos (modelo RASLT Fort Benning)."
-      data-summary-text-en="Technology arm (real-time AI with Vantiq). Reactivated. Fátima leading. Opportunity: training in robotic/autonomous systems (RASLT Fort Benning model)."
+      data-summary-text="Braço de tecnologia da Weaver, uma integradora que usa IA com a plataforma Vantiq para criar sistemas inteligentes em tempo real. Iniciativa reativada após meses parada, com Fátima na liderança. Oportunidade atual: treinamento em sistemas robóticos e autônomos, modelo RASLT do Exército dos EUA em Fort Benning."
+      data-summary-text-en="Weaver's technology arm, an integrator using AI with the Vantiq platform to create real-time intelligent systems. Initiative reactivated after months dormant, with Fátima leading. Current opportunity: robotic and autonomous systems training, based on the US Army's RASLT model at Fort Benning."
     >Resumo geral</button>
   </div>
   <p class="leadership" data-pt="Liderança: Fátima" data-en="Leadership: Fátima">Liderança: Fátima</p>
-  <p class="updated-at" data-pt="Última atualização: 12 de junho de 2026, 4:00 PM EST" data-en="Last updated: June 12, 2026, 4:00 PM EST">Última atualização: 12 de junho de 2026, 4:00 PM EST</p>
+  <p class="updated-at" data-pt="Última atualização: 12 de junho de 2026, 2:00 PM EST" data-en="Last updated: June 12, 2026, 2:00 PM EST">Última atualização: 12 de junho de 2026, 2:00 PM EST</p>
   <p class="next-steps">
     <strong data-pt="Próximos passos:" data-en="Next steps:">Próximos passos:</strong>
-    <span data-pt="Adaptar apresentação para treinamento; Validar escopo e cliente-alvo" data-en="Adapt presentation for training; Validate scope and target client">Adaptar apresentação para treinamento; Validar escopo e cliente-alvo</span>
+    <span data-pt="Fátima: adaptar apresentação Weaver Tech para oportunidade de treinamento; Validar escopo e cliente-alvo" data-en="Fátima: adapt Weaver Tech presentation for training opportunity; Validate scope and target client">Fátima: adaptar apresentação Weaver Tech para oportunidade de treinamento; Validar escopo e cliente-alvo</span>
   </p>
   <div class="updates-window">
-    <div class="update-line" data-pt="2026-06-12 — Weaver Tech reativado. Fátima assume liderança. Treinamento em sistemas robóticos/autônomos." data-en="2026-06-12 — Weaver Tech reactivated. Fátima takes leadership. Training in robotic/autonomous systems.">2026-06-12 — Weaver Tech reativado. Fátima assume liderança. Treinamento em sistemas robóticos/autônomos.</div>
+    <div class="update-line" data-pt="2026-06-12 — Weaver Tech reativado. Fátima assume liderança. Oportunidade: treinamento em sistemas robóticos/autônomos (RASLT)." data-en="2026-06-12 — Weaver Tech reactivated. Fátima takes leadership. Opportunity: robotic/autonomous systems training (RASLT).">2026-06-12 — Weaver Tech reativado. Fátima assume liderança. Oportunidade: treinamento em sistemas robóticos/autônomos (RASLT).</div>
   </div>
 </article>
 
-<!-- ===== May 27, 2026 (alphabetical) ===== -->
+<article class="card">
+  <div class="card-top">
+    <h2 data-pt="Miscelânea" data-en="Miscellany">Miscelânea</h2>
+    <button class="summary-button" type="button" data-pt="Resumo geral" data-en="Overview"
+      data-summary-title="Miscelânea"
+      data-summary-title-en="Miscellany"
+      data-summary-updated="2026-06-12"
+      data-summary-text="Itens operacionais que não justificam projeto próprio. Fátima Lunsford iniciou como estagiária (americana, fala português, BD com foco em defesa). Bernardo fez reunião com Paulo (IFC SP) — João produzindo PPT de PPP. Erika (UNDP) deu prosseguimento ao registro de Bernardo como roster do PNUD."
+      data-summary-text-en="Operational items not warranting their own project. Fátima Lunsford started as intern (American, speaks Portuguese, BD with defense focus). Bernardo met with Paulo (IFC SP) — João producing PPP presentation. Erika (UNDP) advancing Bernardo's registration as UNDP roster."
+    >Resumo geral</button>
+  </div>
+  <p class="updated-at" data-pt="Última atualização: 12 de junho de 2026, 1:00 PM EST" data-en="Last updated: June 12, 2026, 1:00 PM EST">Última atualização: 12 de junho de 2026, 1:00 PM EST</p>
+  <p class="next-steps">
+    <strong data-pt="Próximos passos:" data-en="Next steps:">Próximos passos:</strong>
+    <span data-pt="Acompanhar desdobramentos do grupo Invest SC; Prosseguir registro PNUD; Confirmar data de início do estágio da filha do Todd" data-en="Follow up Invest SC group; Advance UNDP registration; Confirm Todd's daughter internship start date">Acompanhar desdobramentos do grupo Invest SC; Prosseguir registro PNUD; Confirmar data de início do estágio da filha do Todd</span>
+  </p>
+  <div class="updates-window">
+    <div class="update-line" data-pt="2026-06-12 — Fátima Lunsford iniciou como estagiária. Americana, fala português. BD com foco em defesa." data-en="2026-06-12 — Fátima Lunsford started as intern. American, speaks Portuguese. BD with defense focus.">2026-06-12 — Fátima Lunsford iniciou como estagiária. Americana, fala português. BD com foco em defesa.</div>
+    <div class="update-line" data-pt="2026-06-05 — Bernardo reuniu com Paulo (IFC SP). João produzindo PPT de PPP." data-en="2026-06-05 — Bernardo met with Paulo (IFC SP). João producing PPP presentation.">2026-06-05 — Bernardo reuniu com Paulo (IFC SP). João produzindo PPT de PPP.</div>
+    <div class="update-line" data-pt="2026-05-26 — Erika (UNDP) contatou para prosseguir registro de Bernardo no PNUD." data-en="2026-05-26 — Erika (UNDP) reached out to advance Bernardo's UNDP registration.">2026-05-26 — Erika (UNDP) contatou para prosseguir registro de Bernardo no PNUD.</div>
+  </div>
+</article>
+
+<article class="card">
+  <div class="card-top">
+    <h2 data-pt="DRC — Shomberwa Solar IPP" data-en="DRC — Shomberwa Solar IPP">DRC — Shomberwa Solar IPP</h2>
+    <button class="summary-button" type="button" data-pt="Resumo geral" data-en="Overview"
+      data-summary-title="DRC — Shomberwa Solar IPP"
+      data-summary-title-en="DRC — Shomberwa Solar IPP"
+      data-summary-updated="2026-06-09"
+      data-summary-text="Weaver mandatada como assessora financeira para fundraising do Shomberwa Solar IPP: usina solar 23.5 MWp + BESS 195.6 MWh em Kambove, Haut-Katanga, DRC. Estrutura BOOT com PPA de 15 anos, offtaker CMT SAS (fundição de cobre/cobalto). Remuneração: success fee 7.7% + retainer USD 77K no primeiro closing. IFC demonstrou interesse renovado; call agendada para 10/06."
+      data-summary-text-en="Weaver mandated as financial advisor for Shomberwa Solar IPP fundraising: 23.5 MWp solar plant + 195.6 MWh BESS in Kambove, Haut-Katanga, DRC. BOOT structure with 15-year PPA, offtaker CMT SAS (copper/cobalt smelter). Compensation: 7.7% success fee + USD 77K retainer at first closing. IFC showed renewed interest; call scheduled for Jun 10."
+    >Resumo geral</button>
+  </div>
+  <p class="leadership" data-pt="Liderança: Bernardo" data-en="Leadership: Bernardo">Liderança: Bernardo</p>
+  <p class="updated-at" data-pt="Última atualização: 9 de junho de 2026, 4:00 PM EST" data-en="Last updated: June 9, 2026, 4:00 PM EST">Última atualização: 9 de junho de 2026, 4:00 PM EST</p>
+  <p class="next-steps">
+    <strong data-pt="Próximos passos:" data-en="Next steps:">Próximos passos:</strong>
+    <span data-pt="Seguir outreach para China (financiamento/investidores); Monitorar retorno da IFC pós-call; Cobrar Bernardo sobre parceiros" data-en="Continue outreach to China (financing/investors); Monitor IFC follow-up post-call; Check with Bernardo on partners">Seguir outreach para China (financiamento/investidores); Monitorar retorno da IFC pós-call; Cobrar Bernardo sobre parceiros</span>
+  </p>
+  <div class="updates-window">
+    <div class="update-line" data-pt="2026-06-09 — Call com IFC agendada para 10/06. Bernardo acionou o Sam." data-en="2026-06-09 — IFC call scheduled for Jun 10. Bernardo called Sam.">2026-06-09 — Call com IFC agendada para 10/06. Bernardo acionou o Sam.</div>
+    <div class="update-line" data-pt="2026-05-15 — IFC voltou a mostrar interesse. Equipe segue tentando a China (financiamento)." data-en="2026-05-15 — IFC showed renewed interest. Team still pursuing China (financing).">2026-05-15 — IFC voltou a mostrar interesse. Equipe segue tentando a China (financiamento).</div>
+  </div>
+</article>
+
+<article class="card">
+  <div class="card-top">
+    <h2 data-pt="Espanha — Abertura da Empresa" data-en="Spain — Company Incorporation">Espanha — Abertura da Empresa</h2>
+    <button class="summary-button" type="button" data-pt="Resumo geral" data-en="Overview"
+      data-summary-title="Espanha — Abertura da Empresa"
+      data-summary-title-en="Spain — Company Incorporation"
+      data-summary-updated="2026-06-09"
+      data-summary-text="Processo de abertura da Weaver Advisory de España, S.L.U. NIE bloqueado por divergência de sobrenome (NIE ≠ passaporte). Correção em andamento junto ao Depto. de Visados. Certificación negativa solicitada (C-5447994). SLU confirmada com CNAE 7022, capital 3.000 EUR. Nicola é o dono do processo."
+      data-summary-text-en="Incorporation of Weaver Advisory de España, S.L.U. NIE blocked due to surname mismatch (NIE ≠ passport). Correction underway with the Visa Department. Certificación negativa requested (C-5447994). SLU confirmed with CNAE 7022, capital EUR 3,000. Nicola owns the process."
+    >Resumo geral</button>
+  </div>
+  <p class="leadership" data-pt="Liderança: Nicola" data-en="Leadership: Nicola">Liderança: Nicola</p>
+  <p class="updated-at" data-pt="Última atualização: 9 de junho de 2026, 1:00 PM EST" data-en="Last updated: June 9, 2026, 1:00 PM EST">Última atualização: 9 de junho de 2026, 1:00 PM EST</p>
+  <p class="next-steps">
+    <strong data-pt="Próximos passos:" data-en="Next steps:">Próximos passos:</strong>
+    <span data-pt="Corrigir NIE (Depto. Visados); Acompanhar certificación negativa; Contratar virtual office Madri; Contatar Notaría Online" data-en="Fix NIE (Visa Dept); Track certificación negativa; Contract virtual office Madrid; Contact Notaría Online">Corrigir NIE (Depto. Visados); Acompanhar certificación negativa; Contratar virtual office Madri; Contatar Notaría Online</span>
+  </p>
+  <div class="updates-window">
+    <div class="update-line" data-pt="2026-06-09 — Bernardo deu entrada no consulado. NIE bloqueado: sobrenome diverge do passaporte. Correção urgente em andamento." data-en="2026-06-09 — Bernardo filed at consulate. NIE blocked: surname differs from passport. Urgent correction underway.">2026-06-09 — Bernardo deu entrada no consulado. NIE bloqueado: sobrenome diverge do passaporte. Correção urgente em andamento.</div>
+    <div class="update-line" data-pt="2026-05-26 — Processo migrado para assinatura por videoconferência. 8 passos definidos." data-en="2026-05-26 — Process migrated to videoconference signing. 8 steps defined.">2026-05-26 — Processo migrado para assinatura por videoconferência. 8 passos definidos.</div>
+    <div class="update-line" data-pt="2026-05-14 — Certificación negativa solicitada (C-5447994). SLU com CNAE 7022, capital 3.000 EUR." data-en="2026-05-14 — Certificación negativa requested (C-5447994). SLU with CNAE 7022, capital EUR 3,000.">2026-05-14 — Certificación negativa solicitada (C-5447994). SLU com CNAE 7022, capital 3.000 EUR.</div>
+  </div>
+</article>
+
+<article class="card">
+  <div class="card-top">
+    <h2 data-pt="Tanzânia LNG" data-en="Tanzania LNG">Tanzânia LNG</h2>
+    <button class="summary-button" type="button" data-pt="Resumo geral" data-en="Overview"
+      data-summary-title="Tanzânia LNG"
+      data-summary-title-en="Tanzania LNG"
+      data-summary-updated="2026-06-08"
+      data-summary-text="Oportunidade de exploração de LNG na Tanzânia via TPC/TPDC (regulador estatal). Contato via David Kiai (Nairobi). Apresentações recebidas e em análise no Weaver Deal Room. Contexto favorável: Qatar declarou force majeure em contratos de LNG com a Europa. Próximo passo: Aureo analisar apresentações."
+      data-summary-text-en="LNG exploration opportunity in Tanzania via TPC/TPDC (state regulator). Contact via David Kiai (Nairobi). Presentations received and under review in Weaver Deal Room. Favorable context: Qatar declared force majeure on LNG contracts with Europe. Next step: Aureo to analyze presentations."
+    >Resumo geral</button>
+  </div>
+  <p class="leadership" data-pt="Liderança: Aureo" data-en="Leadership: Aureo">Liderança: Aureo</p>
+  <p class="updated-at" data-pt="Última atualização: 8 de junho de 2026, 3:00 PM EST" data-en="Last updated: June 8, 2026, 3:00 PM EST">Última atualização: 8 de junho de 2026, 3:00 PM EST</p>
+  <p class="next-steps">
+    <strong data-pt="Próximos passos:" data-en="Next steps:">Próximos passos:</strong>
+    <span data-pt="Aureo: analisar apresentações da Tanzânia no Deal Room; Decidir como seguir com a oportunidade" data-en="Aureo: analyze Tanzania presentations in Deal Room; Decide how to proceed with the opportunity">Aureo: analisar apresentações da Tanzânia no Deal Room; Decidir como seguir com a oportunidade</span>
+  </p>
+  <div class="updates-window">
+    <div class="update-line" data-pt="2026-06-08 — Apresentações recebidas da Tanzânia. Aureo colocou no Deal Room. Em análise." data-en="2026-06-08 — Tanzania presentations received. Aureo placed in Deal Room. Under review.">2026-06-08 — Apresentações recebidas da Tanzânia. Aureo colocou no Deal Room. Em análise.</div>
+    <div class="update-line" data-pt="2026-06-02 — Reunião com Godbless (TPC). Sem contrato direto, mas pipeline de projetos será compartilhado." data-en="2026-06-02 — Meeting with Godbless (TPC). No direct contract, but project pipeline to be shared.">2026-06-02 — Reunião com Godbless (TPC). Sem contrato direto, mas pipeline de projetos será compartilhado.</div>
+  </div>
+</article>
+
+<article class="card">
+  <div class="card-top">
+    <h2 data-pt="Deal Room" data-en="Deal Room">Deal Room</h2>
+    <button class="summary-button" type="button" data-pt="Resumo geral" data-en="Overview"
+      data-summary-title="Deal Room"
+      data-summary-title-en="Deal Room"
+      data-summary-updated="2026-06-08"
+      data-summary-text="Vitrine digital de oportunidades da Weaver (M&A e capital raises em mercados emergentes). Página HTML autocontida no GitHub Pages, embedada em weaveradvisory.com/dealroom. 12 deals, $200M+ aggregate, 9 países, 6 setores. Ghana Power Sector saiu; entraram Universal Bank Control Stake (Montenegro, €35M) e AI Agentic Banking Platform ($2M)."
+      data-summary-text-en="Weaver's digital deal showcase (M&A and capital raises in emerging markets). Self-contained HTML page on GitHub Pages, embedded at weaveradvisory.com/dealroom. 12 deals, $200M+ aggregate, 9 countries, 6 sectors. Ghana Power Sector exited; Universal Bank Control Stake (Montenegro, €35M) and AI Agentic Banking Platform ($2M) entered."
+    >Resumo geral</button>
+  </div>
+  <p class="leadership" data-pt="Liderança: Aureo" data-en="Leadership: Aureo">Liderança: Aureo</p>
+  <p class="updated-at" data-pt="Última atualização: 8 de junho de 2026, 12:00 PM EST" data-en="Last updated: June 8, 2026, 12:00 PM EST">Última atualização: 8 de junho de 2026, 12:00 PM EST</p>
+  <p class="next-steps">
+    <strong data-pt="Próximos passos:" data-en="Next steps:">Próximos passos:</strong>
+    <span data-pt="Manter iteração do roster e filtros; Avaliar novos deals para entrada no pipeline" data-en="Maintain roster and filter iteration; Evaluate new deals for pipeline entry">Manter iteração do roster e filtros; Avaliar novos deals para entrada no pipeline</span>
+  </p>
+  <div class="updates-window">
+    <div class="update-line" data-pt="2026-06-08 — Ghana Power Debt Refinancing ($1.6B) saiu. Entraram: Universal Bank Control Stake (Montenegro, €35M) e AI Agentic Banking ($2M). 12 deals." data-en="2026-06-08 — Ghana Power Debt Refinancing ($1.6B) exited. Entered: Universal Bank Control Stake (Montenegro, €35M) and AI Agentic Banking ($2M). 12 deals.">2026-06-08 — Ghana Power Debt Refinancing ($1.6B) saiu. Entraram: Universal Bank Control Stake (Montenegro, €35M) e AI Agentic Banking ($2M). 12 deals.</div>
+    <div class="update-line" data-pt="2026-05-07 — Aureo avança na criação da tabela de deals no site da Weaver." data-en="2026-05-07 — Aureo advances deal table creation on Weaver site.">2026-05-07 — Aureo avança na criação da tabela de deals no site da Weaver.</div>
+  </div>
+</article>
+
+<article class="card">
+  <div class="card-top">
+    <h2 data-pt="Job Search" data-en="Job Search">Job Search</h2>
+    <button class="summary-button" type="button" data-pt="Resumo geral" data-en="Overview"
+      data-summary-title="Job Search"
+      data-summary-title-en="Job Search"
+      data-summary-updated="2026-05-27"
+      data-summary-text="Centralização do job search nos MDBs. Nicola na liderança, compilando trabalhos passados da Weaver para propostas mais robustas. Bernardo compartilhando work samples. João organizou pasta e tabela de referência. Reinaldo mandou modelos de EOI para o EOI master da Weaver."
+      data-summary-text-en="Centralized MDB job search. Nicola leading, compiling past Weaver work for stronger proposals. Bernardo sharing work samples. João organized folder and reference table. Reinaldo sent EOI templates for Weaver's master EOI."
+    >Resumo geral</button>
+  </div>
+  <p class="leadership" data-pt="Liderança: Nicola" data-en="Leadership: Nicola">Liderança: Nicola</p>
+  <p class="updated-at" data-pt="Última atualização: 27 de maio de 2026, 5:00 PM EST" data-en="Last updated: May 27, 2026, 5:00 PM EST">Última atualização: 27 de maio de 2026, 5:00 PM EST</p>
+  <p class="next-steps">
+    <strong data-pt="Próximos passos:" data-en="Next steps:">Próximos passos:</strong>
+    <span data-pt="Consolidar modelo de EOI/Proposta com base nos work samples; Manter tabela de referência atualizada" data-en="Consolidate EOI/Proposal template based on work samples; Keep reference table updated">Consolidar modelo de EOI/Proposta com base nos work samples; Manter tabela de referência atualizada</span>
+  </p>
+  <div class="updates-window">
+    <div class="update-line" data-pt="2026-05-27 — Nicola assume liderança. Trabalhando no EOI do fundo espanhol e EOI geral. João no apoio." data-en="2026-05-27 — Nicola takes leadership. Working on Spanish fund EOI and general EOI. João supporting.">2026-05-27 — Nicola assume liderança. Trabalhando no EOI do fundo espanhol e EOI geral. João no apoio.</div>
+    <div class="update-line" data-pt="2026-05-25 — Trabalho de EOI master iniciado com modelos do Reinaldo." data-en="2026-05-25 — Master EOI work started with Reinaldo's templates.">2026-05-25 — Trabalho de EOI master iniciado com modelos do Reinaldo.</div>
+  </div>
+</article>
 
 <article class="card">
   <div class="card-top">
@@ -488,18 +541,20 @@
       data-summary-title="Casa Brasil"
       data-summary-title-en="Casa Brasil"
       data-summary-updated="2026-05-27"
-      data-summary-text="Presença e posicionamento da Casa Brasil. Atualização do site avançou. João assumiu liderança. Possível participação David (Vantiq)."
-      data-summary-text-en="Casa Brasil presence and positioning. Website update advanced. João took leadership. Possible David (Vantiq) participation."
+      data-summary-text="Frente de presença e posicionamento da Casa Brasil. João assumiu liderança. Site em atualização. Tea meeting no FMI planejado. Próxima aparição/fala a definir. Possível participação do David (Vantiq)."
+      data-summary-text-en="Casa Brasil presence and positioning. João took leadership. Website being updated. Tea meeting at IMF planned. Next appearance/speech to be defined. Possible participation of David (Vantiq)."
     >Resumo geral</button>
   </div>
   <p class="leadership" data-pt="Liderança: João" data-en="Leadership: João">Liderança: João</p>
   <p class="updated-at" data-pt="Última atualização: 27 de maio de 2026, 4:00 PM EST" data-en="Last updated: May 27, 2026, 4:00 PM EST">Última atualização: 27 de maio de 2026, 4:00 PM EST</p>
   <p class="next-steps">
     <strong data-pt="Próximos passos:" data-en="Next steps:">Próximos passos:</strong>
-    <span data-pt="Finalizar atualização do site; Tea meeting no FMI; Definir próxima aparição" data-en="Finalize website update; Tea meeting at IMF; Define next appearance">Finalizar atualização do site; Tea meeting no FMI; Definir próxima aparição</span>
+    <span data-pt="Finalizar atualização do site; Fazer tea meeting no FMI; Definir próxima aparição/fala" data-en="Finalize website update; Hold tea meeting at IMF; Define next appearance/speech">Finalizar atualização do site; Fazer tea meeting no FMI; Definir próxima aparição/fala</span>
   </p>
   <div class="updates-window">
-    <div class="update-line" data-pt="2026-05-27 — João assume liderança da Casa Brasil." data-en="2026-05-27 — João takes leadership of Casa Brasil.">2026-05-27 — João assume liderança da Casa Brasil.</div>
+    <div class="update-line" data-pt="2026-05-27 — João assume liderança da Casa Brasil. Site em atualização." data-en="2026-05-27 — João takes over Casa Brasil leadership. Website updating.">2026-05-27 — João assume liderança da Casa Brasil. Site em atualização.</div>
+    <div class="update-line" data-pt="2026-05-26 — Próximo passo: tea meeting no FMI esta semana." data-en="2026-05-26 — Next step: tea meeting at the IMF this week.">2026-05-26 — Próximo passo: tea meeting no FMI esta semana.</div>
+    <div class="update-line" data-pt="2026-05-04 — Site avançou e planejamento da próxima aparição andou." data-en="2026-05-04 — Website advanced and next appearance planning progressed.">2026-05-04 — Site avançou e planejamento da próxima aparição andou.</div>
   </div>
 </article>
 
@@ -510,44 +565,21 @@
       data-summary-title="EBRD Iraq"
       data-summary-title-en="EBRD Iraq"
       data-summary-updated="2026-05-27"
-      data-summary-text="Oportunidade EBRD Iraq com Omar. Cost-sharing advisory para SMEs. Registro como International Advisor para deals >$5M. Resume Trainer enviado."
-      data-summary-text-en="EBRD Iraq opportunity with Omar. Cost-sharing advisory for SMEs. Registration as International Advisor for deals >$5M. Resume Trainer sent."
+      data-summary-text="Oportunidade em qualificação com Omar no Iraque. Modelo de cost-sharing advisory para SMEs com subsídio parcial do EBRD. Banco tem recursos da UE. Weaver já aplicou projeto de Gaza lá (sem sucesso). Caio enviou Resume Trainer para Omar. Registro como International Advisor pendente."
+      data-summary-text-en="Opportunity under qualification with Omar in Iraq. Cost-sharing advisory model for SMEs with partial EBRD subsidy. Bank has EU resources. Weaver previously applied for a Gaza project there (unsuccessful). Caio sent Resume Trainer to Omar. Registration as International Advisor pending."
     >Resumo geral</button>
   </div>
   <p class="leadership" data-pt="Liderança: Caio" data-en="Leadership: Caio">Liderança: Caio</p>
-  <p class="updated-at" data-pt="Última atualização: 27 de maio de 2026, 4:00 PM EST" data-en="Last updated: May 27, 2026, 4:00 PM EST">Última atualização: 27 de maio de 2026, 4:00 PM EST</p>
+  <p class="updated-at" data-pt="Última atualização: 27 de maio de 2026, 3:00 PM EST" data-en="Last updated: May 27, 2026, 3:00 PM EST">Última atualização: 27 de maio de 2026, 3:00 PM EST</p>
   <p class="next-steps">
     <strong data-pt="Próximos passos:" data-en="Next steps:">Próximos passos:</strong>
-    <span data-pt="Call com Omar sobre pipeline; Identificar banco (aplicaram Gaza); Avaliar prioridade" data-en="Call with Omar about pipeline; Identify bank (applied for Gaza); Evaluate priority">Call com Omar sobre pipeline; Identificar banco (aplicaram Gaza); Avaliar prioridade</span>
+    <span data-pt="Registrar Weaver como International Advisor no EBRD; Agendar call com contato local do EBRD via Omar" data-en="Register Weaver as International Advisor at EBRD; Schedule call with local EBRD contact via Omar">Registrar Weaver como International Advisor no EBRD; Agendar call com contato local do EBRD via Omar</span>
   </p>
   <div class="updates-window">
-    <div class="update-line" data-pt="2026-05-27 — Caio enviou Resume Trainer para Omar." data-en="2026-05-27 — Caio sent Resume Trainer to Omar.">2026-05-27 — Caio enviou Resume Trainer para Omar.</div>
+    <div class="update-line" data-pt="2026-05-27 — Caio enviou Resume Trainer para Omar por email e WhatsApp." data-en="2026-05-27 — Caio sent Resume Trainer to Omar via email and WhatsApp.">2026-05-27 — Caio enviou Resume Trainer para Omar por email e WhatsApp.</div>
+    <div class="update-line" data-pt="2026-05-19 — Registro EBRD e central do Banco do Iraque em andamento. Formulários enviados." data-en="2026-05-19 — EBRD registration and Iraq Central Bank underway. Forms sent.">2026-05-19 — Registro EBRD e central do Banco do Iraque em andamento. Formulários enviados.</div>
   </div>
 </article>
-
-<article class="card">
-  <div class="card-top">
-    <h2 data-pt="Job Search (EOI Master)" data-en="Job Search (Master EOI)">Job Search (EOI Master)</h2>
-    <button class="summary-button" type="button" data-pt="Resumo geral" data-en="Overview"
-      data-summary-title="Job Search (EOI Master)"
-      data-summary-title-en="Job Search (Master EOI)"
-      data-summary-updated="2026-05-27"
-      data-summary-text="Compilação de trabalhos passados para propostas mais robustas. Bernardo compartilhando work samples. João organizou pasta. Reinaldo mandou modelos de EOI. Nicola desenvolvendo EOI master."
-      data-summary-text-en="Compilation of past work for stronger proposals. Bernardo sharing work samples. João organized folder. Reinaldo sent EOI models. Nicola developing master EOI."
-    >Resumo geral</button>
-  </div>
-  <p class="leadership" data-pt="Liderança: Nicola" data-en="Leadership: Nicola">Liderança: Nicola</p>
-  <p class="updated-at" data-pt="Última atualização: 27 de maio de 2026, 4:00 PM EST" data-en="Last updated: May 27, 2026, 4:00 PM EST">Última atualização: 27 de maio de 2026, 4:00 PM EST</p>
-  <p class="next-steps">
-    <strong data-pt="Próximos passos:" data-en="Next steps:">Próximos passos:</strong>
-    <span data-pt="Consolidar EOI geral com base nos work samples; Manter tabela de referência" data-en="Consolidate general EOI based on work samples; Keep reference table updated">Consolidar EOI geral com base nos work samples; Manter tabela de referência</span>
-  </p>
-  <div class="updates-window">
-    <div class="update-line" data-pt="2026-05-27 — Nicola assume liderança. Trabalhando EOI geral. João no apoio." data-en="2026-05-27 — Nicola takes leadership. Working on general EOI. João supporting.">2026-05-27 — Nicola assume liderança. Trabalhando EOI geral. João no apoio.</div>
-  </div>
-</article>
-
-<!-- ===== May 25, 2026 ===== -->
 
 <article class="card">
   <div class="card-top">
@@ -556,22 +588,21 @@
       data-summary-title="Austral Continental"
       data-summary-title-en="Austral Continental"
       data-summary-updated="2026-05-25"
-      data-summary-text="Parceria Weaver-Austral Continental (Drew) para conectar pipeline brasileiro a capital americano. Complementaridade clara. Tickets $20M a $100M+."
-      data-summary-text-en="Weaver-Austral Continental (Drew) partnership to connect Brazilian pipeline to American capital. Clear complementarity. Tickets $20M to $100M+."
+      data-summary-text="Parceria com Drew e Austral Continental para conectar pipeline brasileiro de project finance a capital americano (PE, family offices, RIAs). Ticket sizes US$20M a US$100M+. Setores: logística, agricultura, mineração, energia renovável. NDA enviado; Drew mandou comentários. Três ações: pipeline exemplo FNO/FNE, pitch Amapá, call Drew-Bernardo."
+      data-summary-text-en="Partnership with Drew and Austral Continental to connect Brazilian project finance pipeline to American capital (PE, family offices, RIAs). Ticket sizes $20M to $100M+. Sectors: logistics, agriculture, mining, renewable energy. NDA sent; Drew sent comments. Three actions: FNO/FNE pipeline example, Amapá pitch, Drew-Bernardo call."
     >Resumo geral</button>
   </div>
   <p class="leadership" data-pt="Liderança: Aureo" data-en="Leadership: Aureo">Liderança: Aureo</p>
-  <p class="updated-at" data-pt="Última atualização: 25 de maio de 2026, 4:00 PM EST" data-en="Last updated: May 25, 2026, 4:00 PM EST">Última atualização: 25 de maio de 2026, 4:00 PM EST</p>
+  <p class="updated-at" data-pt="Última atualização: 25 de maio de 2026, 6:00 PM EST" data-en="Last updated: May 25, 2026, 6:00 PM EST">Última atualização: 25 de maio de 2026, 6:00 PM EST</p>
   <p class="next-steps">
     <strong data-pt="Próximos passos:" data-en="Next steps:">Próximos passos:</strong>
-    <span data-pt="Aguardar NDA de Drew; Nicola concluir pitch Amapá; Alinhar call Bernardo-Drew" data-en="Await Drew's NDA; Nicola to complete Amapá pitch; Align Bernardo-Drew call">Aguardar NDA de Drew; Nicola concluir pitch Amapá; Alinhar call Bernardo-Drew</span>
+    <span data-pt="Aguardar retorno do Drew sobre NDA + pipeline; Nicola: pitch da usina no Amapá; Alinhar Bernardo e marcar call com Drew" data-en="Await Drew's return on NDA + pipeline; Nicola: Amapá plant pitch; Align Bernardo and schedule call with Drew">Aguardar retorno do Drew sobre NDA + pipeline; Nicola: pitch da usina no Amapá; Alinhar Bernardo e marcar call com Drew</span>
   </p>
   <div class="updates-window">
     <div class="update-line" data-pt="2026-05-25 — Drew mandou mais comentários. Aureo agradeceu e vai revisar." data-en="2026-05-25 — Drew sent more comments. Aureo thanked and will review.">2026-05-25 — Drew mandou mais comentários. Aureo agradeceu e vai revisar.</div>
+    <div class="update-line" data-pt="2026-05-06 — Primeira reunião. Três ações: exemplo FNO/FNE, NDA para Amapá (~US$100M), call Drew-Bernardo." data-en="2026-05-06 — First meeting. Three actions: FNO/FNE example, NDA for Amapá (~$100M), Drew-Bernardo call.">2026-05-06 — Primeira reunião. Três ações: exemplo FNO/FNE, NDA para Amapá (~US$100M), call Drew-Bernardo.</div>
   </div>
 </article>
-
-<!-- ===== May 15, 2026 ===== -->
 
 <article class="card">
   <div class="card-top">
@@ -580,22 +611,21 @@
       data-summary-title="N5Deal"
       data-summary-title-en="N5Deal"
       data-summary-updated="2026-05-15"
-      data-summary-text="Intermediação de deals. Egor aceitou 25% de comissão. Aureo estruturou modelo de mandato. Segundo teaser recebido. Terceiro deal em prospecção."
-      data-summary-text-en="Deal intermediation. Egor accepted 25% commission. Aureo structured mandate model. Second teaser received. Third deal in prospection."
+      data-summary-text="Intermediação de deals entre Weaver e compradores institucionais. Egor aceitou 25% da comissão para apresentar o Buyer. Modelo de mandato enviado ao Palheiro. Nicola fazendo pitch do terceiro teaser. Segundo teaser de Massena/Palheiro será enviado para Egor → Buyer."
+      data-summary-text-en="Deal intermediation between Weaver and institutional buyers. Egor accepted 25% commission to introduce Buyer. Mandate model sent to Palheiro. Nicola pitching third teaser. Second teaser from Massena/Palheiro to be sent to Egor → Buyer."
     >Resumo geral</button>
   </div>
   <p class="leadership" data-pt="Liderança: Bernardo" data-en="Leadership: Bernardo">Liderança: Bernardo</p>
   <p class="updated-at" data-pt="Última atualização: 15 de maio de 2026, 4:00 PM EST" data-en="Last updated: May 15, 2026, 4:00 PM EST">Última atualização: 15 de maio de 2026, 4:00 PM EST</p>
   <p class="next-steps">
     <strong data-pt="Próximos passos:" data-en="Next steps:">Próximos passos:</strong>
-    <span data-pt="Aguardar pitch do Palheiro; Nicola finalizar terceiro teaser" data-en="Await Palheiro's pitch; Nicola to finalize third teaser">Aguardar pitch do Palheiro; Nicola finalizar terceiro teaser</span>
+    <span data-pt="Aguardar pitch detalhado do Palheiro; Nicola: finalizar terceiro teaser; Enviar teaser Massena/Palheiro para Egor → Buyer" data-en="Await Palheiro's detailed pitch; Nicola: finalize third teaser; Send Massena/Palheiro teaser to Egor → Buyer">Aguardar pitch detalhado do Palheiro; Nicola: finalizar terceiro teaser; Enviar teaser Massena/Palheiro para Egor → Buyer</span>
   </p>
   <div class="updates-window">
-    <div class="update-line" data-pt="2026-05-15 — Palheiro preparando pitch detalhado (anonimizado). Envio em breve." data-en="2026-05-15 — Palheiro preparing detailed pitch (anonymized). Sending soon.">2026-05-15 — Palheiro preparando pitch detalhado (anonimizado). Envio em breve.</div>
+    <div class="update-line" data-pt="2026-05-15 — Palheiro preparando pitch detalhado de um negócio (anonimizado). Envio em breve." data-en="2026-05-15 — Palheiro preparing detailed pitch for one deal (anonymized). Sending soon.">2026-05-15 — Palheiro preparando pitch detalhado de um negócio (anonimizado). Envio em breve.</div>
+    <div class="update-line" data-pt="2026-05-07 — Modelo de mandato enviado ao Palheiro. Egor aceitou 25%. Terceiro deal em prospecção via Massena." data-en="2026-05-07 — Mandate model sent to Palheiro. Egor accepted 25%. Third deal prospecting via Massena.">2026-05-07 — Modelo de mandato enviado ao Palheiro. Egor aceitou 25%. Terceiro deal em prospecção via Massena.</div>
   </div>
 </article>
-
-<!-- ===== May 14, 2026 ===== -->
 
 <article class="card">
   <div class="card-top">
@@ -604,22 +634,21 @@
       data-summary-title="Angola — Feasibility Studies"
       data-summary-title-en="Angola — Feasibility Studies"
       data-summary-updated="2026-05-14"
-      data-summary-text="Mapeamento de feasibility studies em Angola (WBG). Weaver já fez trabalho inicial. Contato Wenilton (Min. Finanças) iniciado. 4 estudos identificados. Possível entrada com Alvarez & Marsal."
-      data-summary-text-en="Mapping of feasibility studies in Angola (WBG). Weaver has prior work. Contact Wenilton (Min. Finance) initiated. 4 studies identified. Possible entry with Alvarez & Marsal."
+      data-summary-text="Monitoramento de feasibility studies em Angola via WBG. Weaver já fez trabalho inicial nesta frente. Contato com Wenilton (Ministério das Finanças) iniciado. Quatro oportunidades identificadas: Caculo Cabaça Transmission, Cunene Transmission, PPP Transaction Advisory, Huila-Cunene Interconnection."
+      data-summary-text-en="Monitoring feasibility studies in Angola via WBG. Weaver already did initial work on this front. Contact with Wenilton (Ministry of Finance) initiated. Four opportunities identified: Caculo Cabaça Transmission, Cunene Transmission, PPP Transaction Advisory, Huila-Cunene Interconnection."
     >Resumo geral</button>
   </div>
   <p class="leadership" data-pt="Liderança: Caio" data-en="Leadership: Caio">Liderança: Caio</p>
-  <p class="updated-at" data-pt="Última atualização: 14 de maio de 2026, 4:00 PM EST" data-en="Last updated: May 14, 2026, 4:00 PM EST">Última atualização: 14 de maio de 2026, 4:00 PM EST</p>
+  <p class="updated-at" data-pt="Última atualização: 14 de maio de 2026, 5:00 PM EST" data-en="Last updated: May 14, 2026, 5:00 PM EST">Última atualização: 14 de maio de 2026, 5:00 PM EST</p>
   <p class="next-steps">
     <strong data-pt="Próximos passos:" data-en="Next steps:">Próximos passos:</strong>
-    <span data-pt="Responder ao Wenilton com mais informações; Revisitar portal de procurement de Angola; Monitorar WBG" data-en="Respond to Wenilton with more information; Revisit Angola procurement portal; Monitor WBG">Responder ao Wenilton com mais informações; Revisitar portal de procurement de Angola; Monitorar WBG</span>
+    <span data-pt="Caio: ver com Bernardo e responder ao Wenilton com mais informações do projeto; Revisitar portal de procurement de Angola" data-en="Caio: check with Bernardo and reply to Wenilton with more project info; Revisit Angola procurement portal">Caio: ver com Bernardo e responder ao Wenilton com mais informações do projeto; Revisitar portal de procurement de Angola</span>
   </p>
   <div class="updates-window">
-    <div class="update-line" data-pt="2026-05-14 — Caio contactou Wenilton (Min. Finanças). Respondeu pedindo mais informações." data-en="2026-05-14 — Caio contacted Wenilton (Min. Finance). Responded asking for more info.">2026-05-14 — Caio contactou Wenilton (Min. Finanças). Respondeu pedindo mais informações.</div>
+    <div class="update-line" data-pt="2026-05-14 — Caio contactou Wenilton (Ministério das Finanças). Respondeu perguntando mais informações do projeto." data-en="2026-05-14 — Caio contacted Wenilton (Ministry of Finance). Replied asking for more project information.">2026-05-14 — Caio contactou Wenilton (Ministério das Finanças). Respondeu perguntando mais informações do projeto.</div>
+    <div class="update-line" data-pt="2026-05-04 — Monitoramento WBG e procurement de Angola em andamento." data-en="2026-05-04 — WBG and Angola procurement monitoring underway.">2026-05-04 — Monitoramento WBG e procurement de Angola em andamento.</div>
   </div>
 </article>
-
-<!-- ===== May 7, 2026 ===== -->
 
 <article class="card">
   <div class="card-top">
@@ -628,42 +657,19 @@
       data-summary-title="Granter.ai"
       data-summary-title-en="Granter.ai"
       data-summary-updated="2026-05-07"
-      data-summary-text="Startup portuguesa (Web Summit 2025, Techstars Torino). Agente de IA para grants (€21,3M candidaturas). Oportunidades: investimento, parceria RFP scraping, contatos EUA."
-      data-summary-text-en="Portuguese startup (Web Summit 2025, Techstars Torino). AI agent for grants (€21.3M applications). Opportunities: investment, RFP scraping partnership, US contacts."
+      data-summary-text="Startup portuguesa (Lisboa), vencedora do Web Summit 2025 e Techstars Torino. Agente de IA para grants: matching, escrita, gestão pós-aprovação. €21,3M em candidaturas, 3000+ clientes. Reunião com Bernardo Seixas abriu 3 frentes: rodada de investimento, parceria tecnológica (scraping de RFP), contatos em depts federais EUA."
+      data-summary-text-en="Portuguese startup (Lisbon), winner of Web Summit 2025 and Techstars Torino. AI agent for grants: matching, writing, post-approval management. €21.3M in applications, 3000+ clients. Meeting with Bernardo Seixas opened 3 fronts: investment round, tech partnership (RFP scraping), contacts in US federal departments."
     >Resumo geral</button>
   </div>
   <p class="leadership" data-pt="Liderança: Aureo" data-en="Leadership: Aureo">Liderança: Aureo</p>
-  <p class="updated-at" data-pt="Última atualização: 7 de maio de 2026, 4:00 PM EST" data-en="Last updated: May 7, 2026, 4:00 PM EST">Última atualização: 7 de maio de 2026, 4:00 PM EST</p>
+  <p class="updated-at" data-pt="Última atualização: 7 de maio de 2026, 6:00 PM EST" data-en="Last updated: May 7, 2026, 6:00 PM EST">Última atualização: 7 de maio de 2026, 6:00 PM EST</p>
   <p class="next-steps">
     <strong data-pt="Próximos passos:" data-en="Next steps:">Próximos passos:</strong>
-    <span data-pt="Agendar reunião Bernardo Seixas + Bernardo Weaver; Follow-up rodada de investimento" data-en="Schedule Bernardo Seixas + Bernardo Weaver meeting; Follow up investment round">Agendar reunião Bernardo Seixas + Bernardo Weaver; Follow-up rodada de investimento</span>
+    <span data-pt="Agendar reunião Bernardo Seixas + Bernardo Weaver (frente governo americano); Fazer follow-up sobre rodada de investimento; Avaliar prioridade entre as 3 frentes" data-en="Schedule Bernardo Seixas + Bernardo Weaver meeting (US government front); Follow up on investment round; Evaluate priority among 3 fronts">Agendar reunião Bernardo Seixas + Bernardo Weaver (frente governo americano); Fazer follow-up sobre rodada de investimento; Avaliar prioridade entre as 3 frentes</span>
   </p>
   <div class="updates-window">
-    <div class="update-line" data-pt="2026-05-07 — Aureo sugeriu reunião na semana seguinte com Bernardo Weaver." data-en="2026-05-07 — Aureo suggested meeting the following week with Bernardo Weaver.">2026-05-07 — Aureo sugeriu reunião na semana seguinte com Bernardo Weaver.</div>
-  </div>
-</article>
-
-<!-- ===== May 4, 2026 (alphabetical) ===== -->
-
-<article class="card">
-  <div class="card-top">
-    <h2 data-pt="Weaver Advisory (Visão Geral)" data-en="Weaver Advisory (Overview)">Weaver Advisory (Visão Geral)</h2>
-    <button class="summary-button" type="button" data-pt="Resumo geral" data-en="Overview"
-      data-summary-title="Weaver Advisory (Visão Geral)"
-      data-summary-title-en="Weaver Advisory (Overview)"
-      data-summary-updated="2026-05-04"
-      data-summary-text="Visão-mãe das frentes Weaver. Cada projeto tem card próprio. Projetos novos entram como registro temporário até ganharem card próprio."
-      data-summary-text-en="Mother view of Weaver fronts. Each project has its own card. New projects enter as temporary records until they get their own card."
-    >Resumo geral</button>
-  </div>
-  <p class="leadership" data-pt="Liderança: Aureo" data-en="Leadership: Aureo">Liderança: Aureo</p>
-  <p class="updated-at" data-pt="Última atualização: 4 de maio de 2026, 4:00 PM EST" data-en="Last updated: May 4, 2026, 4:00 PM EST">Última atualização: 4 de maio de 2026, 4:00 PM EST</p>
-  <p class="next-steps">
-    <strong data-pt="Próximos passos:" data-en="Next steps:">Próximos passos:</strong>
-    <span data-pt="Manter mapa geral; Garantir cards para cada frente" data-en="Maintain overall map; Ensure each front has its own card">Manter mapa geral; Garantir cards para cada frente</span>
-  </p>
-  <div class="updates-window">
-    <div class="update-line" data-pt="2026-05-04 — Painel convertido para visão-mãe. Frentes organizadas por cards no dashboard." data-en="2026-05-04 — Panel converted to mother view. Fronts organized by dashboard cards.">2026-05-04 — Painel convertido para visão-mãe. Frentes organizadas por cards no dashboard.</div>
+    <div class="update-line" data-pt="2026-05-07 — Aureo sugeriu reunião na semana que vem com Bernardo Weaver para destravar frente de governo americano." data-en="2026-05-07 — Aureo suggested meeting next week with Bernardo Weaver to unlock US government front.">2026-05-07 — Aureo sugeriu reunião na semana que vem com Bernardo Weaver para destravar frente de governo americano.</div>
+    <div class="update-line" data-pt="2026-05-06 — Reunião inicial. 3 oportunidades: rodada de investimento, parceria IA scraping de RFP, contatos EUA." data-en="2026-05-06 — Initial meeting. 3 opportunities: investment round, AI RFP scraping partnership, US contacts.">2026-05-06 — Reunião inicial. 3 oportunidades: rodada de investimento, parceria IA scraping de RFP, contatos EUA.</div>
   </div>
 </article>
 
@@ -674,41 +680,54 @@
       data-summary-title="Opportunity Monitor"
       data-summary-title-en="Opportunity Monitor"
       data-summary-updated="2026-05-04"
-      data-summary-text="Pipeline de oportunidades com busca manual. Consolidado semanal prometido. Conversa com WBG, procurement de país."
-      data-summary-text-en="Opportunity pipeline with manual search. Weekly consolidated report promised. WBG and country procurement conversations."
+      data-summary-text="Pipeline de oportunidades da Weaver — busca manual em andamento. Consolidado prometido com o que foi aplicado. Conversa com Banco Mundial, procurement de país e rotina de aplicações. Aguardando relatório completo de sexta-feira."
+      data-summary-text-en="Weaver opportunity pipeline — manual search ongoing. Consolidated report promised with what was applied. Covers World Bank, country procurement, and application routine. Awaiting full Friday report."
     >Resumo geral</button>
   </div>
-  <p class="leadership" data-pt="Liderança: (time)" data-en="Leadership: (team)">Liderança: (time)</p>
-  <p class="updated-at" data-pt="Última atualização: 4 de maio de 2026, 4:00 PM EST" data-en="Last updated: May 4, 2026, 4:00 PM EST">Última atualização: 4 de maio de 2026, 4:00 PM EST</p>
+  <p class="updated-at" data-pt="Última atualização: 4 de maio de 2026, 7:00 PM EST" data-en="Last updated: May 4, 2026, 7:00 PM EST">Última atualização: 4 de maio de 2026, 7:00 PM EST</p>
   <p class="next-steps">
     <strong data-pt="Próximos passos:" data-en="Next steps:">Próximos passos:</strong>
-    <span data-pt="Receber consolidado semanal; Organizar origem e estágio das aplicações" data-en="Receive weekly consolidated report; Organize origin and stage of applications">Receber consolidado semanal; Organizar origem e estágio das aplicações</span>
+    <span data-pt="Receber e organizar consolidado de sexta; Evoluir busca manual para fluxo mais estruturado" data-en="Receive and organize Friday consolidated report; Evolve manual search to more structured flow">Receber e organizar consolidado de sexta; Evoluir busca manual para fluxo mais estruturado</span>
   </p>
   <div class="updates-window">
-    <div class="update-line" data-pt="2026-05-04 — Busca manual. Consolidado prometido para sexta." data-en="2026-05-04 — Manual search. Consolidated report promised for Friday.">2026-05-04 — Busca manual. Consolidado prometido para sexta.</div>
+    <div class="update-line" data-pt="2026-05-04 — Busca segue manual. Consolidado do que foi aplicado prometido para sexta." data-en="2026-05-04 — Search remains manual. Consolidated report promised for Friday.">2026-05-04 — Busca segue manual. Consolidado do que foi aplicado prometido para sexta.</div>
   </div>
 </article>
 
 <article class="card">
   <div class="card-top">
-    <h2 data-pt="Weaver Team Monitor" data-en="Weaver Team Monitor">Weaver Team Monitor</h2>
+    <h2 data-pt="Team Monitor" data-en="Team Monitor">Team Monitor</h2>
     <button class="summary-button" type="button" data-pt="Resumo geral" data-en="Overview"
-      data-summary-title="Weaver Team Monitor"
-      data-summary-title-en="Weaver Team Monitor"
+      data-summary-title="Team Monitor"
+      data-summary-title-en="Team Monitor"
       data-summary-updated="2026-05-04"
-      data-summary-text="Consolidação de reportes diários da equipe. Base estruturada pronta. Em fase operacional. Pode evoluir para dashboard."
-      data-summary-text-en="Consolidation of daily team reports. Structured base ready. In operational phase. Can evolve into dashboard."
+      data-summary-text="Consolidação de reportes diários da equipe Weaver em base estruturada. Geração de resumos semanais e evolução para dashboard. Base inicial existe no workspace. Em fase de estruturação operacional para virar instrumento real de acompanhamento."
+      data-summary-text-en="Consolidation of daily Weaver team reports into a structured base. Weekly summaries and dashboard evolution. Initial base exists in workspace. In operational structuring phase to become a real tracking instrument."
     >Resumo geral</button>
   </div>
-  <p class="leadership" data-pt="Liderança: (rodízio)" data-en="Leadership: (rotation)">Liderança: (rodízio)</p>
-  <p class="updated-at" data-pt="Última atualização: 4 de maio de 2026, 4:00 PM EST" data-en="Last updated: May 4, 2026, 4:00 PM EST">Última atualização: 4 de maio de 2026, 4:00 PM EST</p>
+  <p class="updated-at" data-pt="Última atualização: 4 de maio de 2026, 6:00 PM EST" data-en="Last updated: May 4, 2026, 6:00 PM EST">Última atualização: 4 de maio de 2026, 6:00 PM EST</p>
   <p class="next-steps">
     <strong data-pt="Próximos passos:" data-en="Next steps:">Próximos passos:</strong>
-    <span data-pt="Validar estrutura de acompanhamento; Definir fluxo de alimentação; Testar ciclo semanal" data-en="Validate tracking structure; Define input flow; Test weekly cycle">Validar estrutura de acompanhamento; Definir fluxo de alimentação; Testar ciclo semanal</span>
+    <span data-pt="Validar estrutura atual de acompanhamento; Definir fluxo mínimo de alimentação; Testar ciclo semanal com dados reais" data-en="Validate current tracking structure; Define minimum input flow; Test weekly cycle with real data">Validar estrutura atual de acompanhamento; Definir fluxo mínimo de alimentação; Testar ciclo semanal com dados reais</span>
   </p>
   <div class="updates-window">
-    <div class="update-line" data-pt="2026-05-04 — Estrutura definida. Pronta para teste semanal com dados reais." data-en="2026-05-04 — Structure defined. Ready for weekly testing with real data.">2026-05-04 — Estrutura definida. Pronta para teste semanal com dados reais.</div>
+    <div class="update-line" data-pt="2026-05-04 — Caio olhando Banco Mundial e procurement. Nicola e João aplicaram." data-en="2026-05-04 — Caio looking at World Bank and procurement. Nicola and João applied.">2026-05-04 — Caio olhando Banco Mundial e procurement. Nicola e João aplicaram.</div>
   </div>
+</article>
+
+<!-- ===== ARQUIVO ===== -->
+
+<div class="section-divider">
+  <span class="section-label">Arquivo</span>
+</div>
+
+<article class="card archived">
+  <div class="card-top">
+    <h2 data-pt="Board Lusófono" data-en="Lusophone Board">Board Lusófono</h2>
+    <span class="closed-badge" data-pt="Encerrado" data-en="Closed">Encerrado</span>
+  </div>
+  <p class="closed-reason" data-pt="Encerrado em 18 de junho de 2026 — Falta de tração do Will Vogt, dispersão temática sem foco em entregas, e não era prioridade. Will foi comunicado." data-en="Closed June 18, 2026 — Lack of traction from Will Vogt, thematic dispersion without delivery focus, not a priority. Will was informed.">Encerrado em 18 de junho de 2026 — Falta de tração do Will Vogt, dispersão temática sem foco em entregas, e não era prioridade. Will foi comunicado.</p>
+  <p class="archive-summary" data-pt="Iniciativa de plataforma lusófona liderada por Will Vogt. Primeira reunião em 22/05 com grupo qualificado. Weaver chegou a decidir entrar com mais força (Bernardo presidente, William secretário), mas a iniciativa nunca converteu em ação concreta. Encerrado por decisão da Weaver." data-en="Lusophone platform initiative led by Will Vogt. First meeting on May 22 with qualified group. Weaver decided to engage more strongly (Bernardo as president, William as secretary), but the initiative never converted into concrete action. Closed by Weaver decision.">Iniciativa de plataforma lusófona liderada por Will Vogt. Primeira reunião em 22/05 com grupo qualificado. Weaver chegou a decidir entrar com mais força (Bernardo presidente, William secretário), mas a iniciativa nunca converteu em ação concreta. Encerrado por decisão da Weaver.</p>
 </article>
 
   </section>
@@ -739,21 +758,18 @@
     currentLang = lang;
     document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
 
-    // Text content via data-pt / data-en
     document.querySelectorAll('[data-pt][data-en]').forEach(function(el) {
       if (el.dataset[lang] !== undefined) {
         el.textContent = el.dataset[lang];
       }
     });
 
-    // Placeholder attributes
     document.querySelectorAll('[data-pt-placeholder][data-en-placeholder]').forEach(function(el) {
       if (el.dataset[lang + 'Placeholder'] !== undefined) {
         el.placeholder = el.dataset[lang + 'Placeholder'];
       }
     });
 
-    // Lang switch buttons
     document.querySelectorAll('.lang-option').forEach(function(btn) {
       var isActive = btn.dataset.lang === lang;
       btn.classList.toggle('active', isActive);
@@ -763,7 +779,6 @@
     localStorage.setItem('weaver_dash_lang', lang);
   }
 
-  // Lang switch click handlers
   document.querySelectorAll('.lang-option').forEach(function(btn) {
     btn.addEventListener('click', function() {
       applyLanguage(btn.dataset.lang);
@@ -777,7 +792,6 @@
     applyLanguage(currentLang);
     initModals();
   } else {
-    // Apply language to password overlay even before auth
     applyLanguage(currentLang);
   }
 
