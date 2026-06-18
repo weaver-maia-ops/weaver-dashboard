@@ -12,6 +12,66 @@
   "total_applied_year": 39,
   "total_pending": 7,
   "total_cards": 52,
+  "monthly_individual": [
+    {
+      "key": "2025-12",
+      "count": 1
+    },
+    {
+      "key": "2026-01",
+      "count": 1
+    },
+    {
+      "key": "2026-02",
+      "count": 1
+    },
+    {
+      "key": "2026-03",
+      "count": 7
+    },
+    {
+      "key": "2026-04",
+      "count": 7
+    },
+    {
+      "key": "2026-05",
+      "count": 6
+    }
+  ],
+  "monthly_company": [
+    {
+      "key": "2025-09",
+      "count": 2
+    },
+    {
+      "key": "2025-12",
+      "count": 2
+    },
+    {
+      "key": "2026-01",
+      "count": 5
+    },
+    {
+      "key": "2026-02",
+      "count": 2
+    },
+    {
+      "key": "2026-03",
+      "count": 2
+    },
+    {
+      "key": "2026-04",
+      "count": 2
+    },
+    {
+      "key": "2026-05",
+      "count": 5
+    },
+    {
+      "key": "2026-06",
+      "count": 2
+    }
+  ],
   "monthly_applied": [
     {
       "key": "2025-09",
