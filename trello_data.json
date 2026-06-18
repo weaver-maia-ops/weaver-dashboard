@@ -1,0 +1,48 @@
+{
+  "individual": {
+    "pending": 4,
+    "applied_month": 0,
+    "applied_year": 8
+  },
+  "company": {
+    "pending": 3,
+    "applied_month": 1,
+    "applied_year": 3
+  },
+  "monthly_individual": [
+    {
+      "key": "2026-03",
+      "count": 2
+    },
+    {
+      "key": "2026-04",
+      "count": 4
+    },
+    {
+      "key": "2026-05",
+      "count": 2
+    }
+  ],
+  "monthly_company": [
+    {
+      "key": "2025-09",
+      "count": 1
+    },
+    {
+      "key": "2026-03",
+      "count": 1
+    },
+    {
+      "key": "2026-05",
+      "count": 1
+    },
+    {
+      "key": "2026-06",
+      "count": 1
+    }
+  ],
+  "total_applied_year": 11,
+  "total_pending": 7,
+  "shortlisted_individual": 4,
+  "shortlisted_company": 1
+}
