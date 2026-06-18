@@ -1048,5 +1048,78 @@ Reason for closure: Lack of traction from Will Vogt, thematic dispersion without
   }
 })();
 </script>
+
+<script>
+/* ---- Funnel loader ---- */
+(function() {
+  var MONTHS_PT = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+  var MONTHS_EN = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+  function renderFunnel(data) {
+    var lang = localStorage.getItem('weaver_dash_lang') || 'pt';
+    var months = lang === 'pt' ? MONTHS_PT : MONTHS_EN;
+    var ind = data.individual || {};
+    var comp = data.company || {};
+    var totalPending = (ind.pending||0) + (comp.pending||0);
+    var totalMonth = (ind.applied_month||0) + (comp.applied_month||0);
+    var totalYear = (ind.applied_year||0) + (comp.applied_year||0);
+    var totalShort = (data.shortlisted_individual||0) + (data.shortlisted_company||0);
+
+    var labels = {
+      pt: ['A aplicar','Aplicados em Junho','Aplicados em 2026','Shortlisted','Individual','Empresa','Total'],
+      en: ['To apply','Applied in June','Applied in 2026','Shortlisted','Individual','Firm','Total']
+    };
+    var L = labels[lang] || labels.pt;
+
+    // Table
+    var tableHTML = '<table class="funnel-table"><thead><tr><th></th><th>' + L[4] + '</th><th>' + L[5] + '</th><th>' + L[6] + '</th></tr></thead><tbody>';
+    tableHTML += '<tr><td>' + L[0] + '</td><td class="funnel-num">' + (ind.pending||0) + '</td><td class="funnel-num">' + (comp.pending||0) + '</td><td class="funnel-num funnel-total">' + totalPending + '</td></tr>';
+    tableHTML += '<tr><td>' + L[1] + '</td><td class="funnel-num">' + (ind.applied_month||0) + '</td><td class="funnel-num">' + (comp.applied_month||0) + '</td><td class="funnel-num funnel-total">' + totalMonth + '</td></tr>';
+    tableHTML += '<tr><td>' + L[2] + '</td><td class="funnel-num">' + (ind.applied_year||0) + '</td><td class="funnel-num">' + (comp.applied_year||0) + '</td><td class="funnel-num funnel-total">' + totalYear + '</td></tr>';
+    tableHTML += '<tr><td>' + L[3] + '</td><td class="funnel-num">' + (data.shortlisted_individual||0) + '</td><td class="funnel-num">' + (data.shortlisted_company||0) + '</td><td class="funnel-num funnel-total">' + totalShort + '</td></tr>';
+    tableHTML += '</tbody></table>';
+    document.getElementById('funnelTable').innerHTML = tableHTML;
+
+    // Chart
+    var chartTitle = lang === 'pt' ? 'Aplicações por mês (2026)' : 'Applications per month (2026)';
+    var legendInd = lang === 'pt' ? 'Individual' : 'Individual';
+    var legendFirm = lang === 'pt' ? 'Empresa' : 'Firm';
+
+    var monthlyInd = {};
+    (data.monthly_individual || []).forEach(function(m) { monthlyInd[m.key] = m.count; });
+    var monthlyComp = {};
+    (data.monthly_company || []).forEach(function(m) { monthlyComp[m.key] = m.count; });
+
+    var maxVal = 0;
+    for (var i = 0; i < 6; i++) {
+      var mk = '2026-0' + (i+1);
+      var v = (monthlyInd[mk]||0) + (monthlyComp[mk]||0);
+      if (v > maxVal) maxVal = v;
+    }
+    if (maxVal === 0) maxVal = 5;
+
+    var chartHTML = '<div class="funnel-chart-title">' + chartTitle + '</div><div class="bar-chart">';
+    for (var i = 0; i < 6; i++) {
+      var mk = '2026-0' + (i+1);
+      var iv = monthlyInd[mk]||0;
+      var cv = monthlyComp[mk]||0;
+      var ipct = Math.round(iv / maxVal * 100);
+      var cpct = Math.round(cv / maxVal * 100);
+      var total = iv + cv;
+      chartHTML += '<div class="bar-row"><span class="bar-label">' + months[i] + '</span>';
+      chartHTML += '<div class="bar-track"><div class="bar-fill bar-ind" style="width:' + ipct + '%"></div><div class="bar-fill bar-firm" style="width:' + cpct + '%"></div></div>';
+      chartHTML += '<span class="bar-val">' + total + '</span></div>';
+    }
+    chartHTML += '</div><div class="bar-legend"><span class="legend-item"><span class="legend-swatch bar-ind"></span> ' + legendInd + '</span><span class="legend-item"><span class="legend-swatch bar-firm"></span> ' + legendFirm + '</span></div>';
+    document.getElementById('funnelChart').innerHTML = chartHTML;
+  }
+
+  // Load data
+  fetch('trello_data.json')
+    .then(function(r) { return r.json(); })
+    .then(function(data) { renderFunnel(data); })
+    .catch(function() { /* keep hardcoded fallback */ });
+})();
+</script>
 </body>
 </html>
