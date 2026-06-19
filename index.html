@@ -332,7 +332,7 @@
         <button class="lang-option" data-lang="en" aria-pressed="false">EN</button>
       </div>
     </div>
-    <div class="updated" data-pt="Gerado em 18 de junho de 2026, 2:43 PM EST" data-en="Generated on June 18, 2026, 2:43 PM EST">Gerado em 18 de junho de 2026, 2:43 PM EST</div>
+    <div class="updated" data-pt="Gerado em 19 de junho de 2026, 7:06 AM EST" data-en="Generated on June 19, 2026, 7:06 AM EST">Gerado em 19 de junho de 2026, 7:06 AM EST</div>
   </header>
 
   <section class="cards">
@@ -977,13 +977,14 @@ Reason for closure: Lack of traction from Will Vogt, thematic dispersion without
 /* ---- Funnel loader ---- */
 (function() {
   var MONTHS_PT = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+  var MONTHS_FULL_PT = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
   var MONTHS_EN = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  var CUR_MONTH_PT = 'Junho'; var CUR_MONTH_EN = 'June'; // updated by cron
+  var MONTHS_FULL_EN = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 
   function renderFunnel(data) {
     var lang = localStorage.getItem('weaver_dash_lang') || 'pt';
     var months = lang === 'pt' ? MONTHS_PT : MONTHS_EN;
-    var curMonthName = lang === 'pt' ? CUR_MONTH_PT : CUR_MONTH_EN;
+    var nowEst; // computed below before use
     var ind = data.individual || {};
     var comp = data.company || {};
     var tp = (data.total_pending||0);
@@ -991,14 +992,40 @@ Reason for closure: Lack of traction from Will Vogt, thematic dispersion without
     var ty = (ind.applied_year||0)+(comp.applied_year||0);
     var ts = (data.shortlisted_individual||0)+(data.shortlisted_company||0);
 
+    // Compute current week entries (Mon-Sun) in EST
+    var now = new Date();
+    var estOffset = -5; // EST is UTC-5
+    var nowEst = new Date(now.getTime() + (now.getTimezoneOffset() + estOffset*60) * 60000);
+    var curMonthIdx = nowEst.getMonth();
+    var curMonthName = lang === 'pt' ? MONTHS_FULL_PT[curMonthIdx] : MONTHS_FULL_EN[curMonthIdx];
+    var dayOfWeek = nowEst.getDay(); // 0=Sun, 1=Mon...6=Sat
+    var monday = new Date(nowEst); monday.setDate(nowEst.getDate() - (dayOfWeek===0?6:dayOfWeek-1));
+    var sunday = new Date(monday); sunday.setDate(monday.getDate()+6);
+    var pad = function(n){return n<10?'0'+n:''+n;};
+    var monKey = monday.getFullYear()+'-'+pad(monday.getMonth()+1)+'-'+pad(monday.getDate());
+    var sunKey = sunday.getFullYear()+'-'+pad(sunday.getMonth()+1)+'-'+pad(sunday.getDate());
+    var weekEntries = 0;
+    (data.weekly_entries||[]).forEach(function(w){
+      if(w.key >= monKey && w.key <= sunKey) weekEntries += w.count;
+    });
+
+    // Current month entries
+    var curMonthKey = nowEst.getFullYear()+'-'+pad(nowEst.getMonth()+1);
+    var monthEntries = 0;
+    (data.monthly_entries||[]).forEach(function(m){
+      if(m.key === curMonthKey) monthEntries = m.count;
+    });
+
     var labels = {
-      pt: ['A aplicar','Aplicados em '+curMonthName,'Aplicados em 2026','Shortlisted','Individual','Empresa','Total'],
-      en: ['To apply','Applied in '+curMonthName,'Applied in 2026','Shortlisted','Individual','Firm','Total']
+      pt: ['A aplicar','Aplicados em '+curMonthName,'Aplicados em 2026','Shortlisted','Entradas esta semana','Entradas em '+curMonthName,'Individual','Empresa','Total'],
+      en: ['To apply','Applied in '+curMonthName,'Applied in 2026','Shortlisted','Entries this week','Entries in '+curMonthName,'Individual','Firm','Total']
     };
     var L = labels[lang]||labels.pt;
 
     // Table
-    var h='<table class="funnel-table"><thead><tr><th></th><th>'+L[4]+'</th><th>'+L[5]+'</th><th>'+L[6]+'</th></tr></thead><tbody>';
+    var h='<table class="funnel-table"><thead><tr><th></th><th>'+L[6]+'</th><th>'+L[7]+'</th><th>'+L[8]+'</th></tr></thead><tbody>';
+    h+='<tr><td>'+L[4]+'</td><td colspan="2" style="text-align:center;color:var(--muted);font-size:0.75rem;">-</td><td class="funnel-num funnel-total">'+weekEntries+'</td></tr>';
+    h+='<tr><td>'+L[5]+'</td><td colspan="2" style="text-align:center;color:var(--muted);font-size:0.75rem;">-</td><td class="funnel-num funnel-total">'+monthEntries+'</td></tr>';
     h+='<tr><td>'+L[0]+'</td><td class="funnel-num">'+(ind.pending||0)+'</td><td class="funnel-num">'+(comp.pending||0)+'</td><td class="funnel-num funnel-total">'+tp+'</td></tr>';
     h+='<tr><td>'+L[1]+'</td><td class="funnel-num">'+(ind.applied_month||0)+'</td><td class="funnel-num">'+(comp.applied_month||0)+'</td><td class="funnel-num funnel-total">'+tm+'</td></tr>';
     h+='<tr><td>'+L[2]+'</td><td class="funnel-num">'+(ind.applied_year||0)+'</td><td class="funnel-num">'+(comp.applied_year||0)+'</td><td class="funnel-num funnel-total">'+ty+'</td></tr>';
@@ -1036,20 +1063,6 @@ Reason for closure: Lack of traction from Will Vogt, thematic dispersion without
     });
     c+='</div><div class="bar-legend"><span class="legend-item"><span class="legend-swatch bar-ind"></span> '+(lang==='pt'?'Individual':'Individual')+'</span><span class="legend-item"><span class="legend-swatch bar-firm"></span> '+(lang==='pt'?'Empresa':'Firm')+'</span></div>';
 
-    // Weekly chart
-    var weeks = (data.weekly_entries||[]).slice(-12);
-    if (weeks.length>0) {
-      c+='<div class="funnel-chart-title" style="margin-top:1rem;">'+(lang==='pt'?'Entradas por semana':'Weekly entries')+'</div><div class="bar-chart">';
-      var wmax=0; weeks.forEach(function(w){ if(w.count>wmax) wmax=w.count; }); if(wmax===0) wmax=5;
-      weeks.forEach(function(w){
-        var wpct=Math.round(w.count/wmax*100);
-        var wl=w.key.slice(5); // MM-DD
-        c+='<div class="bar-row"><span class="bar-label">'+wl+'</span>';
-        c+='<div class="bar-track"><div class="bar-fill bar-ind" style="width:'+wpct+'%"></div></div>';
-        c+='<span class="bar-val">'+w.count+'</span></div>';
-      });
-      c+='</div>';
-    }
     document.getElementById('funnelChart').innerHTML = c;
   }
 
