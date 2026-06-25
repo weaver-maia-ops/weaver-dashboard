@@ -1,11 +1,11 @@
 {
   "individual": {
-    "pending": 4,
+    "pending": 3,
     "applied_month": 1,
     "applied_year": 23
   },
   "company": {
-    "pending": 3,
+    "pending": 4,
     "applied_month": 2,
     "applied_year": 18
   },
@@ -268,10 +268,6 @@
       "count": 4
     },
     {
-      "key": "2026-06-17",
-      "count": 1
-    },
-    {
       "key": "2026-06-18",
       "count": 1
     },
@@ -280,11 +276,11 @@
       "count": 1
     },
     {
-      "key": "2026-06-22",
-      "count": 1
+      "key": "2026-06-23",
+      "count": 2
     },
     {
-      "key": "2026-06-23",
+      "key": "2026-06-24",
       "count": 2
     }
   ],
