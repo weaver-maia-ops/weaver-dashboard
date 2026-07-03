@@ -883,6 +883,7 @@
     });
 
     localStorage.setItem('weaver_dash_lang', lang);
+    if (funnelData) renderFunnel(funnelData);
   }
 
   document.querySelectorAll('.lang-option').forEach(function(btn) {
@@ -1034,9 +1035,10 @@
     document.getElementById('funnelChart').innerHTML = c;
   }
 
+  var funnelData = null;
   fetch('trello_data.json')
     .then(function(r){ return r.json(); })
-    .then(function(data){ renderFunnel(data); })
+    .then(function(data){ funnelData = data; renderFunnel(data); })
     .catch(function(){});
 })();
 </script>
