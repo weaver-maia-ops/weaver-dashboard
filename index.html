@@ -901,7 +901,6 @@
     });
 
     localStorage.setItem('weaver_dash_lang', lang);
-    if (funnelData) renderFunnel(funnelData);
   }
 
   document.querySelectorAll('.lang-option').forEach(function(btn) {
@@ -1058,6 +1057,13 @@
     .then(function(r){ return r.json(); })
     .then(function(data){ funnelData = data; renderFunnel(data); })
     .catch(function(){});
+
+  // Re-render funnel on language change
+  document.querySelectorAll('.lang-option').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      setTimeout(function() { if (funnelData) renderFunnel(funnelData); }, 50);
+    });
+  });
 })();
 </script>
 </body>
