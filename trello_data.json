@@ -1,6 +1,6 @@
 {
   "individual": {
-    "pending": 2,
+    "pending": 3,
     "applied_month": 0,
     "applied_year": 25
   },
@@ -10,8 +10,8 @@
     "applied_year": 19
   },
   "total_applied_year": 43,
-  "total_pending": 5,
-  "total_cards": 54,
+  "total_pending": 6,
+  "total_cards": 55,
   "monthly_individual": [
     {
       "key": "2025-12",
@@ -290,6 +290,10 @@
     {
       "key": "2026-07-01",
       "count": 2
+    },
+    {
+      "key": "2026-07-02",
+      "count": 1
     }
   ],
   "monthly_entries": [
@@ -331,7 +335,7 @@
     },
     {
       "key": "2026-07",
-      "count": 2
+      "count": 3
     }
   ],
   "shortlisted_individual": 4,
