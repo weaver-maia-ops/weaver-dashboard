@@ -1034,16 +1034,16 @@ Reason for closure: Lack of traction from Will Vogt, thematic dispersion without
     var pad = function(n){return n<10?'0'+n:''+n;};
     var monKey = monday.getFullYear()+'-'+pad(monday.getMonth()+1)+'-'+pad(monday.getDate());
     var sunKey = sunday.getFullYear()+'-'+pad(sunday.getMonth()+1)+'-'+pad(sunday.getDate());
-    var weekEntries = 0;
-    (data.weekly_entries||[]).forEach(function(w){
-      if(w.key >= monKey && w.key <= sunKey) weekEntries += w.count;
-    });
+    var sumWeek = function(arr){ var s=0; (arr||[]).forEach(function(w){ if(w.key >= monKey && w.key <= sunKey) s+=w.count; }); return s; };
+    var weekEntries = sumWeek(data.weekly_entries);
+    var weekEntriesInd = sumWeek(data.weekly_entries_individual);
+    var weekEntriesComp = sumWeek(data.weekly_entries_company);
 
     var curMonthKey = nowEst.getFullYear()+'-'+pad(nowEst.getMonth()+1);
-    var monthEntries = 0;
-    (data.monthly_entries||[]).forEach(function(m){
-      if(m.key === curMonthKey) monthEntries = m.count;
-    });
+    var getMonth = function(arr){ var s=0; (arr||[]).forEach(function(m){ if(m.key === curMonthKey) s=m.count; }); return s; };
+    var monthEntries = getMonth(data.monthly_entries);
+    var monthEntriesInd = getMonth(data.monthly_entries_individual);
+    var monthEntriesComp = getMonth(data.monthly_entries_company);
 
     var labels = {
       pt: ['A aplicar','Aplicados em '+curMonthName,'Aplicados em 2026','Shortlisted','Entradas esta semana','Entradas em '+curMonthName,'Individual','Empresa','Total'],
@@ -1052,8 +1052,8 @@ Reason for closure: Lack of traction from Will Vogt, thematic dispersion without
     var L = labels[lang]||labels.pt;
 
     var h='<table class="funnel-table"><thead><tr><th></th><th>'+L[6]+'</th><th>'+L[7]+'</th><th>'+L[8]+'</th></tr></thead><tbody>';
-    h+='<tr><td>'+L[4]+'</td><td colspan="2" style="text-align:center;color:var(--muted);font-size:0.75rem;">-</td><td class="funnel-num funnel-total">'+weekEntries+'</td></tr>';
-    h+='<tr><td>'+L[5]+'</td><td colspan="2" style="text-align:center;color:var(--muted);font-size:0.75rem;">-</td><td class="funnel-num funnel-total">'+monthEntries+'</td></tr>';
+    h+='<tr><td>'+L[4]+'</td><td class="funnel-num">'+weekEntriesInd+'</td><td class="funnel-num">'+weekEntriesComp+'</td><td class="funnel-num funnel-total">'+weekEntries+'</td></tr>';
+    h+='<tr><td>'+L[5]+'</td><td class="funnel-num">'+monthEntriesInd+'</td><td class="funnel-num">'+monthEntriesComp+'</td><td class="funnel-num funnel-total">'+monthEntries+'</td></tr>';
     h+='<tr><td>'+L[0]+'</td><td class="funnel-num">'+(ind.pending||0)+'</td><td class="funnel-num">'+(comp.pending||0)+'</td><td class="funnel-num funnel-total">'+tp+'</td></tr>';
     h+='<tr><td>'+L[1]+'</td><td class="funnel-num">'+(ind.applied_month||0)+'</td><td class="funnel-num">'+(comp.applied_month||0)+'</td><td class="funnel-num funnel-total">'+tm+'</td></tr>';
     h+='<tr><td>'+L[2]+'</td><td class="funnel-num">'+(ind.applied_year||0)+'</td><td class="funnel-num">'+(comp.applied_year||0)+'</td><td class="funnel-num funnel-total">'+ty+'</td></tr>';
