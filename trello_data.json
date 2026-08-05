@@ -1,17 +1,17 @@
 {
   "individual": {
     "pending": 1,
-    "applied_month": 0,
-    "applied_year": 30
+    "applied_month": 1,
+    "applied_year": 31
   },
   "company": {
-    "pending": 3,
+    "pending": 4,
     "applied_month": 0,
     "applied_year": 31
   },
-  "total_applied_year": 60,
-  "total_pending": 4,
-  "total_cards": 70,
+  "total_applied_year": 61,
+  "total_pending": 5,
+  "total_cards": 72,
   "monthly_individual": [
     {
       "key": "2025-12",
@@ -44,6 +44,10 @@
     {
       "key": "2026-07",
       "count": 5
+    },
+    {
+      "key": "2026-08",
+      "count": 1
     }
   ],
   "monthly_company": [
@@ -120,6 +124,10 @@
     {
       "key": "2026-07",
       "count": 15
+    },
+    {
+      "key": "2026-08",
+      "count": 1
     }
   ],
   "weekly_entries": [
@@ -324,12 +332,12 @@
       "count": 1
     },
     {
-      "key": "2026-07-31",
-      "count": 1
+      "key": "2026-08-03",
+      "count": 2
     },
     {
-      "key": "2026-08-03",
-      "count": 3
+      "key": "2026-08-04",
+      "count": 4
     }
   ],
   "monthly_entries": [
@@ -367,11 +375,11 @@
     },
     {
       "key": "2026-07",
-      "count": 19
+      "count": 18
     },
     {
       "key": "2026-08",
-      "count": 3
+      "count": 6
     }
   ],
   "weekly_entries_individual": [
@@ -481,6 +489,10 @@
     },
     {
       "key": "2026-08-03",
+      "count": 1
+    },
+    {
+      "key": "2026-08-04",
       "count": 2
     }
   ],
@@ -594,12 +606,12 @@
       "count": 1
     },
     {
-      "key": "2026-07-31",
+      "key": "2026-08-03",
       "count": 1
     },
     {
-      "key": "2026-08-03",
-      "count": 1
+      "key": "2026-08-04",
+      "count": 2
     }
   ],
   "monthly_entries_individual": [
@@ -637,7 +649,7 @@
     },
     {
       "key": "2026-08",
-      "count": 2
+      "count": 3
     }
   ],
   "monthly_entries_company": [
@@ -675,11 +687,11 @@
     },
     {
       "key": "2026-07",
-      "count": 15
+      "count": 14
     },
     {
       "key": "2026-08",
-      "count": 1
+      "count": 3
     }
   ],
   "shortlisted_individual": 4,
