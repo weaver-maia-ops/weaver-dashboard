@@ -5,12 +5,12 @@
     "applied_year": 32
   },
   "company": {
-    "pending": 7,
-    "applied_month": 5,
-    "applied_year": 34
+    "pending": 6,
+    "applied_month": 6,
+    "applied_year": 35
   },
-  "total_applied_year": 65,
-  "total_pending": 8,
+  "total_applied_year": 66,
+  "total_pending": 7,
   "total_cards": 79,
   "monthly_individual": [
     {
@@ -89,7 +89,7 @@
     },
     {
       "key": "2026-08",
-      "count": 5
+      "count": 6
     }
   ],
   "monthly_applied": [
@@ -131,7 +131,7 @@
     },
     {
       "key": "2026-08",
-      "count": 7
+      "count": 8
     }
   ],
   "weekly_entries": [
