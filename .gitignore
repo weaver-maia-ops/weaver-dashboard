@@ -1,1 +1,12 @@
+# Local secrets
+.env
+.env.*
+!.env.example
+
+# Legacy/sensitive local scripts
 fetch_trello_data.sh
+
+# Logs and temp files
+*.log
+/tmp/
+.DS_Store
