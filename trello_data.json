@@ -377,7 +377,11 @@
     },
     {
       "key": "2026-09-03",
-      "count": 3
+      "count": 2
+    },
+    {
+      "key": "2026-09-04",
+      "count": 1
     }
   ],
   "monthly_entries": [
@@ -687,7 +691,11 @@
     },
     {
       "key": "2026-09-03",
-      "count": 3
+      "count": 2
+    },
+    {
+      "key": "2026-09-04",
+      "count": 1
     }
   ],
   "monthly_entries_individual": [
