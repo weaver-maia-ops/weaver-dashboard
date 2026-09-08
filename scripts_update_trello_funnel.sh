@@ -27,8 +27,19 @@ need_var() {
 need_cmd curl
 need_cmd jq
 need_cmd git
+need_cmd cmp
 need_var TRELLO_KEY
 need_var TRELLO_TOKEN
+
+# Keep this checkout aligned with the published branch before generating data.
+# A local refresh is not a successful dashboard update until it is on origin/main.
+cd "$REPO_DIR"
+git fetch origin main
+if ! git diff --quiet || ! git diff --cached --quiet; then
+  echo "ERROR: dashboard checkout has uncommitted changes; refusing to publish over an unknown state" >&2
+  exit 40
+fi
+git pull --ff-only origin main
 
 JOBSEARCH_LIST_ID="${TRELLO_JOBSEARCH_LIST_ID:-618d6e3a7f45fe818da46b14}"
 SHORTLISTED_LIST_ID="${TRELLO_SHORTLISTED_LIST_ID:-66e03eea1a6e73171d379092}"
@@ -111,13 +122,34 @@ echo "Funnel updated: ${summary}"
 cd "$REPO_DIR"
 git add trello_data.json
 if git diff --cached --quiet; then
-  echo "No git changes to publish."
-  exit 0
+  echo "No local funnel changes to commit."
+else
+  git commit -m "funnel: atualização $(date -u +'%Y-%m-%d')"
+  if [ "${WEAVER_DASHBOARD_PUSH:-1}" = "1" ]; then
+    git push origin main
+  else
+    echo "WEAVER_DASHBOARD_PUSH=0, commit created but push skipped."
+    exit 0
+  fi
 fi
 
-git commit -m "funnel: atualização $(date -u +'%Y-%m-%d')"
-if [ "${WEAVER_DASHBOARD_PUSH:-1}" = "1" ]; then
-  git push origin main
-else
-  echo "WEAVER_DASHBOARD_PUSH=0, commit created but push skipped."
+local_head="$(git rev-parse HEAD)"
+remote_head="$(git ls-remote origin refs/heads/main | cut -f1)"
+if [ "$local_head" != "$remote_head" ]; then
+  echo "ERROR: origin/main does not match the local dashboard commit after publish" >&2
+  exit 50
 fi
+
+# The job is successful only once GitHub Pages serves the generated data.
+PAGES_DATA_URL="${WEAVER_DASHBOARD_PUBLIC_DATA_URL:-https://weaver-maia-ops.github.io/weaver-dashboard/trello_data.json}"
+for attempt in 1 2 3 4 5 6 7 8 9 10 11 12; do
+  if curl -fsS --max-time 20 "${PAGES_DATA_URL}?commit=${local_head}" -o "$TMP_DIR/published_trello_data.json" \
+    && cmp -s "$OUTFILE" "$TMP_DIR/published_trello_data.json"; then
+    echo "Published dashboard data verified (commit ${local_head:0:7})."
+    exit 0
+  fi
+  sleep 5
+done
+
+echo "ERROR: GitHub Pages did not serve the generated trello_data.json within 60 seconds" >&2
+exit 60
