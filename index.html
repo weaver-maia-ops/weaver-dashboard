@@ -134,6 +134,13 @@
     .modal-panel h2 { color: var(--accent); margin-bottom: 0.5rem; }
     .modal-panel .meta { color: var(--muted); font-size: 0.8rem; margin-bottom: 1rem; }
     .modal-panel .summary-text { line-height: 1.65; margin-bottom: 1.5rem; white-space: pre-wrap; }
+    .dossier { display: grid; gap: 0.9rem; margin-bottom: 1.5rem; }
+    .dossier-section { background: #0f172a; border: 1px solid var(--border); border-radius: 8px; padding: 0.85rem 1rem; }
+    .dossier-section h3 { color: var(--accent); font-size: 0.76rem; font-weight: 650; letter-spacing: 0.07em; margin-bottom: 0.4rem; text-transform: uppercase; }
+    .dossier-section p { color: var(--text); font-size: 0.9rem; line-height: 1.55; white-space: pre-wrap; }
+    .dossier-section ul { color: var(--text); font-size: 0.9rem; line-height: 1.55; margin: 0.25rem 0 0 1.1rem; }
+    .dossier-section li + li { margin-top: 0.2rem; }
+    .dossier-summary { border-color: #38bdf855; }
     .modal-panel button {
       background: var(--accent); color: #0f172a;
       border: none; border-radius: 6px; padding: 0.5rem 1.25rem;
@@ -645,6 +652,22 @@
       data-summary-title="BID - Estruturação de Financiamiento Verde"
       data-summary-title-en="IDB - Green Financing Structuring"
       data-summary-updated="2026-09-15"
+      data-dossier-overview="Contrato assinado e trabalhos iniciados. A frente está em execução."
+      data-dossier-overview-en="Contract signed and work started. The project is in execution."
+      data-dossier-objective="Estruturar financiamento verde no Equador no âmbito do contrato BID."
+      data-dossier-objective-en="Structure green financing in Ecuador within the IDB contract."
+      data-dossier-scope="Escopo, entregas e critérios de aceite ainda precisam ser registrados a partir do plano de trabalho e dos documentos contratuais."
+      data-dossier-scope-en="Scope, deliverables, and acceptance criteria still need to be recorded from the work plan and contract documents."
+      data-dossier-phase="Execução. Liderança geral: Aureo. Frentes técnicas já registradas: Nicola."
+      data-dossier-phase-en="Execution. Overall lead: Aureo. Recorded technical fronts: Nicola."
+      data-dossier-progress="Contrato assinado|Trabalhos iniciados|Tópico operacional da equipe criado no Weaver HQ"
+      data-dossier-progress-en="Contract signed|Work started|Team operating topic created in Weaver HQ"
+      data-dossier-decisions="Card renomeado para BID - Estruturação de Financiamiento Verde|Atualizações materiais do projeto devem refletir neste dossiê do dashboard"
+      data-dossier-decisions-en="Card renamed to IDB - Green Financing Structuring|Material project updates must be reflected in this dashboard dossier"
+      data-dossier-risks="Plano de trabalho detalhado ainda não registrado|Entregas, responsáveis e cronograma ainda precisam ser consolidados"
+      data-dossier-risks-en="Detailed work plan not yet recorded|Deliverables, owners, and timeline still need consolidation"
+      data-dossier-nextsteps="Registrar plano de trabalho, entregas, responsáveis e cronograma|Registrar a primeira atualização de execução|Atualizar este dossiê a cada avanço material"
+      data-dossier-nextsteps-en="Record the work plan, deliverables, owners, and timeline|Record the first execution update|Update this dossier after every material advance"
       data-summary-text="✅ Contrato assinado e trabalhos iniciados. A frente entra em execução. A equipe centralizará a operação, o acompanhamento e o registro dos dados no tópico BID - Estruturação de Financiamiento Verde, no Weaver HQ."
       data-summary-text-en="✅ Contract signed and work started. The project has entered execution. The team will centralize operations, follow-up, and the data record in the IDB - Green Financing Structuring topic in Weaver HQ."
     >Resumo geral</button>
@@ -832,7 +855,7 @@
   <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="summaryTitle">
     <h2 id="summaryTitle"></h2>
     <p class="meta" id="summaryMeta"></p>
-    <p class="summary-text" id="summaryText"></p>
+    <div class="summary-text" id="summaryText"></div>
     <button id="summaryClose" data-pt="Fechar" data-en="Close">Fechar</button>
   </div>
 </div>
@@ -911,20 +934,61 @@
     var titleEl = document.getElementById('summaryTitle');
     var metaEl = document.getElementById('summaryMeta');
     var textEl = document.getElementById('summaryText');
+    var dossierFields = [
+      {key:'overview', pt:'Situação atual', en:'Current situation', summary:true},
+      {key:'objective', pt:'Objetivo do projeto', en:'Project objective'},
+      {key:'scope', pt:'Escopo e entregas', en:'Scope and deliverables'},
+      {key:'phase', pt:'Fase e governança', en:'Phase and governance'},
+      {key:'progress', pt:'Marcos e andamento', en:'Milestones and progress', list:true},
+      {key:'decisions', pt:'Decisões registradas', en:'Recorded decisions', list:true},
+      {key:'risks', pt:'Riscos, dependências e lacunas', en:'Risks, dependencies and gaps', list:true},
+      {key:'nextsteps', pt:'Próximos passos', en:'Next steps', list:true}
+    ];
+
+    function dossierValue(btn, key) {
+      var datasetKey = 'dossier' + key.charAt(0).toUpperCase() + key.slice(1) + (currentLang === 'pt' ? '' : 'En');
+      return btn.dataset[datasetKey] || (currentLang === 'pt' ? btn.dataset['dossier' + key.charAt(0).toUpperCase() + key.slice(1)] : '') || '';
+    }
+
+    function addDossierSection(btn, field) {
+      var raw = dossierValue(btn, field.key);
+      if (!raw) return;
+      var section = document.createElement('section');
+      section.className = 'dossier-section' + (field.summary ? ' dossier-summary' : '');
+      var heading = document.createElement('h3');
+      heading.textContent = currentLang === 'pt' ? field.pt : field.en;
+      section.appendChild(heading);
+      if (field.list) {
+        var list = document.createElement('ul');
+        raw.split('|').map(function(v) { return v.trim(); }).filter(Boolean).forEach(function(item) {
+          var li = document.createElement('li');
+          li.textContent = item;
+          list.appendChild(li);
+        });
+        section.appendChild(list);
+      } else {
+        var paragraph = document.createElement('p');
+        paragraph.textContent = raw.replace(/\\n/g, '\n');
+        section.appendChild(paragraph);
+      }
+      textEl.appendChild(section);
+    }
 
     document.querySelectorAll('.summary-button').forEach(function(btn) {
       btn.addEventListener('click', function() {
         var titleKey = currentLang === 'pt' ? 'summaryTitle' : 'summaryTitleEn';
         titleEl.textContent = btn.dataset[titleKey] || btn.dataset.summaryTitle || '';
-
         var dateStr = btn.dataset.summaryUpdated || '';
-        var label = currentLang === 'pt' ? 'Última atualização: ' : 'Last updated: ';
-        metaEl.textContent = label + dateStr;
-
-        var textKey = currentLang === 'pt' ? 'summaryText' : 'summaryTextEn';
-        var rawText = btn.dataset[textKey] || btn.dataset.summaryText || '';
-        textEl.textContent = rawText.replace(/\\n/g, '\n');
-
+        metaEl.textContent = (currentLang === 'pt' ? 'Última atualização: ' : 'Last updated: ') + dateStr;
+        textEl.replaceChildren();
+        if (btn.dataset.dossierOverview) {
+          textEl.className = 'dossier';
+          dossierFields.forEach(function(field) { addDossierSection(btn, field); });
+        } else {
+          textEl.className = 'summary-text';
+          var textKey = currentLang === 'pt' ? 'summaryText' : 'summaryTextEn';
+          textEl.textContent = (btn.dataset[textKey] || btn.dataset.summaryText || '').replace(/\\n/g, '\n');
+        }
         modal.hidden = false;
       });
     });
