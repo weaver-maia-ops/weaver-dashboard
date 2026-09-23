@@ -1,17 +1,22 @@
 {
   "individual": {
-    "pending": 4,
-    "applied_month": 0,
+    "pending": 5,
+    "applied_month": 2,
     "applied_year": 33
   },
   "company": {
-    "pending": 7,
-    "applied_month": 4,
-    "applied_year": 39
+    "pending": 4,
+    "applied_month": 3,
+    "applied_year": 35
   },
-  "total_applied_year": 71,
+  "private": {
+    "pending": 2,
+    "applied_month": 1,
+    "applied_year": 6
+  },
+  "total_applied_year": 73,
   "total_pending": 11,
-  "total_cards": 88,
+  "total_cards": 90,
   "monthly_individual": [
     {
       "key": "2025-12",
@@ -35,7 +40,7 @@
     },
     {
       "key": "2026-05",
-      "count": 6
+      "count": 5
     },
     {
       "key": "2026-06",
@@ -43,17 +48,21 @@
     },
     {
       "key": "2026-07",
-      "count": 5
+      "count": 4
     },
     {
       "key": "2026-08",
       "count": 3
+    },
+    {
+      "key": "2026-09",
+      "count": 2
     }
   ],
   "monthly_company": [
     {
       "key": "2025-09",
-      "count": 2
+      "count": 1
     },
     {
       "key": "2025-12",
@@ -65,7 +74,7 @@
     },
     {
       "key": "2026-02",
-      "count": 2
+      "count": 1
     },
     {
       "key": "2026-03",
@@ -73,7 +82,7 @@
     },
     {
       "key": "2026-04",
-      "count": 2
+      "count": 1
     },
     {
       "key": "2026-05",
@@ -85,7 +94,7 @@
     },
     {
       "key": "2026-07",
-      "count": 8
+      "count": 7
     },
     {
       "key": "2026-08",
@@ -93,7 +102,33 @@
     },
     {
       "key": "2026-09",
-      "count": 4
+      "count": 3
+    }
+  ],
+  "monthly_private": [
+    {
+      "key": "2025-09",
+      "count": 1
+    },
+    {
+      "key": "2026-02",
+      "count": 1
+    },
+    {
+      "key": "2026-04",
+      "count": 1
+    },
+    {
+      "key": "2026-05",
+      "count": 1
+    },
+    {
+      "key": "2026-07",
+      "count": 2
+    },
+    {
+      "key": "2026-09",
+      "count": 1
     }
   ],
   "monthly_applied": [
@@ -139,7 +174,7 @@
     },
     {
       "key": "2026-09",
-      "count": 4
+      "count": 6
     }
   ],
   "weekly_entries": [
@@ -384,14 +419,6 @@
       "count": 1
     },
     {
-      "key": "2026-09-08",
-      "count": 1
-    },
-    {
-      "key": "2026-09-10",
-      "count": 1
-    },
-    {
       "key": "2026-09-11",
       "count": 4
     },
@@ -410,6 +437,10 @@
     {
       "key": "2026-09-21",
       "count": 3
+    },
+    {
+      "key": "2026-09-23",
+      "count": 4
     }
   ],
   "monthly_entries": [
@@ -455,7 +486,7 @@
     },
     {
       "key": "2026-09",
-      "count": 16
+      "count": 18
     }
   ],
   "weekly_entries_individual": [
@@ -532,10 +563,6 @@
       "count": 1
     },
     {
-      "key": "2026-05-12",
-      "count": 1
-    },
-    {
       "key": "2026-05-26",
       "count": 1
     },
@@ -564,10 +591,6 @@
       "count": 1
     },
     {
-      "key": "2026-08-03",
-      "count": 1
-    },
-    {
       "key": "2026-08-04",
       "count": 1
     },
@@ -590,12 +613,16 @@
     {
       "key": "2026-09-21",
       "count": 2
+    },
+    {
+      "key": "2026-09-23",
+      "count": 3
     }
   ],
   "weekly_entries_company": [
     {
       "key": "2025-10-13",
-      "count": 2
+      "count": 1
     },
     {
       "key": "2025-12-18",
@@ -622,10 +649,6 @@
       "count": 1
     },
     {
-      "key": "2026-02-24",
-      "count": 1
-    },
-    {
       "key": "2026-02-25",
       "count": 1
     },
@@ -635,10 +658,6 @@
     },
     {
       "key": "2026-03-24",
-      "count": 1
-    },
-    {
-      "key": "2026-04-14",
       "count": 1
     },
     {
@@ -683,7 +702,7 @@
     },
     {
       "key": "2026-07-22",
-      "count": 2
+      "count": 1
     },
     {
       "key": "2026-07-23",
@@ -726,16 +745,8 @@
       "count": 1
     },
     {
-      "key": "2026-09-08",
-      "count": 1
-    },
-    {
-      "key": "2026-09-10",
-      "count": 1
-    },
-    {
       "key": "2026-09-11",
-      "count": 4
+      "count": 3
     },
     {
       "key": "2026-09-14",
@@ -743,10 +754,6 @@
     },
     {
       "key": "2026-09-18",
-      "count": 1
-    },
-    {
-      "key": "2026-09-21",
       "count": 1
     }
   ],
@@ -773,7 +780,7 @@
     },
     {
       "key": "2026-05",
-      "count": 4
+      "count": 3
     },
     {
       "key": "2026-06",
@@ -785,17 +792,17 @@
     },
     {
       "key": "2026-08",
-      "count": 4
+      "count": 3
     },
     {
       "key": "2026-09",
-      "count": 4
+      "count": 7
     }
   ],
   "monthly_entries_company": [
     {
       "key": "2025-10",
-      "count": 2
+      "count": 1
     },
     {
       "key": "2025-12",
@@ -807,15 +814,11 @@
     },
     {
       "key": "2026-02",
-      "count": 2
+      "count": 1
     },
     {
       "key": "2026-03",
       "count": 2
-    },
-    {
-      "key": "2026-04",
-      "count": 1
     },
     {
       "key": "2026-05",
@@ -827,7 +830,7 @@
     },
     {
       "key": "2026-07",
-      "count": 11
+      "count": 10
     },
     {
       "key": "2026-08",
@@ -835,9 +838,78 @@
     },
     {
       "key": "2026-09",
-      "count": 12
+      "count": 8
+    }
+  ],
+  "weekly_entries_private": [
+    {
+      "key": "2025-10-13",
+      "count": 1
+    },
+    {
+      "key": "2026-02-24",
+      "count": 1
+    },
+    {
+      "key": "2026-04-14",
+      "count": 1
+    },
+    {
+      "key": "2026-05-12",
+      "count": 1
+    },
+    {
+      "key": "2026-07-22",
+      "count": 1
+    },
+    {
+      "key": "2026-08-03",
+      "count": 1
+    },
+    {
+      "key": "2026-09-11",
+      "count": 1
+    },
+    {
+      "key": "2026-09-21",
+      "count": 1
+    },
+    {
+      "key": "2026-09-23",
+      "count": 1
+    }
+  ],
+  "monthly_entries_private": [
+    {
+      "key": "2025-10",
+      "count": 1
+    },
+    {
+      "key": "2026-02",
+      "count": 1
+    },
+    {
+      "key": "2026-04",
+      "count": 1
+    },
+    {
+      "key": "2026-05",
+      "count": 1
+    },
+    {
+      "key": "2026-07",
+      "count": 1
+    },
+    {
+      "key": "2026-08",
+      "count": 1
+    },
+    {
+      "key": "2026-09",
+      "count": 3
     }
   ],
   "shortlisted_individual": 3,
-  "shortlisted_company": 4
+  "shortlisted_company": 3,
+  "shortlisted_private": 1
 }
