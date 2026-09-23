@@ -284,6 +284,7 @@
     }
     .bar-ind { background: var(--accent); }
     .bar-firm { background: #a78bfa; }
+    .bar-private { background: #34d399; }
     .bar-val { color: var(--text); font-size: 0.72rem; font-variant-numeric: tabular-nums; }
     .bar-legend {
       display: flex;
@@ -1073,10 +1074,11 @@ Pipeline de fazendas sendo anonimizado. Próximo: ver com Bernardo follow up com
     var months = lang === 'pt' ? MONTHS_PT : MONTHS_EN;
     var ind = data.individual || {};
     var comp = data.company || {};
+    var priv = data.private || {};
     var tp = (data.total_pending||0);
-    var tm = (ind.applied_month||0)+(comp.applied_month||0);
-    var ty = (ind.applied_year||0)+(comp.applied_year||0);
-    var ts = (data.shortlisted_individual||0)+(data.shortlisted_company||0);
+    var tm = (ind.applied_month||0)+(comp.applied_month||0)+(priv.applied_month||0);
+    var ty = (ind.applied_year||0)+(comp.applied_year||0)+(priv.applied_year||0);
+    var ts = (data.shortlisted_individual||0)+(data.shortlisted_company||0)+(data.shortlisted_private||0);
 
     // Compute current week entries (Mon-Sun) in EST
     var now = new Date();
@@ -1094,33 +1096,36 @@ Pipeline de fazendas sendo anonimizado. Próximo: ver com Bernardo follow up com
     var weekEntries = sumWeek(data.weekly_entries);
     var weekEntriesInd = sumWeek(data.weekly_entries_individual);
     var weekEntriesComp = sumWeek(data.weekly_entries_company);
+    var weekEntriesPriv = sumWeek(data.weekly_entries_private);
 
     var curMonthKey = nowEst.getFullYear()+'-'+pad(nowEst.getMonth()+1);
     var getMonth = function(arr){ var s=0; (arr||[]).forEach(function(m){ if(m.key === curMonthKey) s=m.count; }); return s; };
     var monthEntries = getMonth(data.monthly_entries);
     var monthEntriesInd = getMonth(data.monthly_entries_individual);
     var monthEntriesComp = getMonth(data.monthly_entries_company);
+    var monthEntriesPriv = getMonth(data.monthly_entries_private);
 
     var labels = {
-      pt: ['A aplicar','Aplicados em '+curMonthName,'Aplicados em 2026','Shortlisted','Entradas esta semana','Entradas em '+curMonthName,'Individual','Empresa','Total'],
-      en: ['To apply','Applied in '+curMonthName,'Applied in 2026','Shortlisted','Entries this week','Entries in '+curMonthName,'Individual','Firm','Total']
+      pt: ['A aplicar','Aplicados em '+curMonthName,'Aplicados em 2026','Shortlisted','Entradas esta semana','Entradas em '+curMonthName,'Individual','Empresa','Setor Privado','Total'],
+      en: ['To apply','Applied in '+curMonthName,'Applied in 2026','Shortlisted','Entries this week','Entries in '+curMonthName,'Individual','Firm','Private Sector','Total']
     };
     var L = labels[lang]||labels.pt;
 
-    var h='<table class="funnel-table"><thead><tr><th></th><th>'+L[6]+'</th><th>'+L[7]+'</th><th>'+L[8]+'</th></tr></thead><tbody>';
-    h+='<tr><td>'+L[4]+'</td><td class="funnel-num">'+weekEntriesInd+'</td><td class="funnel-num">'+weekEntriesComp+'</td><td class="funnel-num funnel-total">'+weekEntries+'</td></tr>';
-    h+='<tr><td>'+L[5]+'</td><td class="funnel-num">'+monthEntriesInd+'</td><td class="funnel-num">'+monthEntriesComp+'</td><td class="funnel-num funnel-total">'+monthEntries+'</td></tr>';
-    h+='<tr><td>'+L[0]+'</td><td class="funnel-num">'+(ind.pending||0)+'</td><td class="funnel-num">'+(comp.pending||0)+'</td><td class="funnel-num funnel-total">'+tp+'</td></tr>';
-    h+='<tr><td>'+L[1]+'</td><td class="funnel-num">'+(ind.applied_month||0)+'</td><td class="funnel-num">'+(comp.applied_month||0)+'</td><td class="funnel-num funnel-total">'+tm+'</td></tr>';
-    h+='<tr><td>'+L[2]+'</td><td class="funnel-num">'+(ind.applied_year||0)+'</td><td class="funnel-num">'+(comp.applied_year||0)+'</td><td class="funnel-num funnel-total">'+ty+'</td></tr>';
-    h+='<tr><td>'+L[3]+'</td><td class="funnel-num">'+(data.shortlisted_individual||0)+'</td><td class="funnel-num">'+(data.shortlisted_company||0)+'</td><td class="funnel-num funnel-total">'+ts+'</td></tr>';
+    var h='<table class="funnel-table"><thead><tr><th></th><th>'+L[6]+'</th><th>'+L[7]+'</th><th>'+L[8]+'</th><th>'+L[9]+'</th></tr></thead><tbody>';
+    h+='<tr><td>'+L[4]+'</td><td class="funnel-num">'+weekEntriesInd+'</td><td class="funnel-num">'+weekEntriesComp+'</td><td class="funnel-num">'+weekEntriesPriv+'</td><td class="funnel-num funnel-total">'+weekEntries+'</td></tr>';
+    h+='<tr><td>'+L[5]+'</td><td class="funnel-num">'+monthEntriesInd+'</td><td class="funnel-num">'+monthEntriesComp+'</td><td class="funnel-num">'+monthEntriesPriv+'</td><td class="funnel-num funnel-total">'+monthEntries+'</td></tr>';
+    h+='<tr><td>'+L[0]+'</td><td class="funnel-num">'+(ind.pending||0)+'</td><td class="funnel-num">'+(comp.pending||0)+'</td><td class="funnel-num">'+(priv.pending||0)+'</td><td class="funnel-num funnel-total">'+tp+'</td></tr>';
+    h+='<tr><td>'+L[1]+'</td><td class="funnel-num">'+(ind.applied_month||0)+'</td><td class="funnel-num">'+(comp.applied_month||0)+'</td><td class="funnel-num">'+(priv.applied_month||0)+'</td><td class="funnel-num funnel-total">'+tm+'</td></tr>';
+    h+='<tr><td>'+L[2]+'</td><td class="funnel-num">'+(ind.applied_year||0)+'</td><td class="funnel-num">'+(comp.applied_year||0)+'</td><td class="funnel-num">'+(priv.applied_year||0)+'</td><td class="funnel-num funnel-total">'+ty+'</td></tr>';
+    h+='<tr><td>'+L[3]+'</td><td class="funnel-num">'+(data.shortlisted_individual||0)+'</td><td class="funnel-num">'+(data.shortlisted_company||0)+'</td><td class="funnel-num">'+(data.shortlisted_private||0)+'</td><td class="funnel-num funnel-total">'+ts+'</td></tr>';
     h+='</tbody></table>';
     document.getElementById('funnelTable').innerHTML = h;
 
-    var monthlyByType = { ind: {}, comp: {} };
+    var monthlyByType = { ind: {}, comp: {}, priv: {} };
     (data.monthly_individual||[]).forEach(function(m){ monthlyByType.ind[m.key]=m.count; });
     (data.monthly_company||[]).forEach(function(m){ monthlyByType.comp[m.key]=m.count; });
-    var allMonths = Object.keys(monthlyByType.ind).concat(Object.keys(monthlyByType.comp));
+    (data.monthly_private||[]).forEach(function(m){ monthlyByType.priv[m.key]=m.count; });
+    var allMonths = Object.keys(monthlyByType.ind).concat(Object.keys(monthlyByType.comp), Object.keys(monthlyByType.priv));
     if (allMonths.length === 0 && (data.monthly_applied||[]).length > 0) {
       data.monthly_applied.forEach(function(m){ monthlyByType.ind[m.key]=m.count; });
       allMonths = Object.keys(monthlyByType.ind);
@@ -1129,20 +1134,20 @@ Pipeline de fazendas sendo anonimizado. Próximo: ver com Bernardo follow up com
     if (allMonths.length > 12) allMonths = allMonths.slice(-12);
 
     var maxVal = 0;
-    allMonths.forEach(function(m){ var v=(monthlyByType.ind[m]||0)+(monthlyByType.comp[m]||0); if(v>maxVal) maxVal=v; });
+    allMonths.forEach(function(m){ var v=(monthlyByType.ind[m]||0)+(monthlyByType.comp[m]||0)+(monthlyByType.priv[m]||0); if(v>maxVal) maxVal=v; });
     if (maxVal===0) maxVal=5;
 
     var chartTitle = lang==='pt' ? 'Aplicações por mês' : 'Applications per month';
     var c='<div class="funnel-chart-title">'+chartTitle+'</div><div class="bar-chart">';
     allMonths.forEach(function(mk){
-      var iv=monthlyByType.ind[mk]||0, cv=monthlyByType.comp[mk]||0;
-      var ipct=Math.round(iv/maxVal*100), cpct=Math.round(cv/maxVal*100);
+      var iv=monthlyByType.ind[mk]||0, cv=monthlyByType.comp[mk]||0, pv=monthlyByType.priv[mk]||0;
+      var ipct=Math.round(iv/maxVal*100), cpct=Math.round(cv/maxVal*100), ppct=Math.round(pv/maxVal*100);
       var mi=parseInt(mk.slice(5,7))-1, label=months[mi]||mk;
       c+='<div class="bar-row"><span class="bar-label">'+label+'</span>';
-      c+='<div class="bar-track"><div class="bar-fill bar-ind" style="width:'+ipct+'%"></div><div class="bar-fill bar-firm" style="width:'+cpct+'%"></div></div>';
-      c+='<span class="bar-val">'+(iv+cv)+'</span></div>';
+      c+='<div class="bar-track"><div class="bar-fill bar-ind" style="width:'+ipct+'%"></div><div class="bar-fill bar-firm" style="width:'+cpct+'%"></div><div class="bar-fill bar-private" style="width:'+ppct+'%"></div></div>';
+      c+='<span class="bar-val">'+(iv+cv+pv)+'</span></div>';
     });
-    c+='</div><div class="bar-legend"><span class="legend-item"><span class="legend-swatch bar-ind"></span> '+(lang==='pt'?'Individual':'Individual')+'</span><span class="legend-item"><span class="legend-swatch bar-firm"></span> '+(lang==='pt'?'Empresa':'Firm')+'</span></div>';
+    c+='</div><div class="bar-legend"><span class="legend-item"><span class="legend-swatch bar-ind"></span> '+(lang==='pt'?'Individual':'Individual')+'</span><span class="legend-item"><span class="legend-swatch bar-firm"></span> '+(lang==='pt'?'Empresa':'Firm')+'</span><span class="legend-item"><span class="legend-swatch bar-private"></span> '+(lang==='pt'?'Setor Privado':'Private Sector')+'</span></div>';
 
     document.getElementById('funnelChart').innerHTML = c;
   }

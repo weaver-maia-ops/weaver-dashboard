@@ -73,8 +73,9 @@ jq -r --arg now "$NOW" --arg cur_month "$CUR_MONTH" --arg cur_year "$CUR_YEAR" '
   def due_ts: (clean_due | if . then (fromdateiso8601) else null end);
   def due_month: (if .due then (.due[0:7]) else null end);
   def due_year: (if .due then (.due[0:4]) else null end);
-  def is_individual: (.name | test("\\bIC\\b|Individual Consultant"; "i"));
-  def is_company: (.name | test("\\bFirm\\b"; "i")) or (is_individual | not);
+  def is_private: (.name | test("\\bPRIVATE\\b|Setor Privado"; "i"));
+  def is_individual: (is_private | not) and (.name | test("\\bIC\\b|Individual Consultant"; "i"));
+  def is_company: (is_private | not) and ((.name | test("\\bFirm\\b"; "i")) or (is_individual | not));
   def has_done: (label_names | index("Done") != null);
   def is_past_due: (due_ts != null and due_ts <= ($now | tonumber));
   def is_future: (due_ts != null and due_ts > ($now | tonumber));
@@ -93,25 +94,34 @@ jq -r --arg now "$NOW" --arg cur_month "$CUR_MONTH" --arg cur_year "$CUR_YEAR" '
       applied_month: [.[] | select(is_company and is_applied_month)] | length,
       applied_year: [.[] | select(is_company and is_applied_year)] | length
     },
+    private: {
+      pending: [.[] | select(is_private and is_pending)] | length,
+      applied_month: [.[] | select(is_private and is_applied_month)] | length,
+      applied_year: [.[] | select(is_private and is_applied_year)] | length
+    },
     total_applied_year: [.[] | select(is_applied and (due_year == $cur_year))] | length,
     total_pending: [.[] | select(is_pending)] | length,
     total_cards: length,
     monthly_individual: ([.[] | select(is_individual and is_applied and (due_month != null))] | group_by(.due[0:7]) | map({key: .[0].due[0:7], count: length})),
     monthly_company: ([.[] | select(is_company and is_applied and (due_month != null))] | group_by(.due[0:7]) | map({key: .[0].due[0:7], count: length})),
+    monthly_private: ([.[] | select(is_private and is_applied and (due_month != null))] | group_by(.due[0:7]) | map({key: .[0].due[0:7], count: length})),
     monthly_applied: ([.[] | select(is_applied and (due_month != null))] | group_by(.due[0:7]) | map({key: .[0].due[0:7], count: length})),
     weekly_entries: ([.[] | select(.dateLastActivity != null)] | group_by(.dateLastActivity[0:10]) | map({key: .[0].dateLastActivity[0:10], count: length}) | sort_by(.key)),
     monthly_entries: ([.[] | select(.dateLastActivity != null)] | group_by(.dateLastActivity[0:7]) | map({key: .[0].dateLastActivity[0:7], count: length}) | sort_by(.key)),
     weekly_entries_individual: ([.[] | select(is_individual and .dateLastActivity != null)] | group_by(.dateLastActivity[0:10]) | map({key: .[0].dateLastActivity[0:10], count: length}) | sort_by(.key)),
     weekly_entries_company: ([.[] | select(is_company and .dateLastActivity != null)] | group_by(.dateLastActivity[0:10]) | map({key: .[0].dateLastActivity[0:10], count: length}) | sort_by(.key)),
     monthly_entries_individual: ([.[] | select(is_individual and .dateLastActivity != null)] | group_by(.dateLastActivity[0:7]) | map({key: .[0].dateLastActivity[0:7], count: length}) | sort_by(.key)),
-    monthly_entries_company: ([.[] | select(is_company and .dateLastActivity != null)] | group_by(.dateLastActivity[0:7]) | map({key: .[0].dateLastActivity[0:7], count: length}) | sort_by(.key))
+    monthly_entries_company: ([.[] | select(is_company and .dateLastActivity != null)] | group_by(.dateLastActivity[0:7]) | map({key: .[0].dateLastActivity[0:7], count: length}) | sort_by(.key)),
+    weekly_entries_private: ([.[] | select(is_private and .dateLastActivity != null)] | group_by(.dateLastActivity[0:10]) | map({key: .[0].dateLastActivity[0:10], count: length}) | sort_by(.key)),
+    monthly_entries_private: ([.[] | select(is_private and .dateLastActivity != null)] | group_by(.dateLastActivity[0:7]) | map({key: .[0].dateLastActivity[0:7], count: length}) | sort_by(.key))
   }
 ' "$TMP_DIR/trello_jobsearch.json" > "$TMP_DIR/funnel_stats.json"
 
 jq -r '
-  def is_individual: (.name | test("\\bIC\\b|Individual Consultant"; "i"));
-  def is_company: (.name | test("\\bFirm\\b"; "i")) or (is_individual | not);
-  { shortlisted_individual: [.[] | select(is_individual)] | length, shortlisted_company: [.[] | select(is_company)] | length }
+  def is_private: (.name | test("\\bPRIVATE\\b|Setor Privado"; "i"));
+  def is_individual: (is_private | not) and (.name | test("\\bIC\\b|Individual Consultant"; "i"));
+  def is_company: (is_private | not) and ((.name | test("\\bFirm\\b"; "i")) or (is_individual | not));
+  { shortlisted_individual: [.[] | select(is_individual)] | length, shortlisted_company: [.[] | select(is_company)] | length, shortlisted_private: [.[] | select(is_private)] | length }
 ' "$TMP_DIR/trello_shortlisted.json" > "$TMP_DIR/shortlisted_stats.json"
 
 jq -s '.[0] * .[1]' "$TMP_DIR/funnel_stats.json" "$TMP_DIR/shortlisted_stats.json" > "$OUTFILE"
