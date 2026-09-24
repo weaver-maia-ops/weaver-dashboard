@@ -73,7 +73,7 @@ jq -r --arg now "$NOW" --arg cur_month "$CUR_MONTH" --arg cur_year "$CUR_YEAR" '
   def due_ts: (clean_due | if . then (fromdateiso8601) else null end);
   def due_month: (if .due then (.due[0:7]) else null end);
   def due_year: (if .due then (.due[0:4]) else null end);
-  def is_private: (.name | test("\\bPRIVATE\\b|Setor Privado"; "i"));
+  def is_private: (.name | test("\\bPRIVATE\\b|Setor Privado|\\bBTG\\b"; "i"));
   def is_individual: (is_private | not) and (.name | test("\\bIC\\b|Individual Consultant"; "i"));
   def is_company: (is_private | not) and ((.name | test("\\bFirm\\b"; "i")) or (is_individual | not));
   def has_done: (label_names | index("Done") != null);
@@ -118,7 +118,7 @@ jq -r --arg now "$NOW" --arg cur_month "$CUR_MONTH" --arg cur_year "$CUR_YEAR" '
 ' "$TMP_DIR/trello_jobsearch.json" > "$TMP_DIR/funnel_stats.json"
 
 jq -r '
-  def is_private: (.name | test("\\bPRIVATE\\b|Setor Privado"; "i"));
+  def is_private: (.name | test("\\bPRIVATE\\b|Setor Privado|\\bBTG\\b"; "i"));
   def is_individual: (is_private | not) and (.name | test("\\bIC\\b|Individual Consultant"; "i"));
   def is_company: (is_private | not) and ((.name | test("\\bFirm\\b"; "i")) or (is_individual | not));
   { shortlisted_individual: [.[] | select(is_individual)] | length, shortlisted_company: [.[] | select(is_company)] | length, shortlisted_private: [.[] | select(is_private)] | length }
