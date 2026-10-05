@@ -5,17 +5,17 @@
     "applied_year": 36
   },
   "company": {
-    "pending": 4,
-    "applied_month": 0,
-    "applied_year": 37
+    "pending": 3,
+    "applied_month": 1,
+    "applied_year": 38
   },
   "private": {
-    "pending": 3,
-    "applied_month": 2,
-    "applied_year": 14
+    "pending": 1,
+    "applied_month": 4,
+    "applied_year": 16
   },
-  "total_applied_year": 85,
-  "total_pending": 7,
+  "total_applied_year": 88,
+  "total_pending": 4,
   "total_cards": 98,
   "monthly_individual": [
     {
@@ -103,6 +103,10 @@
     {
       "key": "2026-09",
       "count": 5
+    },
+    {
+      "key": "2026-10",
+      "count": 1
     }
   ],
   "monthly_private": [
@@ -132,7 +136,7 @@
     },
     {
       "key": "2026-10",
-      "count": 2
+      "count": 4
     }
   ],
   "monthly_applied": [
@@ -182,7 +186,7 @@
     },
     {
       "key": "2026-10",
-      "count": 2
+      "count": 5
     }
   ],
   "weekly_entries": [
