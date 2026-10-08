@@ -11,12 +11,12 @@
   },
   "private": {
     "pending": 1,
-    "applied_month": 4,
-    "applied_year": 16
+    "applied_month": 5,
+    "applied_year": 17
   },
-  "total_applied_year": 88,
+  "total_applied_year": 89,
   "total_pending": 7,
-  "total_cards": 101,
+  "total_cards": 102,
   "monthly_individual": [
     {
       "key": "2025-12",
@@ -136,7 +136,7 @@
     },
     {
       "key": "2026-10",
-      "count": 4
+      "count": 5
     }
   ],
   "monthly_applied": [
@@ -186,7 +186,7 @@
     },
     {
       "key": "2026-10",
-      "count": 5
+      "count": 6
     }
   ],
   "weekly_entries": [
@@ -472,11 +472,11 @@
     },
     {
       "key": "2026-10-05",
-      "count": 3
+      "count": 2
     },
     {
-      "key": "2026-10-06",
-      "count": 1
+      "key": "2026-10-07",
+      "count": 3
     }
   ],
   "monthly_entries": [
@@ -526,7 +526,7 @@
     },
     {
       "key": "2026-10",
-      "count": 8
+      "count": 9
     }
   ],
   "weekly_entries_individual": [
@@ -806,7 +806,11 @@
     },
     {
       "key": "2026-10-05",
-      "count": 3
+      "count": 2
+    },
+    {
+      "key": "2026-10-07",
+      "count": 1
     }
   ],
   "monthly_entries_individual": [
@@ -955,8 +959,8 @@
       "count": 2
     },
     {
-      "key": "2026-10-06",
-      "count": 1
+      "key": "2026-10-07",
+      "count": 2
     }
   ],
   "monthly_entries_private": [
@@ -990,7 +994,7 @@
     },
     {
       "key": "2026-10",
-      "count": 4
+      "count": 5
     }
   ],
   "shortlisted_individual": 3,
