@@ -1,11 +1,11 @@
 {
   "individual": {
-    "pending": 0,
+    "pending": 1,
     "applied_month": 0,
     "applied_year": 36
   },
   "company": {
-    "pending": 6,
+    "pending": 11,
     "applied_month": 1,
     "applied_year": 38
   },
@@ -15,8 +15,8 @@
     "applied_year": 17
   },
   "total_applied_year": 89,
-  "total_pending": 7,
-  "total_cards": 102,
+  "total_pending": 13,
+  "total_cards": 108,
   "monthly_individual": [
     {
       "key": "2025-12",
@@ -460,7 +460,7 @@
     },
     {
       "key": "2026-09-30",
-      "count": 4
+      "count": 3
     },
     {
       "key": "2026-10-01",
@@ -472,11 +472,15 @@
     },
     {
       "key": "2026-10-05",
-      "count": 2
+      "count": 1
     },
     {
       "key": "2026-10-07",
       "count": 3
+    },
+    {
+      "key": "2026-10-08",
+      "count": 8
     }
   ],
   "monthly_entries": [
@@ -522,11 +526,11 @@
     },
     {
       "key": "2026-09",
-      "count": 21
+      "count": 20
     },
     {
       "key": "2026-10",
-      "count": 9
+      "count": 16
     }
   ],
   "weekly_entries_individual": [
@@ -653,6 +657,10 @@
     {
       "key": "2026-09-30",
       "count": 2
+    },
+    {
+      "key": "2026-10-08",
+      "count": 1
     }
   ],
   "weekly_entries_company": [
@@ -798,7 +806,7 @@
     },
     {
       "key": "2026-09-30",
-      "count": 2
+      "count": 1
     },
     {
       "key": "2026-10-02",
@@ -806,11 +814,15 @@
     },
     {
       "key": "2026-10-05",
-      "count": 2
+      "count": 1
     },
     {
       "key": "2026-10-07",
       "count": 1
+    },
+    {
+      "key": "2026-10-08",
+      "count": 7
     }
   ],
   "monthly_entries_individual": [
@@ -853,6 +865,10 @@
     {
       "key": "2026-09",
       "count": 5
+    },
+    {
+      "key": "2026-10",
+      "count": 1
     }
   ],
   "monthly_entries_company": [
@@ -894,11 +910,11 @@
     },
     {
       "key": "2026-09",
-      "count": 9
+      "count": 8
     },
     {
       "key": "2026-10",
-      "count": 4
+      "count": 10
     }
   ],
   "weekly_entries_private": [
