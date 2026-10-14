@@ -16,6 +16,7 @@ The **Resumo geral** button is a concise project dossier, not only a status note
 6. **Decisões registradas**: decisions that change scope, ownership, route, or priority.
 7. **Riscos, dependências e lacunas**: blockers, external dependencies, and missing information.
 8. **Próximos passos**: concrete actions, ideally with owners and timing when known.
+9. **Resumo da reunião**: optional closing record for a material meeting. Preserve the meeting's project-relevant narrative, decisions, alternatives, and commitments in a readable form; do not paste raw transcript or private discussion.
 
 ## Writing rules
 
@@ -38,6 +39,7 @@ data-dossier-progress="item 1|item 2"
 data-dossier-decisions="item 1|item 2"
 data-dossier-risks="item 1|item 2"
 data-dossier-nextsteps="item 1|item 2"
+data-dossier-meeting="optional meeting record"
 ```
 
 Each needs an equivalent `-en` attribute. Cards without `data-dossier-overview` continue to use the legacy free-text summary until they are upgraded.
