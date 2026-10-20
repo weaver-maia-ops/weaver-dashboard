@@ -5,18 +5,18 @@
     "applied_year": 37
   },
   "company": {
-    "pending": 6,
-    "applied_month": 5,
-    "applied_year": 42
+    "pending": 7,
+    "applied_month": 3,
+    "applied_year": 40
   },
   "private": {
-    "pending": 0,
+    "pending": 8,
     "applied_month": 6,
     "applied_year": 18
   },
-  "total_applied_year": 95,
-  "total_pending": 6,
-  "total_cards": 107,
+  "total_applied_year": 93,
+  "total_pending": 15,
+  "total_cards": 114,
   "monthly_individual": [
     {
       "key": "2025-12",
@@ -110,7 +110,7 @@
     },
     {
       "key": "2026-10",
-      "count": 5
+      "count": 3
     }
   ],
   "monthly_private": [
@@ -190,7 +190,7 @@
     },
     {
       "key": "2026-10",
-      "count": 12
+      "count": 10
     }
   ],
   "weekly_entries": [
@@ -372,7 +372,7 @@
     },
     {
       "key": "2026-07-16",
-      "count": 3
+      "count": 2
     },
     {
       "key": "2026-07-22",
@@ -480,11 +480,11 @@
     },
     {
       "key": "2026-10-08",
-      "count": 6
+      "count": 5
     },
     {
       "key": "2026-10-13",
-      "count": 2
+      "count": 1
     },
     {
       "key": "2026-10-14",
@@ -493,6 +493,10 @@
     {
       "key": "2026-10-15",
       "count": 2
+    },
+    {
+      "key": "2026-10-19",
+      "count": 10
     }
   ],
   "monthly_entries": [
@@ -530,7 +534,7 @@
     },
     {
       "key": "2026-07",
-      "count": 15
+      "count": 14
     },
     {
       "key": "2026-08",
@@ -542,7 +546,7 @@
     },
     {
       "key": "2026-10",
-      "count": 16
+      "count": 24
     }
   ],
   "weekly_entries_individual": [
@@ -754,7 +758,7 @@
     },
     {
       "key": "2026-07-16",
-      "count": 3
+      "count": 2
     },
     {
       "key": "2026-07-22",
@@ -822,14 +826,14 @@
     },
     {
       "key": "2026-10-08",
-      "count": 6
-    },
-    {
-      "key": "2026-10-13",
-      "count": 1
+      "count": 5
     },
     {
       "key": "2026-10-15",
+      "count": 2
+    },
+    {
+      "key": "2026-10-19",
       "count": 2
     }
   ],
@@ -910,7 +914,7 @@
     },
     {
       "key": "2026-07",
-      "count": 10
+      "count": 9
     },
     {
       "key": "2026-08",
@@ -989,6 +993,10 @@
     {
       "key": "2026-10-14",
       "count": 1
+    },
+    {
+      "key": "2026-10-19",
+      "count": 8
     }
   ],
   "monthly_entries_private": [
@@ -1022,7 +1030,7 @@
     },
     {
       "key": "2026-10",
-      "count": 5
+      "count": 13
     }
   ],
   "shortlisted_individual": 3,
